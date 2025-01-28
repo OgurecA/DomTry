@@ -9,7 +9,9 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const endpoint = web3.clusterApiUrl('devnet')
 	const wallets = [
 		new walletAdapterWallets.PhantomWalletAdapter(),
-		new walletAdapterWallets.SlopeWalletAdapter()
+		new walletAdapterWallets.SlopeWalletAdapter(),
+		new walletAdapterWallets.SafePalWalletAdapter(),
+		new walletAdapterWallets.CloverWalletAdapter()
 	]
 
 	return (
