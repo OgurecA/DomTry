@@ -1,59 +1,50 @@
 .App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #0055ff;
+  overflow: scroll; /* Сохраняет прокрутку */
+  scrollbar-width: none; /* Убирает полосу в Firefox */
+  -ms-overflow-style: none; 
+}
 
-  text-align: left;
-  background-color: #282c34;
+.App::-webkit-scrollbar {
+  display: none;
 }
 
 .AppHeader {
+  position: fixed;
+  left: 0;
   height: 90px;
+  width: calc(100vw - 40px);
   display: flex;
   background-color: black;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Элементы по краям */
   font-size: 50px;
   color: white;
   padding-left: 20px;
   padding-right: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
-.AppBody {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  padding-top: 50px;
+.LogoImage {
+  height: 80%;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  margin-right: 10px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.LeftSection {
+  height: 90px;
+  display: flex; /* Размещаем img и span рядом */
+  align-items: center; /* Выравниваем по вертикали */
+  gap: 10px; /* Расстояние между элементами */
 }
 
-.input {
-  background: #f2f2f2;
+.RightSection {
+  height: 90px;
+  display: flex; /* Выравниваем кнопки в строку */
+  align-items: center; /* Вертикальное выравнивание */
+  gap: 5px; /* Расстояние между кнопками */
 }
 
-.formField {
-  margin: 10px 0 10px 0;
-  min-width: 500px;
-  padding: 15px;
-  font-size: 16px;
-  border: 0;
-  font-family: "Roboto", sans-serif;
-}
-.formButton {
-  margin: 10px 0 10px 0;
-  padding: 15px;
-  font-size: 16px;
-  border: 0;
-  font-family: "Roboto", sans-serif;
-}

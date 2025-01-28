@@ -2,11 +2,14 @@ import { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 import WalletContextProvider from '../components/WalletContextProvider'
 import { AppBar } from '../components/AppBar'
-import { BalanceDisplay } from '../components/BalanceDisplay'
-import { PingButton } from '../components/PingButton'
 import Head from 'next/head'
+import RoleChoose from '../components/RoleChoose'
+import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 
 const Home: NextPage = (props) => {
+
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
 
   return (
     <div className={styles.App}>
@@ -17,12 +20,8 @@ const Home: NextPage = (props) => {
           content="Wallet-Adapter Example"
         />
       </Head>
-      <WalletContextProvider>
         <AppBar />
-        <div className={styles.AppBody}>
-          <PingButton />
-        </div>
-      </WalletContextProvider >
+        <RoleChoose />
     </div>
   );
 }

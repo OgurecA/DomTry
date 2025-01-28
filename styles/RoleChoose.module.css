@@ -1,0 +1,31 @@
+.panelContainer {
+    position: absolute;
+    top: 50%; /* Центрирование по вертикали */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Смещение для точного центрирования */
+    display: flex;
+    justify-content: center; /* Выравнивание кнопок по горизонтали */
+    gap: 20px; /* Расстояние между кнопками */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #f9f9f9; /* Опционально: фон панели */
+    border-radius: 8px; /* Опционально: скругление углов */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Опционально: тень */
+  }
+  
+  
+  
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
