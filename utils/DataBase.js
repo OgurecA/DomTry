@@ -1,4 +1,4 @@
-import Database from "better-sqlite3";
+const Database = require("better-sqlite3");
 
 // Подключаемся к БД (если файла `orders.db` нет, он создастся автоматически)
 const db = new Database("orders.db");
