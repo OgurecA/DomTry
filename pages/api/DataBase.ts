@@ -10,7 +10,7 @@ db.exec(`
         sender TEXT DEFAULT NULL,
         receiver TEXT DEFAULT NULL,
         courier TEXT DEFAULT NULL,
-        amount INTEGER NOT NULL,
+        amount INTEGER NOT NULL
     );
 
     CREATE TABLE IF NOT EXISTS activeOrders (
@@ -18,8 +18,7 @@ db.exec(`
         sender TEXT DEFAULT NULL,
         receiver TEXT DEFAULT NULL,
         courier TEXT DEFAULT NULL,
-        amount INTEGER NOT NULL,
-        courier TEXT NOT NULL,
+        amount INTEGER NOT NULL
     );
 `);
 
