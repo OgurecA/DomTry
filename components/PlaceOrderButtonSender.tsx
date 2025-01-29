@@ -10,7 +10,7 @@ const PlaceOrderButtonSender = () => {
 
 
   const PlaceOrder = async () => {
-    const response = await fetch('/api/database', {
+    const response = await fetch('/api/DataBase', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sender: publicKey, amount: 1 })
