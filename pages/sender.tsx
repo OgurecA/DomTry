@@ -1,7 +1,7 @@
 import Head from "next/head"
 import SenderButtons from "../components/SenderButtons";
 import * as web3 from '@solana/web3.js';
-import PlaceOrderButtonSender from "../components/PlaceOrderButtonSender";
+import OrdersSender from "../components/OrdersSender";
 
 const Sender = () => {
 
@@ -21,7 +21,7 @@ const Sender = () => {
       <div>
         <h1>Sender Page</h1>
         <p>Content for the sender page.</p>
-        <PlaceOrderButtonSender />
+        <OrdersSender />
         <SenderButtons
           courierKey1={courierKey1}
           receiverKey={receiverKey}
