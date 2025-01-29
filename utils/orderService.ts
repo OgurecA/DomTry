@@ -1,4 +1,4 @@
-import db from "./DataBase";
+const db = require("./DataBase");
 
 // Интерфейсы для структур данных
 interface Order {

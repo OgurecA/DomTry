@@ -24,4 +24,4 @@ db.exec(`
 
 console.log("База данных и таблицы инициализированы.");
 
-export default db;
+module.exports = db;
