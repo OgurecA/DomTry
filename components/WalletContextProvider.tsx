@@ -11,13 +11,16 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 		new walletAdapterWallets.PhantomWalletAdapter(),
 		new walletAdapterWallets.SlopeWalletAdapter(),
 		new walletAdapterWallets.SafePalWalletAdapter(),
-		new walletAdapterWallets.CloverWalletAdapter()
+		new walletAdapterWallets.CloverWalletAdapter(),
+		new walletAdapterWallets.SolletWalletAdapter(),
+		new walletAdapterWallets.BitKeepWalletAdapter(),
+		new walletAdapterWallets.CoinhubWalletAdapter()
 	]
 
 	return (
-		<ConnectionProvider endpoint={endpoint}>
-	    <WalletProvider wallets={wallets}>
-	      <WalletModalProvider>
+	<ConnectionProvider endpoint={endpoint}>
+	  <WalletProvider wallets={wallets}>
+	    <WalletModalProvider>
 	        { children }
         </WalletModalProvider>
       </WalletProvider>
