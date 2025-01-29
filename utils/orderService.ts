@@ -1,4 +1,4 @@
-import db from "../pages/api/DataBase";
+import db from "./DataBase";
 
 // Интерфейсы для структур данных
 interface Order {

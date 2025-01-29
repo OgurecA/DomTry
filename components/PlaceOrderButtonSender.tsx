@@ -8,17 +8,17 @@ const PlaceOrderButtonSender = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
+  const placeOrderSender = async (publicKey: string, amount: number) => {
+    const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender: publicKey, amount: amount })
+    });
 
-  const PlaceOrder = async () => {
-    const response = await fetch('/api/DataBase', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sender: publicKey, amount: 1 })
-  });
+    const data = await response.json();
+    console.log("Order created:", data);
+};
 
-  const data = await response.json();
-  console.log("Order created:", data);
-};  
 
   const TakeOrder = async () => {
 
@@ -26,7 +26,7 @@ const PlaceOrderButtonSender = () => {
 
   return (
     <div className={styles.panelContainer}>
-      <button className={styles.button} onClick={() => PlaceOrder()}>PlaceOrder</button>
+      <button className={styles.button} onClick={() => placeOrderSender(publicKey.toBase58(), 1)}>PlaceOrder</button>
       <button className={styles.button} onClick={() => TakeOrder()}>TakeOrder</button>
     </div>
   );
