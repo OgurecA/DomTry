@@ -35,20 +35,31 @@ const OrdersSender = () => {
 };
 
 
-  const TakeOrder = async () => {
+  const TakeOrderSender = async (orderId: number) => {
+    if (!publicKey) return alert("Connect wallet first!");
 
-  }
+    const response = await fetch("/api/orders", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, role: "receiver", user: publicKey.toBase58() })
+    });
+
+    const data = await response.json();
+    console.log("Order updated:", data);
+    setOrders(orders.map(order => order.id === orderId ? { ...order, receiver: publicKey.toBase58() } : order));
+  };
 
   return (
     <div className={styles.container}>
-      {/* Основные кнопки */}
       <div className={styles.panelContainer}>
         <button className={styles.button} onClick={() => placeOrderSender(publicKey.toBase58(), 1)}>
           Place Order
         </button>
+        <button className={styles.button} onClick={() => TakeOrderSender(1)}>
+          Take Order
+        </button>
       </div>
 
-      {/* Боковая панель с заказами */}
       <div className={styles.sidebar}>
         <h3>Waiting Orders</h3>
         <div className={styles.orderList}>
@@ -56,7 +67,6 @@ const OrdersSender = () => {
             orders.map((order) => (
               <div key={order.id} className={styles.orderItem}>
                 <p>ID: {order.id}</p>
-                <p>Sender: {order.sender || "Waiting..."}</p>
                 <p>Amount: {order.amount}</p>
               </div>
             ))

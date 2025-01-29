@@ -24,6 +24,30 @@ export function addWaitingOrderReceiver(receiver: string, amount: number): numbe
     return info.lastInsertRowid as number;
 }
 
+export function acceptOrderAsReceiver(orderId: number, receiver: string): void {
+    const order = db.prepare("SELECT * FROM waitingOrders WHERE id = ?").get(orderId) as Order;
+    if (!order) throw new Error("Order not found");
+
+    if (order.receiver) {
+        throw new Error("Order already has a receiver");
+    }
+
+    const stmt = db.prepare("UPDATE waitingOrders SET receiver = ? WHERE id = ?");
+    stmt.run(receiver, orderId);
+}
+
+export function acceptOrderAsSender(orderId: number, sender: string): void {
+    const order = db.prepare("SELECT * FROM waitingOrders WHERE id = ?").get(orderId) as Order;
+    if (!order) throw new Error("Order not found");
+
+    if (order.sender) {
+        throw new Error("Order already has a sender");
+    }
+
+    const stmt = db.prepare("UPDATE waitingOrders SET sender = ? WHERE id = ?");
+    stmt.run(sender, orderId);
+}
+
 // Перемещение заказа из `waitingOrders` в `activeOrders`
 export function activateOrder(orderId: number, courier: string): void {
     const order = db.prepare("SELECT * FROM waitingOrders WHERE id = ?").get(orderId) as Order;
@@ -41,8 +65,8 @@ export function activateOrder(orderId: number, courier: string): void {
     // Добавляем курьера
     order.courier = courier;
 
-    const insertStmt = db.prepare("INSERT INTO activeOrders (id, sender, receiver, amount, courier) VALUES (?, ?, ?, ?, ?)");
-    insertStmt.run(order.id, order.sender, order.receiver, order.amount, order.courier);
+    const insertStmt = db.prepare("INSERT INTO activeOrders (id, sender, receiver, courier, amount) VALUES (?, ?, ?, ?, ?)");
+    insertStmt.run(order.id, order.sender, order.receiver, order.courier, order.amount);
 
     db.prepare("DELETE FROM waitingOrders WHERE id = ?").run(orderId);
 }

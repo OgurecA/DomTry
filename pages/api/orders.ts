@@ -1,11 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {
-    addWaitingOrderSender,
-    addWaitingOrderReceiver,
-    activateOrder,
-    getWaitingOrders,
-    getActiveOrders
-} from "../../utils/orderService"; // Подключаем функции работы с БД
+import * as order from "../../utils/orderService"; // Подключаем функции работы с БД
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -13,39 +7,58 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             // Получаем заказы (ожидающие или активные)
             const { status } = req.query;
             if (status === "waiting") {
-                return res.status(200).json(getWaitingOrders());
+                return res.status(200).json(order.getWaitingOrders());
             }
             if (status === "active") {
-                return res.status(200).json(getActiveOrders());
+                return res.status(200).json(order.getActiveOrders());
             }
             return res.status(400).json({ error: "Invalid status parameter" });
         }
+
+
 
         if (req.method === "POST") {
             // Добавляем заказ (отправитель или получатель)
             const { sender, receiver, amount } = req.body;
 
             if (sender) {
-                const id = addWaitingOrderSender(sender, amount);
+                const id = order.addWaitingOrderSender(sender, amount);
                 return res.status(201).json({ id });
             }
 
             if (receiver) {
-                const id = addWaitingOrderReceiver(receiver, amount);
+                const id = order.addWaitingOrderReceiver(receiver, amount);
                 return res.status(201).json({ id });
             }
 
             return res.status(400).json({ error: "Sender or Receiver required" });
         }
 
+
+
         if (req.method === "PUT") {
             // Активируем заказ (назначаем курьера)
-            const { orderId, courier } = req.body;
-            if (!orderId || !courier) {
-                return res.status(400).json({ error: "Order ID and Courier required" });
+            const { orderId, role, user } = req.body;
+                if (!orderId || !role || !user) {
+                res.status(400).json({ error: "Missing orderId, role, or user" });
+                return;
             }
-            activateOrder(orderId, courier);
-            return res.status(200).json({ message: "Order activated" });
+
+            try {
+
+                if (role === "receiver") {
+                    order.acceptOrderAsReceiver(orderId, user);
+                } else if (role === "sender") {
+                    order.acceptOrderAsSender(orderId, user);
+                } else if (role === "courier"){
+                    order.activateOrder(orderId, user);
+                }
+
+                return res.status(200).json({ message: "Order activated" });
+
+            } catch (error) {
+                res.status(400).json({ error: error.message });
+            }
         }
 
         return res.status(405).json({ error: "Method Not Allowed" });
