@@ -81,7 +81,7 @@ const CourierButtons: React.FC<CourierButtonsProps> = ({ selectedOrder }) => {
     if (!selectedOrder) return alert("Select an order first!");
     if (!publicKey) return alert("Connect your wallet!");
   
-    const response = await fetch("/api/orders/multisig", {
+    const response = await fetch("/api/orders", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
