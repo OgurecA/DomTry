@@ -26,14 +26,13 @@ const ReceiverButtons: React.FC<ReceiverButtonsProps> = ({ selectedOrder }) => {
   const { publicKey, sendTransaction } = useWallet();
 
   
-
-  const courierKey1 = new web3.PublicKey(selectedOrder.courier)
-  const receiverKey = new web3.PublicKey(selectedOrder.receiver)
   const backupKey = new web3.PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2")
-  const amount = selectedOrder.amount
-  const serializedTransaction = selectedOrder.serialized
+  
 
   const createHolder = async () => {
+    const courierKey1 = new web3.PublicKey(selectedOrder.courier)
+    const receiverKey = new web3.PublicKey(selectedOrder.receiver)
+    const amount = selectedOrder.amount
     const { transaction, multisigAddress } = await solCommands.CreateMultiSigTransaction(connection, publicKey, courierKey1, receiverKey, backupKey, amount)
 
     const signature = await sendTransaction(transaction, connection);
@@ -47,6 +46,8 @@ const ReceiverButtons: React.FC<ReceiverButtonsProps> = ({ selectedOrder }) => {
   }
 
   const confirmDelivery = async () => {
+    const serializedTransaction = selectedOrder.serialized
+    
     const transaction = web3.Transaction.from(Buffer.from(serializedTransaction, 'base64'));
 
 

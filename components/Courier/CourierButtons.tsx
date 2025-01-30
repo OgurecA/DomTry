@@ -28,16 +28,16 @@ const CourierButtons: React.FC<CourierButtonsProps> = ({ selectedOrder }) => {
 
   
 
-  const courierKey1 = new web3.PublicKey(selectedOrder.courier)
-  const receiverKey = new web3.PublicKey(selectedOrder.receiver)
-  const senderKey = new web3.PublicKey(selectedOrder.sender)
+  
   const backupKey = new web3.PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2")
-  const amount = selectedOrder.amount
-  const multisigAddressCourier = new web3.PublicKey(selectedOrder.multisig_address_courier)
-  const multisigAddressReceiver = new web3.PublicKey(selectedOrder.multisig_address_receiver)
+  
+  
 
 
   const createHolder = async () => {
+    const courierKey1 = new web3.PublicKey(selectedOrder.courier)
+    const receiverKey = new web3.PublicKey(selectedOrder.receiver)
+    const amount = selectedOrder.amount
     const { transaction, multisigAddress } = await solCommands.CreateMultiSigTransaction(connection, publicKey, courierKey1, receiverKey, backupKey, amount)
 
     const signature = await sendTransaction(transaction, connection);
@@ -51,6 +51,13 @@ const CourierButtons: React.FC<CourierButtonsProps> = ({ selectedOrder }) => {
   }
 
   const confirmDelivery = async () => {
+    const courierKey1 = new web3.PublicKey(selectedOrder.courier)
+    const receiverKey = new web3.PublicKey(selectedOrder.receiver)
+    const senderKey = new web3.PublicKey(selectedOrder.sender)
+    const amount = selectedOrder.amount
+    const multisigAddressCourier = new web3.PublicKey(selectedOrder.multisig_address_courier)
+    const multisigAddressReceiver = new web3.PublicKey(selectedOrder.multisig_address_receiver)
+
     const transaction = await solCommands.confirmCashDelivery(connection, publicKey, multisigAddressCourier, multisigAddressReceiver, courierKey1, receiverKey, senderKey, backupKey, amount)
 
     const { blockhash } = await connection.getLatestBlockhash("finalized");
