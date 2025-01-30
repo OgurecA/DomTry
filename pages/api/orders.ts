@@ -57,7 +57,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
                 } else if (role === "multisigAddressCourier"){
                     order.addMultisigAddressCourier(orderId, user);
                 } else if (role === "serialized"){
-                    order.addMultisigAddressCourier(orderId, user);
+                    order.addSerialized(orderId, user);
                 }
 
                 return res.status(200).json({ message: "Order activated" });
