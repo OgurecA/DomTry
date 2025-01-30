@@ -18,7 +18,10 @@ db.exec(`
         sender TEXT DEFAULT NULL,
         receiver TEXT DEFAULT NULL,
         courier TEXT DEFAULT NULL,
-        amount INTEGER NOT NULL
+        amount INTEGER NOT NULL,
+        multisig_address_courier TEXT DEFAULT NULL,
+        multisig_address_receiver TEXT DEFAULT NULL,
+        serialized TEXT DEFAULT NULL
     );
 `);
 

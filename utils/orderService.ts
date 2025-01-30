@@ -7,6 +7,9 @@ interface Order {
     receiver?: string;
     courier?: string;
     amount: number;
+    multisig_address_receiver?: string;
+    multisig_address_courier?: string;
+    serialized?: string;
 }
 
 
@@ -46,6 +49,42 @@ export function acceptOrderAsSender(orderId: number, sender: string): void {
 
     const stmt = db.prepare("UPDATE waitingOrders SET sender = ? WHERE id = ?");
     stmt.run(sender, orderId);
+}
+
+export function addMultisigAddressReceiver(orderId: number, multisigAddressReceiver: string): void {
+    const order = db.prepare("SELECT * FROM activeOrders WHERE id = ?").get(orderId) as Order;
+    if (!order) throw new Error("Order not found");
+
+    if (order.multisig_address_receiver) {
+        throw new Error("Order already has a multisig_address_receiver");
+    }
+
+    const stmt = db.prepare("UPDATE activeOrders SET multisig_address_receiver = ? WHERE id = ?");
+    stmt.run(multisigAddressReceiver, orderId);
+}
+
+export function addMultisigAddressCourier(orderId: number, multisigAddressCourier: string): void {
+    const order = db.prepare("SELECT * FROM activeOrders WHERE id = ?").get(orderId) as Order;
+    if (!order) throw new Error("Order not found");
+
+    if (order.multisig_address_courier) {
+        throw new Error("Order already has a multisig_address_courier");
+    }
+
+    const stmt = db.prepare("UPDATE activeOrders SET multisig_address_courier = ? WHERE id = ?");
+    stmt.run(multisigAddressCourier, orderId);
+}
+
+export function addSerialized(orderId: number, serialized: string): void {
+    const order = db.prepare("SELECT * FROM activeOrders WHERE id = ?").get(orderId) as Order;
+    if (!order) throw new Error("Order not found");
+
+    if (order.serialized) {
+        throw new Error("Order already has a serialized");
+    }
+
+    const stmt = db.prepare("UPDATE activeOrders SET serialized = ? WHERE id = ?");
+    stmt.run(serialized, orderId);
 }
 
 // Перемещение заказа из `waitingOrders` в `activeOrders`

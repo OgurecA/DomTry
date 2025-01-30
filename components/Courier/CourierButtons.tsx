@@ -4,7 +4,23 @@ import { solCommands } from '../../utils/solCommands';
 import * as web3 from '@solana/web3.js';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 
-const CourierButtons = () => {
+
+
+interface CourierButtonsProps {
+  selectedOrder: {
+    id: number;
+    sender?: string;
+    receiver?: string;
+    courier?: string;
+    amount: number;
+    multisig_address_receiver?: string;
+    multisig_address_courier?: string;
+    serialized?: string;
+  } | null;
+}
+
+
+const CourierButtons: React.FC<CourierButtonsProps> = ({ selectedOrder }) => {
   const router = useRouter();
 
   const { connection } = useConnection();
@@ -12,16 +28,17 @@ const CourierButtons = () => {
 
   
 
-  const courierKey = new web3.PublicKey("DMxVZUCgETcZgg4hEqWwp4bxmUoSmxVLffV8HN9s3jgW")
-  const receiverKey = new web3.PublicKey("ADiCp9b2BtHkt1PvipMjAmQfzThFMczwMzUtfYPNoY8b")
+  const courierKey1 = new web3.PublicKey(selectedOrder.courier)
+  const receiverKey = new web3.PublicKey(selectedOrder.receiver)
+  const senderKey = new web3.PublicKey(selectedOrder.sender)
   const backupKey = new web3.PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2")
-  const senderKey = new web3.PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2")
-  const multisigAddressCourier = new web3.PublicKey("r6Gpd2NbzU4gNxKXnW9WD4yMGWoV1Q9RAvLTbVNR3FQ")
-  const multisigAddressReceiver = new web3.PublicKey("r6Gpd2NbzU4gNxKXnW9WD4yMGWoV1Q9RAvLTbVNR3FQ")
-  const amount = 100
+  const amount = selectedOrder.amount
+  const multisigAddressCourier = new web3.PublicKey(selectedOrder.multisig_address_courier)
+  const multisigAddressReceiver = new web3.PublicKey(selectedOrder.multisig_address_receiver)
+
 
   const createHolder = async () => {
-    const transaction = await solCommands.CreateMultiSigTransaction(connection, publicKey, courierKey, receiverKey, backupKey, amount)
+    const { transaction, multisigAddress } = await solCommands.CreateMultiSigTransaction(connection, publicKey, courierKey1, receiverKey, backupKey, amount)
 
     const signature = await sendTransaction(transaction, connection);
 
@@ -30,10 +47,11 @@ const CourierButtons = () => {
     if (confirmation.value.err) {
       throw new Error('Transaction failed');
     }
+    addMultisigAddress(multisigAddress.toBase58())
   }
 
   const confirmDelivery = async () => {
-    const transaction = await solCommands.confirmCashDelivery(connection, publicKey, multisigAddressCourier, multisigAddressReceiver, courierKey, receiverKey, senderKey, backupKey, amount)
+    const transaction = await solCommands.confirmCashDelivery(connection, publicKey, multisigAddressCourier, multisigAddressReceiver, courierKey1, receiverKey, senderKey, backupKey, amount)
 
     const { blockhash } = await connection.getLatestBlockhash("finalized");
     transaction.recentBlockhash = blockhash;
@@ -46,9 +64,56 @@ const CourierButtons = () => {
     requireAllSignatures: false,
   }).toString('base64');
 
+  addSerialized(serializedTransaction)
+
   console.log('Serialized Transaction:', serializedTransaction);
 
   }
+
+  const addMultisigAddress = async (multisigAddress: string) => {
+    if (!selectedOrder) return alert("Select an order first!");
+    if (!publicKey) return alert("Connect your wallet!");
+  
+    const response = await fetch("/api/orders/multisig", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        orderId: selectedOrder.id,
+        role: "multisigAddressReceiver", // или "courier" в зависимости от кнопки
+        user: multisigAddress
+      }),
+    });
+  
+    const data = await response.json();
+    if (data.success) {
+      alert("Multisig address added successfully!");
+    } else {
+      alert(`Error: ${data.error}`);
+    }
+  };
+
+  const addSerialized = async (serialized: string) => {
+    if (!selectedOrder) return alert("Select an order first!");
+    if (!publicKey) return alert("Connect your wallet!");
+  
+    const response = await fetch("/api/orders/multisig", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        orderId: selectedOrder.id,
+        role: "serialized", // или "courier" в зависимости от кнопки
+        user: serialized
+      }),
+    });
+  
+    const data = await response.json();
+    if (data.success) {
+      alert("Multisig address added successfully!");
+    } else {
+      alert(`Error: ${data.error}`);
+    }
+  };
+  
 
   return (
     <div className={styles.panelContainer}>

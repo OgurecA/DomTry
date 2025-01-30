@@ -14,8 +14,7 @@ const Reciever = () => {
       </Head>
       <div>
         <h1>Reciever Page</h1>
-        <p>Content for the Reciever page.</p>
-        
+        <p>Content for the Reciever page.</p> 
         <OrdersReceiver />
       </div>
     </div>

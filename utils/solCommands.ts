@@ -43,7 +43,7 @@ export class solCommands {
     recieverKey: PublicKey,
     backupKey: PublicKey,
     amount: number
-  ): Promise<Transaction> {
+  ): Promise<{ transaction: Transaction; multisigAddress: PublicKey }> {
 
     const multisigAccount = Keypair.generate();
     const m = 2;
@@ -106,7 +106,7 @@ export class solCommands {
 
     transaction.partialSign(multisigAccount);
 
-  return transaction
+    return { transaction, multisigAddress: multisigAccount.publicKey };
 
   }
 

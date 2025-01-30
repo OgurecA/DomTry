@@ -11,12 +11,14 @@ const MyOrdersReceiverPage = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
 
 
   return (
       <div>
-        <MyOrdersReceiver />
-        <ReceiverButtons />
+        <MyOrdersReceiver onSelectOrder={setSelectedOrder} />
+        <ReceiverButtons selectedOrder={selectedOrder} />
       </div>
   );
 };

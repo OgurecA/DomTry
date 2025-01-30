@@ -11,12 +11,12 @@ const MyOrdersCourierPage = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
-
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   return (
       <div>
-        <MyOrdersCourier />
-        <CourierButtons />
+        <MyOrdersCourier onSelectOrder={setSelectedOrder} />
+        <CourierButtons selectedOrder={selectedOrder}/>
       </div>
   );
 };
