@@ -17,6 +17,10 @@ const OrdersReceiver = () => {
     fetchWaitingOrders();
   }, []);
 
+  const navigateTo = (path: string) => {
+    router.push(path);
+  };
+
   const fetchWaitingOrders = async () => {
     const response = await fetch("/api/orders?status=waiting");
     const data = await response.json();
@@ -59,6 +63,9 @@ const OrdersReceiver = () => {
         </button>
         <button className={styles.button} onClick={() => TakeOrderReceiver(selectedOrderId)}>
           Take Order
+        </button>
+        <button className={styles.button} onClick={() => navigateTo('/receiver/myorders')}>
+          My Orders
         </button>
       </div>
 

@@ -7,7 +7,7 @@ export const AppBar: FC = () => {
         <div className={styles.AppHeader}>
             <div className={styles.LeftSection}>
                 <img src="/chip.png" className={styles.LogoImage}/>
-                <span style={{ fontWeight: 'bold' }}>BLOCKCHAIN POKER</span>
+                <span style={{ fontWeight: 'bold' }}>CASHNET</span>
             </div>
             <div className={styles.RightSection}>
                 <WalletMultiButton/>

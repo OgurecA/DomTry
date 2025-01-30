@@ -1,6 +1,6 @@
 import Head from "next/head"
-import ReceiverButtons from "../components/Receiver/ReceiverButtons";
-import OrdersReceiver from "../components/Receiver/OrdersReceiver";
+import ReceiverButtons from "../../components/Receiver/ReceiverButtons";
+import OrdersReceiver from "../../components/Receiver/OrdersReceiver";
 
 const Reciever = () => {
     return (
@@ -15,7 +15,7 @@ const Reciever = () => {
       <div>
         <h1>Reciever Page</h1>
         <p>Content for the Reciever page.</p>
-        <ReceiverButtons />
+        
         <OrdersReceiver />
       </div>
     </div>

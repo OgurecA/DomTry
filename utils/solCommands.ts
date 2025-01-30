@@ -22,6 +22,7 @@ import {
     getAssociatedTokenAddress,
     getAssociatedTokenAddressSync,
     createAssociatedTokenAccountInstruction,
+    createCloseAccountInstruction,
   } from "@solana/spl-token";
   import * as fs from "fs";
 
@@ -145,6 +146,8 @@ export class solCommands {
       senderKey,
       true,
     );
+
+
     
     const returnDepositInstruction = createTransferInstruction(
       multisigAddressCourierAssociatedToken, // Токен-аккаунт мультиподписи
@@ -157,11 +160,36 @@ export class solCommands {
     const sendDepositInstruction = createTransferInstruction(
       multisigAddressReceiverAssociatedToken, // Токен-аккаунт мультиподписи
       associatedTokenSender, // Токен-аккаунт получателя
-      multisigAddressCourier, // Мультиподписной аккаунт (владелец)
+      multisigAddressReceiver, // Мультиподписной аккаунт (владелец)
       amount, // Количество токенов (например, 1 токен с decimal = 6)
       [courierKey, recieverKey], // Подписанты
       TOKEN_PROGRAM_ID
     );
+    const closeInstruction1 = createCloseAccountInstruction(
+      multisigAddressCourierAssociatedToken, // Токен-аккаунт
+      courierKey, // Куда отправятся SOL после закрытия
+      multisigAddressCourier, // Владелец токен-аккаунта
+      [courierKey, recieverKey]
+    );
+    const closeInstruction2 = createCloseAccountInstruction(
+      multisigAddressReceiverAssociatedToken, // Токен-аккаунт
+      recieverKey, // Куда отправятся SOL после закрытия
+      multisigAddressReceiver, // Владелец токен-аккаунта
+      [courierKey, recieverKey]
+    );
+    const closeMultiSigInstruction1 = createCloseAccountInstruction(
+      multisigAddressCourier, // Закрываемый аккаунт
+      courierKey, // Кто получает SOL обратно
+      multisigAddressCourier, // Владелец аккаунта
+      [courierKey, recieverKey]
+    );
+    const closeMultiSigInstruction2 = createCloseAccountInstruction(
+      multisigAddressReceiver, // Закрываемый аккаунт
+      recieverKey, // Кто получает SOL обратно
+      multisigAddressReceiver, // Владелец аккаунта
+      [courierKey, recieverKey]
+    );
+    
   
     // Создаём транзакцию
     const { blockhash } = await connection.getLatestBlockhash('finalized');
@@ -170,7 +198,11 @@ export class solCommands {
       feePayer: feePayer,
     })
     .add(returnDepositInstruction)
-    .add(sendDepositInstruction);
+    .add(sendDepositInstruction)
+    .add(closeInstruction1)
+    .add(closeInstruction2)
+    .add(closeMultiSigInstruction1)
+    .add(closeMultiSigInstruction2);
   
     // Подписываем транзакцию первым подписантом
     return transaction
