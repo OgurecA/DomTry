@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/OrderButton.module.css';
+import styles from '../../styles/OrderButton.module.css';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 
