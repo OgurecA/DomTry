@@ -52,3 +52,7 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+.selectedOrder {
+  background-color: rgba(0, 123, 255, 0.3); /* Подсветка выбранного заказа */
+  border: 2px solid blue;
+}

@@ -1,7 +1,7 @@
 import Head from "next/head"
-import SenderButtons from "../components/SenderButtons";
+import SenderButtons from "../components/Sender/SenderButtons";
 import * as web3 from '@solana/web3.js';
-import OrdersSender from "../components/OrdersSender";
+import OrdersSender from "../components/Sender/OrdersSender";
 
 const Sender = () => {
 

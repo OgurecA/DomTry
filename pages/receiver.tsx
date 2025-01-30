@@ -1,5 +1,5 @@
 import Head from "next/head"
-import ReceiverButtons from "../components/ReceiverButtons";
+import ReceiverButtons from "../components/Receiver/ReceiverButtons";
 
 const Reciever = () => {
     return (

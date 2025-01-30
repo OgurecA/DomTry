@@ -1,5 +1,5 @@
 import Head from "next/head"
-import CourierButtons from "../components/CourierButtons";
+import CourierButtons from "../components/Courier/CourierButtons";
 
 const Courier = () => {
     return (

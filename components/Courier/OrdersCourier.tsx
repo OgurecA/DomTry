@@ -3,13 +3,14 @@ import styles from '../styles/OrderButton.module.css';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 
-const OrdersSender = () => {
+const OrdersCourier = () => {
   const router = useRouter();
 
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
   const [orders, setOrders] = useState<any[]>([]); // Храним заказы
+  const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
 
   // Загружаем заказы при загрузке компонента
   useEffect(() => {
@@ -19,43 +20,30 @@ const OrdersSender = () => {
   const fetchWaitingOrders = async () => {
     const response = await fetch("/api/orders?status=waiting");
     const data = await response.json();
-    setOrders(data);
-  };
-
-  const placeOrderSender = async (publicKey: string, amount: number) => {
-    const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sender: publicKey, amount: amount })
-    });
-
-    const data = await response.json();
-    console.log("Order created:", data);
-    fetchWaitingOrders();
+    const filteredOrders = data.filter(order => order.sender && order.receiver); // Оставляем заказы, где есть sender и receiver
+    setOrders(filteredOrders);
 };
 
 
-  const TakeOrderSender = async (orderId: number) => {
-    if (!publicKey) return alert("Connect wallet first!");
 
+  const TakeOrderCourier = async (orderId: number) => {
+    if (!publicKey) return alert("Connect wallet first!");
+    if (!selectedOrderId) return alert("Choose order first!");
     const response = await fetch("/api/orders", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orderId, role: "receiver", user: publicKey.toBase58() })
+      body: JSON.stringify({ orderId, role: "courier", user: publicKey.toBase58() })
     });
 
     const data = await response.json();
     console.log("Order updated:", data);
-    setOrders(orders.map(order => order.id === orderId ? { ...order, receiver: publicKey.toBase58() } : order));
+    fetchWaitingOrders()
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.panelContainer}>
-        <button className={styles.button} onClick={() => placeOrderSender(publicKey.toBase58(), 1)}>
-          Place Order
-        </button>
-        <button className={styles.button} onClick={() => TakeOrderSender(1)}>
+        <button className={styles.button} onClick={() => TakeOrderCourier(selectedOrderId)}>
           Take Order
         </button>
       </div>
@@ -65,7 +53,11 @@ const OrdersSender = () => {
         <div className={styles.orderList}>
           {orders.length > 0 ? (
             orders.map((order) => (
-              <div key={order.id} className={styles.orderItem}>
+              <div
+                key={order.id}
+                className={`${styles.orderItem} ${selectedOrderId === order.id ? styles.selectedOrder : ''}`}
+                onClick={() => setSelectedOrderId(order.id)}
+              >
                 <p>ID: {order.id}</p>
                 <p>Amount: {order.amount}</p>
               </div>
@@ -80,4 +72,4 @@ const OrdersSender = () => {
 };
 
 
-export default OrdersSender;
+export default OrdersCourier;
