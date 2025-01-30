@@ -58,7 +58,7 @@ const OrdersReceiver = () => {
   return (
     <div className={styles.container}>
       <div className={styles.panelContainer}>
-        <button className={styles.button} onClick={() => placeOrderReceiver(publicKey.toBase58(), 1)}>
+        <button className={styles.button} onClick={() => placeOrderReceiver(publicKey.toBase58(), 1000)}>
           Place Order
         </button>
         <button className={styles.button} onClick={() => TakeOrderReceiver(selectedOrderId)}>
