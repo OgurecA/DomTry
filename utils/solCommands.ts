@@ -198,11 +198,7 @@ export class solCommands {
       feePayer: feePayer,
     })
     .add(returnDepositInstruction)
-    .add(sendDepositInstruction)
-    .add(closeInstruction1)
-    .add(closeInstruction2)
-    .add(closeMultiSigInstruction1)
-    .add(closeMultiSigInstruction2);
+    .add(sendDepositInstruction);
   
     // Подписываем транзакцию первым подписантом
     return transaction
