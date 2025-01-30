@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/RoleChoose.module.css'; // Создайте файл стилей по желанию
-import { solCommands } from '../../utils/solCommands';
+import styles from '../../styles/RoleChoose.module.css';
 import * as web3 from '@solana/web3.js';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 
