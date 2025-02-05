@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px; /* Расстояние между UserProfile и TeamProfile */
+    padding: 40px;
+    flex-wrap: wrap; /* Для адаптивности на мобильных */
+}

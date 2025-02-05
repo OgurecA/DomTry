@@ -12,6 +12,7 @@
 .AppHeader {
   position: fixed;
   left: 0;
+  top: 0;
   height: 90px;
   width: calc(100vw - 40px);
   display: flex;
@@ -27,10 +28,9 @@
 }
 
 .LogoImage {
-  height: 80%;
+  height: 100%;
   width: auto;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
   margin-right: 10px;
 }
 
@@ -39,6 +39,42 @@
   display: flex; /* Размещаем img и span рядом */
   align-items: center; /* Выравниваем по вертикали */
   gap: 10px; /* Расстояние между элементами */
+}
+
+.NavButton {
+  height: 50px;
+  width: 100px;
+  background: #ffcc00;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  color: #222;
+}
+
+.NavButton:hover {
+  background: #ffdd44;
+}
+
+.BackButton {
+  width: 50px;
+  height: 50px;
+  background: #555;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 36px;
+  color: white;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  line-height: 1; /* Убирает смещение стрелки */
+  padding: 0; /* Убирает внутренние отступы, если есть */
+  text-align: center; /* Центрирует символ */
 }
 
 .RightSection {

@@ -1,0 +1,13 @@
+.welcome {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 0;
+    width: 80%;
+    line-height: 1.5;
+    white-space: pre-line;
+}
