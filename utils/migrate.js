@@ -6,15 +6,15 @@ const db = new sqlite3.Database('nfts.db');
 // Определяем список таблиц для создания
 const tables = [
     `CREATE TABLE IF NOT EXISTS biks (
-        publickey TEXT UNIQUE,
+        publickey TEXT UNIQUE
     );`,
     
     `CREATE TABLE IF NOT EXISTS rats (
-        publickey TEXT UNIQUE,
+        publickey TEXT UNIQUE
     );`,
 
     `CREATE TABLE IF NOT EXISTS dragons (
-        publickey TEXT UNIQUE,
+        publickey TEXT UNIQUE
     );`
 ];
 
