@@ -38,5 +38,5 @@ app.post('/addPublicKey', (req, res) => {
 });
 
 // Запускаем сервер
-const PORT = 3000;
+const PORT = 3400;
 app.listen(PORT, () => console.log(`✅ API запущено на порту ${PORT}`));
