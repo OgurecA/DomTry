@@ -48,7 +48,7 @@ export class findNFT {
                 }
             }
       
-            console.log("❌ NFT с таким updateAuthority не найдены.");
+            console.log("❌ NFT с таким updateAuthority не найдены.", BIK_AUTH);
             return null;
       
         } catch (error) {
@@ -87,7 +87,7 @@ export class findNFT {
                 }
             }
       
-            console.log("❌ NFT с таким updateAuthority не найдены.");
+            console.log("❌ NFT с таким updateAuthority не найдены.", KRISA_AUTH);
             return null;
       
         } catch (error) {
@@ -126,7 +126,7 @@ export class findNFT {
                 }
             }
       
-            console.log("❌ NFT с таким updateAuthority не найдены.");
+            console.log("❌ NFT с таким updateAuthority не найдены.", DRAGON_AUTH);
             return null;
       
         } catch (error) {
