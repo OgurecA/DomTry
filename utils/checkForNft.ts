@@ -1,4 +1,4 @@
-import { Metaplex } from "@metaplex-foundation/js";
+import { Metadata, Metaplex } from "@metaplex-foundation/js";
 import { Connection, PublicKey } from "@solana/web3.js";
 
 // Подключение к Solana
@@ -8,60 +8,131 @@ const metaplex = Metaplex.make(connection);
 // 📌 `Mint Address` Master NFT
 const MASTER_NFT_MINT = new PublicKey("6umTtienmQxTthD7mUBuvpmanCKU3gNBmBvXC1zYYJkD");
 
-async function findEditionsOfMasterNFT() {
-    console.log(`🔍 Ищем копии Master NFT: ${MASTER_NFT_MINT.toBase58()}`);
+function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-    // 📌 Получаем Master NFT
-    const masterNFT = await metaplex.nfts().findByMint({ mintAddress: MASTER_NFT_MINT });
+const BIK_AUTH = process.env.BIK_AUTH;
+const KRISA_AUTH = process.env.KRISA_AUTH;
+const DRAGON_AUTH = process.env.DRAGON_AUTH;
 
-    console.log("\n✅ Master NFT найден:");
-    console.log(`- Name: ${masterNFT.name}`);
-    console.log(`- Symbol: ${masterNFT.symbol}`);
-    console.log(`- URI: ${masterNFT.uri}`);
+export class findNFT {
 
-    // 📌 Получаем `Current Supply` (количество заминченных копий)
-    const editionAccount = await metaplex.nfts().pdas().edition({ mint: MASTER_NFT_MINT });
-    const editionData = await connection.getAccountInfo(editionAccount);
+    static async Bik(
+        connection: Connection,
+        walletAddress: PublicKey,
+      ): Promise<{ nftAddress: PublicKey } | null> {
+        const metaplex = Metaplex.make(connection);
+        try {
+            const ownerPubKey = new PublicKey(walletAddress);
+      
+            console.log("🔍 Ищем NFT...");
+            const assets = await metaplex.nfts().findAllByOwner({ owner: ownerPubKey });
+      
+            // Фильтруем только Metadata
+            const metadataAssets = assets.filter(asset => asset.model === "metadata") as Metadata[];
+      
+            for (let i = 0; i < metadataAssets.length; i++) {
+                const metadata = metadataAssets[i];
+      
+                // Добавляем задержку, чтобы избежать 429
+                await delay(500);
+      
+                // Загружаем полные данные NFT
+                const nft = await metaplex.nfts().load({ metadata });
+      
+                if (nft.updateAuthorityAddress.toBase58() === BIK_AUTH) {
+                    console.log(`🎯 Найдена NFT с updateAuthority ${BIK_AUTH}:`);
+                    console.log(`✅ Mint: ${nft.address.toBase58()}`);
+                    return { nftAddress: nft.address }; // Останавливаем поиск
+                }
+            }
+      
+            console.log("❌ NFT с таким updateAuthority не найдены.");
+            return null;
+      
+        } catch (error) {
+            console.error("❌ Ошибка получения NFT:", (error as Error).message);
+            return null;
+        }
+      }
 
-    let currentSupply = 0;
-    if (editionData && editionData.data.length >= 2) {
-        currentSupply = editionData.data[1] || 0; // `Current Supply`
-    }
+      static async Rat(
+        connection: Connection,
+        walletAddress: PublicKey,
+      ): Promise<{ nftAddress: PublicKey } | null> {
+        const metaplex = Metaplex.make(connection);
+        try {
+            const ownerPubKey = new PublicKey(walletAddress);
+      
+            console.log("🔍 Ищем NFT...");
+            const assets = await metaplex.nfts().findAllByOwner({ owner: ownerPubKey });
+      
+            // Фильтруем только Metadata
+            const metadataAssets = assets.filter(asset => asset.model === "metadata") as Metadata[];
+      
+            for (let i = 0; i < metadataAssets.length; i++) {
+                const metadata = metadataAssets[i];
+      
+                // Добавляем задержку, чтобы избежать 429
+                await delay(500);
+      
+                // Загружаем полные данные NFT
+                const nft = await metaplex.nfts().load({ metadata });
+      
+                if (nft.updateAuthorityAddress.toBase58() === KRISA_AUTH) {
+                    console.log(`🎯 Найдена NFT с updateAuthority ${KRISA_AUTH}:`);
+                    console.log(`✅ Mint: ${nft.address.toBase58()}`);
+                    return { nftAddress: nft.address }; // Останавливаем поиск
+                }
+            }
+      
+            console.log("❌ NFT с таким updateAuthority не найдены.");
+            return null;
+      
+        } catch (error) {
+            console.error("❌ Ошибка получения NFT:", (error as Error).message);
+            return null;
+        }
+      }
 
-    console.log(`- Current Supply: ${currentSupply}`);
+      static async Dragon(
+        connection: Connection,
+        walletAddress: PublicKey,
+      ): Promise<{ nftAddress: PublicKey } | null> {
+        const metaplex = Metaplex.make(connection);
+        try {
+            const ownerPubKey = new PublicKey(walletAddress);
+      
+            console.log("🔍 Ищем NFT...");
+            const assets = await metaplex.nfts().findAllByOwner({ owner: ownerPubKey });
+      
+            // Фильтруем только Metadata
+            const metadataAssets = assets.filter(asset => asset.model === "metadata") as Metadata[];
+      
+            for (let i = 0; i < metadataAssets.length; i++) {
+                const metadata = metadataAssets[i];
+      
+                // Добавляем задержку, чтобы избежать 429
+                await delay(500);
+      
+                // Загружаем полные данные NFT
+                const nft = await metaplex.nfts().load({ metadata });
+      
+                if (nft.updateAuthorityAddress.toBase58() === DRAGON_AUTH) {
+                    console.log(`🎯 Найдена NFT с updateAuthority ${DRAGON_AUTH}:`);
+                    console.log(`✅ Mint: ${nft.address.toBase58()}`);
+                    return { nftAddress: nft.address }; // Останавливаем поиск
+                }
+            }
+      
+            console.log("❌ NFT с таким updateAuthority не найдены.");
+            return null;
+      
+        } catch (error) {
+            console.error("❌ Ошибка получения NFT:", (error as Error).message);
+            return null;
+        }
+      }
 
-    // 📌 Проверяем, есть ли копии
-    if (currentSupply === 0) {
-        console.log("\n❌ У Master NFT нет копий.");
-        return;
-    }
-
-    console.log("\n🔍 Ищем копии через `findAllByMintList()`...");
-
-    // 📌 Получаем все `Mint Addresses` существующих копий через `printNewEdition()`
-    const editionPDAs = [];
-    for (let i = 1; i <= currentSupply; i++) {
-        const editionPDA = await metaplex.nfts().pdas().edition({ mint: MASTER_NFT_MINT });
-        editionPDAs.push(editionPDA);
-    }
-
-    // 📌 Запрашиваем информацию о найденных копиях
-    const editions = await metaplex.nfts().findAllByMintList({ mints: editionPDAs });
-
-    // 📌 Исключаем `null`-значения, если они есть
-    const validEditions = editions.filter(edition => edition !== null);
-
-    if (validEditions.length === 0) {
-        console.log("\n❌ Копии Master NFT не найдены.");
-        return;
-    }
-
-    console.log("\n📜 Найденные копии (Editions):");
-    validEditions.forEach((edition, index) => {
-        console.log(`#${index + 1}: ${edition.address.toBase58()}`);
-    });
-
-    console.log(`\n🔍 Всего найдено копий: ${validEditions.length}`);
 }
-
-findEditionsOfMasterNFT().catch(console.error);
