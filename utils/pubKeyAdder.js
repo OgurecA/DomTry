@@ -1,12 +1,29 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();
 const db = new sqlite3.Database('nfts.db'); // Подключаем базу
 
 app.use(cors()); // Разрешаем запросы с другого устройства
 app.use(express.json()); // Позволяем обрабатывать JSON
+
+const API_KEY = process.env.API_KEY;
+
+if (!API_KEY) {
+    console.error("❌ Ошибка: API_KEY не задан в .env!");
+    process.exit(1);
+}
+
+function checkApiKey(req, res, next) {
+    const clientKey = req.headers["x-api-key"];
+    if (clientKey !== API_KEY) {
+        return res.status(403).json({ error: "🚫 Доступ запрещен (неверный API-ключ)" });
+    }
+    next();
+}
 
 // Функция для добавления ключа в нужную таблицу
 function addPublicKey(table, publicKey, res) {
@@ -23,7 +40,7 @@ function addPublicKey(table, publicKey, res) {
 }
 
 // Маршрут для добавления ключа
-app.post('/addPublicKey', (req, res) => {
+app.post('/addPublicKey', checkApiKey, (req, res) => {
     const { table, publicKey } = req.body;
 
     if (!table || !publicKey) {
@@ -33,7 +50,6 @@ app.post('/addPublicKey', (req, res) => {
     if (!["biks", "rats", "dragons"].includes(table)) {
         return res.status(400).json({ error: "Неверное имя таблицы" });
     }
-
     addPublicKey(table, publicKey, res);
 });
 
