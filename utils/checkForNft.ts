@@ -1,12 +1,9 @@
 import { Metadata, Metaplex } from "@metaplex-foundation/js";
 import { Connection, PublicKey } from "@solana/web3.js";
 
+
 // Подключение к Solana
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
-const metaplex = Metaplex.make(connection);
-
-// 📌 `Mint Address` Master NFT
-const MASTER_NFT_MINT = new PublicKey("6umTtienmQxTthD7mUBuvpmanCKU3gNBmBvXC1zYYJkD");
 
 function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
