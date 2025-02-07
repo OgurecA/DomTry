@@ -9,9 +9,10 @@ function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-const BIK_AUTH = "7k5evAikEGfdTKUQYXsZkh95ypPJLBiWaubvCcm2wncx";
-const KRISA_AUTH = "45wDk1wvgg3HAFqqBdDiJzL45onN9YGRZ4J3bicK8NxG";
-const DRAGON_AUTH = "39NMcAt82mxQcHkYtqYArXMRxfWZ1nS85SmSDLZkrPE6";
+const BIK_AUTH = process.env.BIK_AUTH;
+const KRISA_AUTH = process.env.KRISA_AUTH;
+const DRAGON_AUTH = process.env.DRAGON_AUTH;
+
 export class findNFT {
 
     static async Bik(
