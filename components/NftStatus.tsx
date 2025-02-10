@@ -43,7 +43,7 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
 
   // Обновляем позицию всплывающего окна при движении мыши
   const handleMouseMove = (e: React.MouseEvent) => {
-    setTooltipPosition({ x: e.clientX + 10, y: e.clientY - 10 });
+    setTooltipPosition({ x: e.clientX + 10, y: e.clientY + 10 });
   };
 
   if (status === null) return null;

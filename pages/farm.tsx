@@ -52,6 +52,28 @@ const FarmPage = () => {
             <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />
           )}
         </div>
+        
+        <div className={styles.selectedNftInfoContainer}>
+        {selectedNft && (
+          <div>
+            <h2>{selectedNft.nftName}</h2>
+            <p><strong>Адрес:</strong> {selectedNft.nftAddress.toBase58()}</p>
+            <h3>Атрибуты:</h3>
+            <ul className={styles.attributeList}>
+              {selectedNft.attributes.length > 0 ? (
+                selectedNft.attributes.map((attr, index) => (
+                  <li key={index}>
+                    <strong>{attr.trait_type}:</strong> {attr.value}
+                  </li>
+                ))
+              ) : (
+                <li>Нет атрибутов</li>
+              )}
+            </ul>
+            </div>
+          )}
+          </div>
+
         <div className={styles.nftWrapper}>
           <NftStatus
             title="BERNARD"
