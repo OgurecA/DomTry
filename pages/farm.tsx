@@ -48,7 +48,9 @@ const FarmPage = () => {
       <FarmAppBar />
       <Back>
         <div className={styles.selectedNftContainer}>
-          <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />
+          {selectedNft.imageUrl && (
+            <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />
+          )}
           <p className={styles.selectedNftTitle}>
             {selectedNft?.nftAddress ? selectedNft.nftAddress.toBase58() : "No"}
           </p>
