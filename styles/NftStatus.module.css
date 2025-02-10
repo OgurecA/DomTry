@@ -42,6 +42,7 @@
   width: 200px;
   z-index: 1000;
   pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .attributeList {
