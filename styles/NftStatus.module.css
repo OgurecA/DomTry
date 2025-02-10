@@ -1,12 +1,14 @@
-.nftContainer {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  display: flex; /* NFT идут в ряд */
-  gap: 20px; /* Отступы между ними */
-  flex-wrap: wrap; /* Разрешаем перенос, если места мало */
-  max-width: 100%; /* Чтобы контейнер не был жёстко 200px */
+.nftContainer { /* Контейнер для одной NFT */
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  gap: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
 }
+
 
 .nftImage {
   width: 100%;

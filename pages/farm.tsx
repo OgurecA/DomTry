@@ -35,7 +35,7 @@ const FarmPage = () => {
     <>
       <FarmAppBar />
       <Back>
-        <div className={styles.nftContainer}>
+        <div className={styles.nftWrapper}>
           <NftStatus title="BERNARD" imageUrl="/BarsukNewPNG.png" checkNft={() => Promise.resolve(nfts.nft1)} />
           <NftStatus title="olev" imageUrl="/BekPNG.png" checkNft={() => Promise.resolve(nfts.nft2)} />
           <NftStatus title="UNICHTOZHITEL" imageUrl="/Krisa.png" checkNft={() => Promise.resolve(nfts.nft3)} />
