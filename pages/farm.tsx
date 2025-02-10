@@ -28,14 +28,15 @@ const FarmPage = () => {
   };
 
   return (
+    <>
     <Back>
-      <AppBar />
         <div className={styles.nftContainer}>
           <NftStatus title="NFT 1" checkNft={checkNft1} />
           <NftStatus title="NFT 2" checkNft={checkNft2} />
           <NftStatus title="NFT 3" checkNft={checkNft3} />
         </div>
     </Back>
+    </>
   );
 };
 

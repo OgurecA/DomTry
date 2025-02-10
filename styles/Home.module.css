@@ -25,6 +25,7 @@
   padding-left: 20px;
   padding-right: 20px;
   flex-wrap: nowrap;
+  z-index: 1000;
 }
 
 .LogoImage {

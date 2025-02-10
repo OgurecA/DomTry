@@ -2,9 +2,6 @@ import { Metadata, Metaplex } from "@metaplex-foundation/js";
 import { Connection, PublicKey } from "@solana/web3.js";
 
 
-// Подключение к Solana
-const connection = new Connection("https://api.devnet.solana.com", "confirmed");
-
 function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -18,7 +15,7 @@ export class findNFT {
     static async Bik(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -33,7 +30,7 @@ export class findNFT {
                 const metadata = metadataAssets[i];
       
                 // Добавляем задержку, чтобы избежать 429
-                await delay(500);
+                await delay(200);
       
                 // Загружаем полные данные NFT
                 const nft = await metaplex.nfts().load({ metadata });
@@ -41,7 +38,15 @@ export class findNFT {
                 if (nft.updateAuthorityAddress.toBase58() === BIK_AUTH) {
                     console.log(`🎯 Найдена NFT с updateAuthority ${BIK_AUTH}:`);
                     console.log(`✅ Mint: ${nft.address.toBase58()}`);
-                    return { nftAddress: nft.address }; // Останавливаем поиск
+                    
+                    const nftName = nft.name;
+                    const attributes = nft.json?.attributes || [];
+
+                    return {
+                        nftAddress: nft.address,
+                        nftName,
+                        attributes
+                    };
                 }
             }
       
@@ -57,7 +62,7 @@ export class findNFT {
       static async Rat(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -72,7 +77,7 @@ export class findNFT {
                 const metadata = metadataAssets[i];
       
                 // Добавляем задержку, чтобы избежать 429
-                await delay(500);
+                await delay(200);
       
                 // Загружаем полные данные NFT
                 const nft = await metaplex.nfts().load({ metadata });
@@ -80,7 +85,15 @@ export class findNFT {
                 if (nft.updateAuthorityAddress.toBase58() === KRISA_AUTH) {
                     console.log(`🎯 Найдена NFT с updateAuthority ${KRISA_AUTH}:`);
                     console.log(`✅ Mint: ${nft.address.toBase58()}`);
-                    return { nftAddress: nft.address }; // Останавливаем поиск
+                    
+                    const nftName = nft.name;
+                    const attributes = nft.json?.attributes || [];
+
+                    return {
+                        nftAddress: nft.address,
+                        nftName,
+                        attributes
+                    };
                 }
             }
       
@@ -96,7 +109,7 @@ export class findNFT {
       static async Dragon(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -111,7 +124,7 @@ export class findNFT {
                 const metadata = metadataAssets[i];
       
                 // Добавляем задержку, чтобы избежать 429
-                await delay(500);
+                await delay(200);
       
                 // Загружаем полные данные NFT
                 const nft = await metaplex.nfts().load({ metadata });
@@ -119,7 +132,15 @@ export class findNFT {
                 if (nft.updateAuthorityAddress.toBase58() === DRAGON_AUTH) {
                     console.log(`🎯 Найдена NFT с updateAuthority ${DRAGON_AUTH}:`);
                     console.log(`✅ Mint: ${nft.address.toBase58()}`);
-                    return { nftAddress: nft.address }; // Останавливаем поиск
+                    
+                    const nftName = nft.name;
+                    const attributes = nft.json?.attributes || [];
+
+                    return {
+                        nftAddress: nft.address,
+                        nftName,
+                        attributes
+                    };
                 }
             }
       
