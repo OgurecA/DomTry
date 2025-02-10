@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/NftStatus.module.css";
+import { PublicKey } from "@solana/web3.js";
 
 type NftData = {
-  nftAddress: string;
+  nftAddress: PublicKey;
   name: string;
   attributes: { trait_type: string; value: string }[];
 } | null;
@@ -41,7 +42,7 @@ export const NftStatus = ({ title, checkNft }: NftStatusProps) => {
       ) : nftData ? (
         <div className={styles.nftDetails}>
           <p><strong>Название:</strong> {nftData.name}</p>
-          <p><strong>Адрес:</strong> {nftData.nftAddress}</p>
+          <p><strong>Адрес:</strong> {nftData.nftAddress.toBase58()}</p>
           
           <p><strong>Атрибуты:</strong></p>
           <ul className={styles.attributeList}>
