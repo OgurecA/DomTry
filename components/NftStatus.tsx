@@ -4,7 +4,7 @@ import { PublicKey } from "@solana/web3.js";
 
 type NftData = {
   nftAddress: PublicKey;
-  name: string;
+  nftName: string;
   attributes: { trait_type: string; value: string }[];
 } | null;
 
@@ -41,8 +41,8 @@ export const NftStatus = ({ title, checkNft }: NftStatusProps) => {
         <div className={styles.loader}></div> // Анимация загрузки
       ) : nftData ? (
         <div className={styles.nftDetails}>
-          <p><strong>Название:</strong> {nftData.name}</p>
-          <p><strong>Адрес:</strong> {nftData.nftAddress.toBase58()}</p>
+          <p><strong>Название:</strong> {nftData.nftName}</p>
+          <p><strong>Адрес:</strong>{nftData.nftAddress.toBase58().slice(0, 4)}....{nftData.nftAddress.toBase58().slice(-4)}</p>
           
           <p><strong>Атрибуты:</strong></p>
           <ul className={styles.attributeList}>
