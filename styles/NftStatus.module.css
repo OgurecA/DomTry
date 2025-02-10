@@ -1,7 +1,7 @@
 .nftContainer { /* Контейнер для одной NFT */
   display: inline-block;
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   border-radius: 10px;
   gap: 20px;
   overflow: hidden;

@@ -12,9 +12,10 @@ type NftStatusProps = {
   title: string;
   checkNft: () => Promise<NftData>;
   imageUrl: string; // URL картинки NFT
+  onClick: () => void;
 };
 
-export const NftStatus = ({ title, checkNft, imageUrl }: NftStatusProps) => {
+export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps) => {
   const [nftData, setNftData] = useState<NftData>(null);
   const [status, setStatus] = useState<0 | 1 | null>(0);
   const [hover, setHover] = useState(false);
@@ -53,6 +54,7 @@ export const NftStatus = ({ title, checkNft, imageUrl }: NftStatusProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onMouseMove={handleMouseMove}
+      onClick={onClick}
     >
       {status === 0 ? (
         <div className={styles.loader}></div> // Анимация загрузки

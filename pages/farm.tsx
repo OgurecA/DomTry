@@ -15,6 +15,8 @@ const FarmPage = () => {
     nft3: null,
   });
 
+  const [selectedNft, setSelectedNft] = useState<any>(null);
+
   useEffect(() => {
     if (!publicKey) return;
 
@@ -35,10 +37,29 @@ const FarmPage = () => {
     <>
       <FarmAppBar />
       <Back>
+        <div className={styles.selectedNftContainer}>
+          {/* <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} /> */}
+          <p className={styles.selectedNftTitle}>{selectedNft.nftAddress}</p>
+        </div>
         <div className={styles.nftWrapper}>
-          <NftStatus title="BERNARD" imageUrl="/BarsukNewPNG.png" checkNft={() => Promise.resolve(nfts.nft1)} />
-          <NftStatus title="olev" imageUrl="/BekPNG.png" checkNft={() => Promise.resolve(nfts.nft2)} />
-          <NftStatus title="UNICHTOZHITEL" imageUrl="/Krisa.png" checkNft={() => Promise.resolve(nfts.nft3)} />
+          <NftStatus
+            title="BERNARD"
+            imageUrl="/BarsukNewPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft1)}
+            onClick={() => setSelectedNft({ title: "BERNARD", imageUrl: "/BarsukNewPNG.png" })}
+          />
+          <NftStatus
+            title="olev"
+            imageUrl="/BekPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft2)}
+            onClick={() => setSelectedNft({ title: "olev", imageUrl: "/BekPNG.png" })}
+          />
+          <NftStatus
+            title="UNICHTOZHITEL"
+            imageUrl="/Krisa.png"
+            checkNft={() => Promise.resolve(nfts.nft3)}
+            onClick={() => setSelectedNft({ title: "UNICHTOZHITEL", imageUrl: "/Krisa.png" })}
+          />
         </div>
       </Back>
     </>
