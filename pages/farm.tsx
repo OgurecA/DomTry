@@ -5,6 +5,16 @@ import { Back } from "../components/Back";
 import { findNFT } from "../utils/checkForNft";
 import { NftStatus } from "../components/NftStatus"; 
 import { FarmAppBar } from "../components/FarmAppBar";
+import { PublicKey } from "@solana/web3.js";
+
+
+type NftData = {
+  nftAddress: PublicKey;
+  nftName: string;
+  attributes: { trait_type: string; value: string }[];
+  imageUrl: string;
+} | null;
+
 
 const FarmPage = () => {
   const { connection } = useConnection();
@@ -15,7 +25,7 @@ const FarmPage = () => {
     nft3: null,
   });
 
-  const [selectedNft, setSelectedNft] = useState<any>(null);
+  const [selectedNft, setSelectedNft] = useState<NftData>(null);
 
   useEffect(() => {
     if (!publicKey) return;
@@ -39,26 +49,26 @@ const FarmPage = () => {
       <Back>
         <div className={styles.selectedNftContainer}>
           {/* <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} /> */}
-          <p className={styles.selectedNftTitle}>{selectedNft.nftAddress}</p>
+          <p className={styles.selectedNftTitle}>{selectedNft.nftAddress.toBase58()}</p>
         </div>
         <div className={styles.nftWrapper}>
           <NftStatus
             title="BERNARD"
             imageUrl="/BarsukNewPNG.png"
             checkNft={() => Promise.resolve(nfts.nft1)}
-            onClick={() => setSelectedNft({ title: "BERNARD", imageUrl: "/BarsukNewPNG.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
           />
           <NftStatus
             title="olev"
             imageUrl="/BekPNG.png"
             checkNft={() => Promise.resolve(nfts.nft2)}
-            onClick={() => setSelectedNft({ title: "olev", imageUrl: "/BekPNG.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
           />
           <NftStatus
             title="UNICHTOZHITEL"
             imageUrl="/Krisa.png"
             checkNft={() => Promise.resolve(nfts.nft3)}
-            onClick={() => setSelectedNft({ title: "UNICHTOZHITEL", imageUrl: "/Krisa.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Krisa.png" })}
           />
         </div>
       </Back>
