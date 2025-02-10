@@ -51,9 +51,6 @@ const FarmPage = () => {
           {selectedNft && (
             <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />
           )}
-          <p className={styles.selectedNftTitle}>
-            {selectedNft?.nftAddress ? selectedNft.nftAddress.toBase58() : "No"}
-          </p>
         </div>
         <div className={styles.nftWrapper}>
           <NftStatus
