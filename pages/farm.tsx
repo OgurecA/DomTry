@@ -1,41 +1,46 @@
+import { useState, useEffect } from "react";
 import styles from "../styles/FarmPage.module.css";
-import { AppBar } from "../components/AppBar";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Back } from "../components/Back";
 import { findNFT } from "../utils/checkForNft";
-import { NftStatus } from "../components/NftStatus"; // Новый компонент
+import { NftStatus } from "../components/NftStatus"; 
+import { FarmAppBar } from "../components/FarmAppBar";
 
 const FarmPage = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
+  const [nfts, setNfts] = useState<{ nft1: any, nft2: any, nft3: any }>({
+    nft1: null,
+    nft2: null,
+    nft3: null,
+  });
 
-  const checkNft1 = async () => {
-    if (!publicKey) return null;
-    const result = await findNFT.Bik(connection, publicKey);
-    return result?.nftAddress.toBase58() ?? null;
-  };
+  useEffect(() => {
+    if (!publicKey) return;
 
-  const checkNft2 = async () => {
-    if (!publicKey) return null;
-    const result = await findNFT.Rat(connection, publicKey);
-    return result?.nftAddress.toBase58() ?? null;
-  };
+    const fetchNfts = async () => {
+      const [nft1, nft2, nft3] = await Promise.all([
+        findNFT.Bik(connection, publicKey),
+        findNFT.Rat(connection, publicKey),
+        findNFT.Dragon(connection, publicKey),
+      ]);
 
-  const checkNft3 = async () => {
-    if (!publicKey) return null;
-    const result = await findNFT.Dragon(connection, publicKey);
-    return result?.nftAddress.toBase58() ?? null;
-  };
+      setNfts({ nft1, nft2, nft3 });
+    };
+
+    fetchNfts();
+  }, [publicKey, connection]);
 
   return (
     <>
-    <Back>
+      <FarmAppBar />
+      <Back>
         <div className={styles.nftContainer}>
-          <NftStatus title="NFT 1" checkNft={checkNft1} />
-          <NftStatus title="NFT 2" checkNft={checkNft2} />
-          <NftStatus title="NFT 3" checkNft={checkNft3} />
+          <NftStatus title="NFT 1" checkNft={() => Promise.resolve(nfts.nft1)} />
+          <NftStatus title="NFT 2" checkNft={() => Promise.resolve(nfts.nft2)} />
+          <NftStatus title="NFT 3" checkNft={() => Promise.resolve(nfts.nft3)} />
         </div>
-    </Back>
+      </Back>
     </>
   );
 };
