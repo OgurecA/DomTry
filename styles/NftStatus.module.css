@@ -2,15 +2,11 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
-  display: flex;
-  gap: 20px;
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
+  display: flex; /* NFT идут в ряд */
+  gap: 20px; /* Отступы между ними */
+  flex-wrap: wrap; /* Разрешаем перенос, если места мало */
+  max-width: 100%; /* Чтобы контейнер не был жёстко 200px */
 }
-
 
 .nftImage {
   width: 100%;
