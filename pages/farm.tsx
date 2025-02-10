@@ -53,9 +53,8 @@ const FarmPage = () => {
           )}
         </div>
         
-        <div className={styles.selectedNftInfoContainer}>
         {selectedNft && (
-          <div>
+        <div className={styles.selectedNftInfoContainer}>
             <h2>{selectedNft.nftName}</h2>
             <p><strong>Адрес:</strong> {selectedNft.nftAddress.toBase58()}</p>
             <h3>Атрибуты:</h3>
@@ -70,9 +69,8 @@ const FarmPage = () => {
                 <li>Нет атрибутов</li>
               )}
             </ul>
-            </div>
-          )}
           </div>
+        )}
 
         <div className={styles.nftWrapper}>
           <NftStatus
