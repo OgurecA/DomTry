@@ -88,19 +88,19 @@ const FarmPage = () => {
             title="BERNARD"
             imageUrl="/BarsukNewPNG.png"
             checkNft={() => Promise.resolve(nfts.nft1)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
           />
           <NftStatus
             title="olev"
             imageUrl="/BekPNG.png"
             checkNft={() => Promise.resolve(nfts.nft2)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Krisa.png" })}
           />
           <NftStatus
             title="UNICHTOZHITEL"
             imageUrl="/Krisa.png"
             checkNft={() => Promise.resolve(nfts.nft3)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Krisa.png" })}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
           />
         </div>
       </Back>
