@@ -46,6 +46,8 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
     setTooltipPosition({ x: e.clientX + 10, y: e.clientY + 10 });
   };
 
+  const allowedAttributes = ["Occupation", "TeamPoints", "SelfPoints"];
+
   if (status === null) return null;
 
   return (
@@ -70,7 +72,9 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
           <p><strong>Название:</strong> {nftData.nftName}</p>
           <ul className={styles.attributeList}>
             {nftData.attributes.length > 0 ? (
-              nftData.attributes.map((attr, index) => (
+              nftData.attributes
+              .filter(attr => allowedAttributes.includes(attr.trait_type))
+              .map((attr, index) => (
                 <li key={index}>
                   <strong>{attr.trait_type}:</strong> {attr.value}
                 </li>

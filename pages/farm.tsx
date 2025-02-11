@@ -7,6 +7,7 @@ import { NftStatus } from "../components/NftStatus";
 import { FarmAppBar } from "../components/FarmAppBar";
 import { PublicKey } from "@solana/web3.js";
 
+const allowedAttributes = ["Species", "TeamPoints", "SelfPoints"];
 
 type NftData = {
   nftAddress: PublicKey;
@@ -60,7 +61,9 @@ const FarmPage = () => {
             <h3>Атрибуты:</h3>
             <ul className={styles.attributeList}>
               {selectedNft.attributes.length > 0 ? (
-                selectedNft.attributes.map((attr, index) => (
+                selectedNft.attributes
+                .filter(attr => allowedAttributes.includes(attr.trait_type))
+                .map((attr, index) => (
                   <li key={index}>
                     <strong>{attr.trait_type}:</strong> {attr.value}
                   </li>
@@ -73,8 +76,10 @@ const FarmPage = () => {
         )}
         {selectedNft && (
         <div className={styles.selectedNftDescriptionContainer}>
-          <h2>{selectedNft.nftName}</h2>
-          <p>большое колвлаошщвошщьваощиьвоатиовщ шщвщп шщшщ ушщ шщтшщт шщвтвшщ тшщпт шщатщпвт щптво твошт от ощвто твш тшт втп шт ошвт овтп олто твотп овто ватпотво т тотощтвощтпощатощ тощвт ощтощ тваощп ощвт овттпощвтпотповвт ощво щтвощ то прттот отт овщ овваат ощвао текста</p>
+          <h2>
+            {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
+          </h2>
+          <p>{selectedNft.attributes.find(attr => attr.trait_type === "Description")?.value || "Нет данных"}</p>
         </div>
         )}
 
