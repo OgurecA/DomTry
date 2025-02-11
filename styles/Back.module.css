@@ -1,8 +1,8 @@
 .BodyDescription {
     position: absolute; /* Абсолютное позиционирование */
     width: 100%;
-    height: calc(100vh - 90px); /* Высота с учетом AppBar */
-    bottom: 0; /* Прикрепляем к нижнему краю */
+    height: calc(100% - 90px); /* Высота с учетом AppBar */
+    top: 90px; /* Прикрепляем к нижнему краю */
     background-image: url('/ForestBack70.png'); /* Путь к картинке */
     background-size: cover;
     background-position: center;

@@ -68,9 +68,6 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
           style={{ top: tooltipPosition.y, left: tooltipPosition.x }}
         >
           <p><strong>Название:</strong> {nftData.nftName}</p>
-          <p><strong>Адрес:</strong> {nftData.nftAddress.toBase58().slice(0, 4)}....{nftData.nftAddress.toBase58().slice(-4)}</p>
-
-          <p><strong>Атрибуты:</strong></p>
           <ul className={styles.attributeList}>
             {nftData.attributes.length > 0 ? (
               nftData.attributes.map((attr, index) => (
