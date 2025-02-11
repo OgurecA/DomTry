@@ -33,7 +33,7 @@
 
 .selectedNftInfoContainer {
   width: auto;
-  min-width: 200px;
+  max-width: 450px;
   min-height: 200px;
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
@@ -68,4 +68,27 @@
   font-size: 14px;
   margin-top: 5px;
   color: white;
+}
+
+.selectedNftDescriptionContainer {
+  width: auto;
+  max-width: 450px; /* Не шире 450px */
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center; /* Центрируем текст */
+  margin: 0 auto; /* Центрируем блок */
+  word-wrap: break-word; /* Перенос слов */
+  overflow-wrap: break-word;
+  white-space: normal; /* Обычный перенос */
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.selectedNftDescriptionContainer h2 {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 8px;
 }

@@ -71,6 +71,12 @@ const FarmPage = () => {
             </ul>
           </div>
         )}
+        {selectedNft && (
+        <div className={styles.selectedNftDescriptionContainer}>
+          <h2>{selectedNft.nftName}</h2>
+          <p>большое колвлаошщвошщьваощиьвоатиовщ шщвщп шщшщ ушщ шщтшщт шщвтвшщ тшщпт шщатщпвт щптво твошт от ощвто твш тшт втп шт ошвт овтп олто твотп овто ватпотво т тотощтвощтпощатощ тощвт ощтощ тваощп ощвт овттпощвтпотповвт ощво щтвощ то прттот отт овщ овваат ощвао текста</p>
+        </div>
+        )}
 
         <div className={styles.nftWrapper}>
           <NftStatus
