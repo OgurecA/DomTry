@@ -78,27 +78,32 @@ const FarmPage = () => {
         nft3: nft3 ? { ...nft3, imageUrl: "/BarsukNewPNG.png" } : null,
       });
     };
-    fetchAnimalKey()
     fetchNfts();
   }, [publicKey, connection]);
 
   
   // Отдельный `useEffect`, чтобы `selectedNft` обновился после `playerAvatar`
   useEffect(() => {
-    if (!animalKey) return;
+    const fetchAndSetNFT = async () => {
+      await fetchAnimalKey(); // Ждём загрузки `animalKey`
   
-    // Ищем среди всех NFT
-    const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
-      (nft) => nft && nft.nftAddress.toBase58() === animalKey
-    );
+      if (!animalKey) return;
   
-    if (foundNft) {
-      setSelectedNft(foundNft);
-    } else {
-      setSelectedNft(playerAvatar)
-    }
-  }, [nfts]);
-   // Запускается при изменении `playerAvatar`
+      // Ищем среди всех NFT
+      const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
+        (nft) => nft && nft.nftAddress.toBase58() === animalKey
+      );
+  
+      if (foundNft) {
+        setSelectedNft(foundNft);
+      } else {
+        setSelectedNft(playerAvatar);
+      }
+    };
+  
+    fetchAndSetNFT();
+  }, [animalKey, playerAvatar, nfts]); // Добавляем зависимости
+  
   
   
   
