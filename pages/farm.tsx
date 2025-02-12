@@ -71,33 +71,34 @@ const FarmPage = () => {
         findNFT.Dragon(connection, publicKey),
       ]);
 
-      setNfts({ player: playerAvatar, nft1, nft2, nft3 });
+      setNfts({
+        player: playerAvatar,
+        nft1: nft1 ? { ...nft1, imageUrl: "/BekPNG.png" } : null,
+        nft2: nft2 ? { ...nft2, imageUrl: "/Krisa.png" } : null,
+        nft3: nft3 ? { ...nft3, imageUrl: "/BarsukNewPNG.png" } : null,
+      });
     };
+    fetchAnimalKey()
     fetchNfts();
   }, [publicKey, connection]);
 
   
   // Отдельный `useEffect`, чтобы `selectedNft` обновился после `playerAvatar`
   useEffect(() => {
-    const fetchAndSetNFT = async () => {
-      await fetchAnimalKey(); // Ждём загрузки `animalKey`
+    if (!animalKey) return;
   
-      if (!animalKey) return;
+    // Ищем среди всех NFT
+    const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
+      (nft) => nft && nft.nftAddress.toBase58() === animalKey
+    );
   
-      // Ищем среди всех NFT
-      const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
-        (nft) => nft && nft.nftAddress.toBase58() === animalKey
-      );
-  
-      if (foundNft) {
-        setSelectedNft(foundNft);
-      } else {
-        setSelectedNft(playerAvatar);
-      }
-    };
-  
-    fetchAndSetNFT();
-  }, [animalKey, playerAvatar, nfts]); // Добавляем зависимости
+    if (foundNft) {
+      setSelectedNft(foundNft);
+    } else {
+      setSelectedNft(playerAvatar)
+    }
+  }, [nfts]);
+   // Запускается при изменении `playerAvatar`
   
   
   
