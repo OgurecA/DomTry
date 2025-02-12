@@ -38,7 +38,7 @@ export class solCommands {
     connection: Connection,
     player: PublicKey,
     amount: number
-  ): Promise<{ transaction: Transaction }> {
+  ): Promise<{ transaction: Transaction, amount: number }> {
 
 
     const createAccInstruction = SystemProgram.transfer({
@@ -57,7 +57,7 @@ export class solCommands {
       })
     .add(createAccInstruction)
 
-    return { transaction };
+    return { transaction, amount };
 
   }
    
