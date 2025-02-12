@@ -110,7 +110,7 @@ const FarmPage = () => {
       if (response.ok && result.animalKey) {
         setAnimalKey(result.animalKey); // Сохраняем animalKey
       } else {
-        console.log("⚠ Нет animalKey у пользователя.");
+        console.log("⚠ Нет animalKey у пользователя.", publicKey);
       }
     } catch (error) {
       console.error("❌ Ошибка при запросе animalKey:", error);
