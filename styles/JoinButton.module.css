@@ -1,0 +1,21 @@
+.joinButton {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #ff9900, #ff6600);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .joinButton:hover {
+    background: linear-gradient(90deg, #ff6600, #ff3300);
+    transform: scale(1.05);
+  }
+  
