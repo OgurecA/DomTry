@@ -1,4 +1,4 @@
-.JoinButton {
+.ConnectButton {
     position: absolute;
     bottom: 20px;
     left: 50%;
@@ -14,7 +14,7 @@
     transition: 0.3s ease-in-out;
   }
   
-  .JoinButton:hover {
+  .ConnectButton:hover {
     background: linear-gradient(90deg, #ff6600, #ff3300);
     transform: scale(1.05);
   }

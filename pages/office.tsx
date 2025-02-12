@@ -6,7 +6,8 @@ import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
 import { Back } from '../components/Back';
 import styles from '../styles/OfficePage.module.css';
-import JoinButton from '../components/joinButton';
+import { ConnectButton } from '../components/ConnectButton';
+
 
 const OfficePage = () => {
     const { connected } = useWallet();
@@ -36,7 +37,7 @@ const OfficePage = () => {
                 <UserProfile avatar={user.avatar} name={user.name} info={user.info} />
                 <TeamProfile name={team.name} members={team.members} score={team.score} />
             </div>
-            <JoinButton />
+            <ConnectButton />
         </Back>
     );
 };
