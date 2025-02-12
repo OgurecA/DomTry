@@ -90,7 +90,7 @@ const FarmPage = () => {
     if (foundNft) {
       setSelectedNft(foundNft);
     } else {
-      console.warn("⚠ NFT с таким `animalKey` не найдена");
+      setSelectedNft(playerAvatar)
     }
   }, [animalKey]);
    // Запускается при изменении `playerAvatar`
