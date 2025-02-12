@@ -1,11 +1,41 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styles from "../styles/ConnectButton.module.css";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 export const ConnectButton: FC = () => {
+
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+
+  const [value, setValue] = useState(0.01);
+  
+  const joinGame = async () => {
+
+    
+
+  }
+
+
   return (
-    <button className={styles.ConnectButton}>
-      JOIN
-    </button>
+    <div className={styles.container}>
+      {/* Ползунок (Slider) */}
+      <input
+        type="range"
+        min="0.01"
+        max="1"
+        step="0.01"
+        value={value}
+        onChange={(e) => setValue(parseFloat(e.target.value))}
+        className={styles.slider}
+      />
+      <span className={styles.valueLabel}>{value.toFixed(2)} SOL</span>
+
+      {/* Кнопка JOIN */}
+      <button className={styles.ConnectButton}>
+        JOIN
+      </button>
+    </div>
   );
+
 };
 
