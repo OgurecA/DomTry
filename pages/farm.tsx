@@ -20,13 +20,25 @@ type NftData = {
 const FarmPage = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
-  const [nfts, setNfts] = useState<{ nft1: any, nft2: any, nft3: any }>({
+  const [nfts, setNfts] = useState<{ player: any, nft1: any, nft2: any, nft3: any }>({
+    player: null,
     nft1: null,
     nft2: null,
     nft3: null,
   });
 
   const [selectedNft, setSelectedNft] = useState<NftData>(null);
+
+  const [playerAvatar, setPlayerAvatar] = useState<NftData>(null);
+
+  const [animalStatus, setAnimalStatus] = useState<String>("SET");
+  const [setting, setSetting] = useState<String>("SET");
+  const [animalKey, setAnimalKey] = useState<string | null>(null);
+
+  const getStatus = (nft: NftData | null) => {
+    if (!nft) return "SET";
+    return nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
+  };
 
   useEffect(() => {
     if (!publicKey) return;
@@ -38,11 +50,64 @@ const FarmPage = () => {
         findNFT.Dragon(connection, publicKey),
       ]);
 
-      setNfts({ nft1, nft2, nft3 });
+      setNfts({ player: playerAvatar, nft1, nft2, nft3 });
     };
 
     fetchNfts();
   }, [publicKey, connection]);
+
+  useEffect(() => {
+    if (!publicKey) return;
+  
+    setPlayerAvatar({
+      nftAddress: publicKey, // Делаем его "NFT"
+      nftName: "PLAYER",
+      attributes: [
+        { trait_type: "Species", value: "Human" },
+        { trait_type: "Occupation", value: "None" },
+        { trait_type: "TeamPoints", value: "1" },
+        { trait_type: "SelfPoints", value: "1" },
+        { trait_type: "Description", value: "prosto chelovek" }
+      ],
+      imageUrl: "/Avatar.png" // Заглушка для аватара
+    });
+  }, [publicKey]);
+  
+  
+
+
+  const setAnimal = async () => {
+      if (!selectedNft) return;
+      try {
+        setAnimalStatus("CHECKING...")
+        setAnimalKey(selectedNft.nftAddress.toBase58());
+        
+        // Отправляем пользователя в БД
+        const response = await fetch('/api/setanimal', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            publicKey: publicKey.toBase58(),
+            animalKey: selectedNft.nftAddress.toBase58(),
+          }),
+        });
+    
+        const result = await response.json();
+        if (response.ok) {
+          console.log("✅ Обновлен в БД:", result);
+          setAnimalStatus("CHOSEN")
+        } else {
+          console.error("❌ Ошибка при обновлении в БД:", result.message);
+          setAnimalStatus("SET")
+        }
+      } catch (error) {
+        console.error("❌ Ошибка в setAnimal:", error)
+        setAnimalStatus("SET");
+      }
+    };
+
 
   return (
     <>
@@ -80,13 +145,19 @@ const FarmPage = () => {
             {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
           </h2>
           <p>{selectedNft.attributes.find(attr => attr.trait_type === "Description")?.value || "Нет данных"}</p>
-          <button className={styles.selectedNftButton}>
-            SET
+          <button className={styles.selectedNftButton} onClick={() => setAnimal()}>
+            {getStatus(selectedNft) ? "CHOSEN" : "SET"}
           </button>
         </div>
         )}
 
         <div className={styles.nftWrapper}>
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
           <NftStatus
             title="BERNARD"
             imageUrl="/BekPNG.png"

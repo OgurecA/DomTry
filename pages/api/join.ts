@@ -18,9 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Добавляем пользователя в таблицу `users`
     await new Promise<void>((resolve, reject) => {
       db.run(
-        `INSERT INTO users (publickey, input_sol) VALUES (?, ?) 
-         ON CONFLICT(publickey) DO UPDATE SET input_sol = input_sol + ?;`,
-        [publicKey, amount, amount],
+        `INSERT INTO users (publickey, input_sol, animalkey) VALUES (?, ?, ?)`,
+        [publicKey, amount, publicKey],
         function (err) {
           if (err) reject(err);
           else resolve();
