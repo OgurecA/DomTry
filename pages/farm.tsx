@@ -124,7 +124,6 @@ const FarmPage = () => {
       if (!selectedNft) return;
       try {
         setAnimalStatus("CHECKING...")
-        setAnimalKey(selectedNft.nftAddress.toBase58());
         
         // Отправляем пользователя в БД
         const response = await fetch('/api/setanimal', {
