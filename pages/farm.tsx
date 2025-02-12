@@ -111,9 +111,11 @@ const FarmPage = () => {
         setAnimalKey(result.animalKey); // Сохраняем animalKey
       } else {
         console.log("⚠ Нет animalKey у пользователя.", publicKey.toBase58());
+        setAnimalKey(playerAvatar.nftAddress.toBase58());
       }
     } catch (error) {
       console.error("❌ Ошибка при запросе animalKey:", error);
+      setAnimalKey(playerAvatar.nftAddress.toBase58());
     }
   };
 
