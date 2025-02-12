@@ -2,13 +2,21 @@ import { FC } from 'react';
 import styles from '../styles/Home.module.css';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
+import { publicKey } from '@solana/web3.js/src/layout';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 export const AppBar: FC = () => {
     
     const router = useRouter();
 
+    const { publicKey, sendTransaction } = useWallet();
+    
     const navigateTo = (path: string) => {
-        router.push(path);
+        if (!publicKey) {
+            alert("Please connect wallet first!")
+        } else {
+            router.push(path);
+        }
       };
 
       

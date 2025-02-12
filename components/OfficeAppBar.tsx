@@ -7,9 +7,6 @@ export const OfficeAppBar: FC = () => {
 
     const router = useRouter();
     
-    const navigateTo = (path: string) => {
-        router.push(path);
-    };
 
     return (
         <div className={styles.AppHeader}>
