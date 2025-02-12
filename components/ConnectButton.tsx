@@ -73,7 +73,7 @@ export const ConnectButton: FC = () => {
 
       {/* Кнопка JOIN */}
       <button
-        className={`${styles.ConnectButton} ${status == "JOINING..." ? styles.disabled : ""} ${status == "JOINED." ? styles.finished : ""}`}
+        className={`${styles.ConnectButton} ${status == "JOINING..." ? styles.disabled : ""} ${status == "JOINED" ? styles.finished : ""}`}
         onClick={() => joinGame()}
         disabled={status !== "JOIN"}
       >

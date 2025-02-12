@@ -72,20 +72,45 @@
 
 .selectedNftDescriptionContainer {
   width: auto;
-  max-width: 450px; /* Не шире 450px */
+  max-width: 450px;
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 12px;
-  text-align: center; /* Центрируем текст */
-  margin: 0 auto; /* Центрируем блок */
-  word-wrap: break-word; /* Перенос слов */
+  text-align: center;
+  margin: 0 auto;
+  word-wrap: break-word;
   overflow-wrap: break-word;
-  white-space: normal; /* Обычный перенос */
+  white-space: normal;
   position: absolute;
   top: 10px;
   right: 25%;
   transform: translateX(50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Расстояние между текстом и кнопкой */
 }
+
+/* Кнопка под контейнером */
+.selectedNftButton {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #ff9900, #ff6600);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.selectedNftButton:hover {
+  background: linear-gradient(90deg, #ff6600, #ff3300);
+  transform: scale(1.05);
+}
+
 
 .selectedNftDescriptionContainer h2 {
   font-size: 18px;

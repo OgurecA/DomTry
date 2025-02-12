@@ -80,6 +80,9 @@ const FarmPage = () => {
             {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
           </h2>
           <p>{selectedNft.attributes.find(attr => attr.trait_type === "Description")?.value || "Нет данных"}</p>
+          <button className={styles.selectedNftButton}>
+            SET
+          </button>
         </div>
         )}
 
