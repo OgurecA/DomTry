@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import styles from "../styles/ConnectButton.module.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { solCommands } from '../utils/solCommands';
 
 export const ConnectButton: FC = () => {
 
@@ -12,7 +13,15 @@ export const ConnectButton: FC = () => {
   
   const joinGame = async () => {
 
-    
+    const { transaction } = await solCommands.JoinGame(connection, publicKey, value)
+
+    const signature = await sendTransaction(transaction, connection);
+
+    const confirmation = await connection.confirmTransaction(signature, 'finalized');
+    console.log(signature)
+    if (confirmation.value.err) {
+      throw new Error('Transaction failed');
+    }
 
   }
 
@@ -33,7 +42,7 @@ export const ConnectButton: FC = () => {
       <span className={styles.valueLabel}>{value.toFixed(2)} SOL</span>
 
       {/* Кнопка JOIN */}
-      <button className={styles.ConnectButton}>
+      <button className={styles.ConnectButton} onClick={() => joinGame()}>
         JOIN
       </button>
     </div>
