@@ -40,6 +40,27 @@ const FarmPage = () => {
     return nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
   };
 
+
+  useEffect(() => {
+    if (!publicKey) return;
+  
+    const avatar = {
+      nftAddress: publicKey, // Делаем его "NFT"
+      nftName: "PLAYER",
+      attributes: [
+        { trait_type: "Species", value: "Human" },
+        { trait_type: "Occupation", value: "Kurjer" },
+        { trait_type: "TeamPoints", value: "1" },
+        { trait_type: "SelfPoints", value: "1" },
+        { trait_type: "Description", value: "prosto chelovek" }
+      ],
+      imageUrl: "/Avatar.png" // Заглушка для аватара
+    };
+  
+    setPlayerAvatar(avatar);
+  }, [publicKey, connection]); // Запускается при изменении `publicKey`
+
+
   useEffect(() => {
     if (!publicKey) return;
 
@@ -52,28 +73,49 @@ const FarmPage = () => {
 
       setNfts({ player: playerAvatar, nft1, nft2, nft3 });
     };
-
+    fetchAnimalKey()
     fetchNfts();
   }, [publicKey, connection]);
 
+  
+  // Отдельный `useEffect`, чтобы `selectedNft` обновился после `playerAvatar`
   useEffect(() => {
+    if (!animalKey) return;
+  
+    // Ищем среди всех NFT
+    const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
+      (nft) => nft && nft.nftAddress.toBase58() === animalKey
+    );
+  
+    if (foundNft) {
+      setSelectedNft(foundNft);
+    } else {
+      console.warn("⚠ NFT с таким `animalKey` не найдена");
+    }
+  }, [animalKey]);
+   // Запускается при изменении `playerAvatar`
+  
+  
+  
+  const fetchAnimalKey = async () => {
     if (!publicKey) return;
-  
-    setPlayerAvatar({
-      nftAddress: publicKey, // Делаем его "NFT"
-      nftName: "PLAYER",
-      attributes: [
-        { trait_type: "Species", value: "Human" },
-        { trait_type: "Occupation", value: "None" },
-        { trait_type: "TeamPoints", value: "1" },
-        { trait_type: "SelfPoints", value: "1" },
-        { trait_type: "Description", value: "prosto chelovek" }
-      ],
-      imageUrl: "/Avatar.png" // Заглушка для аватара
-    });
-  }, [publicKey]);
-  
-  
+    try {
+      const response = await fetch("/api/getanimal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ publicKey: publicKey.toBase58() }),
+      });
+
+      const result = await response.json();
+      if (response.ok && result.animalKey) {
+        setAnimalKey(result.animalKey); // Сохраняем animalKey
+      } else {
+        console.log("⚠ Нет animalKey у пользователя.");
+      }
+    } catch (error) {
+      console.error("❌ Ошибка при запросе animalKey:", error);
+    }
+  };
 
 
   const setAnimal = async () => {
@@ -108,6 +150,7 @@ const FarmPage = () => {
       }
     };
 
+  
 
   return (
     <>
