@@ -12,10 +12,11 @@
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    transform-origin: center;
   }
   
   .ConnectButton:hover {
     background: linear-gradient(90deg, #ff6600, #ff3300);
-    transform: scale(1.05);
+    transform: scale(1.05), translateX(-50%);
   }
   
