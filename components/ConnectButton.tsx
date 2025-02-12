@@ -8,6 +8,7 @@ export const ConnectButton: FC = () => {
   const { publicKey, sendTransaction } = useWallet();
 
   const [value, setValue] = useState(0.01);
+  const gradient = `linear-gradient(90deg, #ff9900 ${value * 100}%, #444 ${value * 100}%)`;
   
   const joinGame = async () => {
 
@@ -27,6 +28,7 @@ export const ConnectButton: FC = () => {
         value={value}
         onChange={(e) => setValue(parseFloat(e.target.value))}
         className={styles.slider}
+        style={{ background: gradient }}
       />
       <span className={styles.valueLabel}>{value.toFixed(2)} SOL</span>
 
