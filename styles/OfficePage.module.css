@@ -1,23 +1,79 @@
 .container {
     display: flex;
-    justify-content: center; /* Центрируем UserProfile */
-    align-items: flex-start; /* Выравниваем сверху */
-    gap: 50px; /* Расстояние между блоками */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px; /* Расстояние между UserProfile и TeamProfile */
     padding: 40px;
-    flex-wrap: wrap; /* Делаем адаптивным */
-    max-width: 1200px; /* Ограничиваем ширину */
-    margin: 0 auto; /* Центрируем весь блок */
+    flex-wrap: wrap; /* Для адаптивности на мобильных */
 }
 
-/* Убедимся, что профили не деформируются */
 .teamContainer {
-    flex: 1;
-    max-width: 300px;
-    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    max-width: 350px;
+    width: 100%;
+    background: #333;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.teamName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.teamInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.teamScore {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc00;
 }
 
 .profileContainer {
-    flex: 1.5; /* Делаем центральный профиль шире */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
     max-width: 400px;
-    min-width: 300px;
+    width: 100%;
+    background: #333; /* Фон, как у команды */
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.infoItem {
+    font-size: 16px;
+    color: #ffcc00;
 }

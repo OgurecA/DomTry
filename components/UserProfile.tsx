@@ -3,7 +3,7 @@ import styles from '../styles/UserProfile.module.css'; // Подключаем C
 
 const UserProfile = ({ avatar, name, info, className }) => {
   return (
-    <div className={`${styles.profileContainer} ${className || ""}`} >
+    <div className={className}>
       <div className={styles.profile}>
         <img src={avatar} alt="User Avatar" className={styles.avatar} />
         <h2 className={styles.username}>{name}</h2>

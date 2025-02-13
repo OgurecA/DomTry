@@ -29,6 +29,7 @@ const OfficePage = () => {
 
     const team = {
         name: "Команда Гром",
+        members: ["Игрок 1", "Игрок 2", "Игрок 3"],
         score: 1500
     };
 
@@ -63,7 +64,7 @@ const OfficePage = () => {
             <OfficeAppBar />
             <div className={styles.container}>
                 <TeamProfile name={team.name} score={team.score} className={styles.teamContainer}/>
-                <UserProfile avatar={user.avatar} name={user.name} info={user.info} className={styles.profileContainer} />
+                <UserProfile avatar={user.avatar} name={user.name} info={user.info} className={styles.profileContainer}/>
                 <TeamProfile name={team.name} score={team.score} className={styles.teamContainer}/>
             </div>
             {isUserInDatabase === false && <ConnectButton />}
