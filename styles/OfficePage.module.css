@@ -1,8 +1,23 @@
 .container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 100px; /* Расстояние между UserProfile и TeamProfile */
+    justify-content: center; /* Центрируем UserProfile */
+    align-items: flex-start; /* Выравниваем сверху */
+    gap: 50px; /* Расстояние между блоками */
     padding: 40px;
-    flex-wrap: wrap; /* Для адаптивности на мобильных */
+    flex-wrap: wrap; /* Делаем адаптивным */
+    max-width: 1200px; /* Ограничиваем ширину */
+    margin: 0 auto; /* Центрируем весь блок */
+}
+
+/* Убедимся, что профили не деформируются */
+.teamContainer {
+    flex: 1;
+    max-width: 300px;
+    min-width: 250px;
+}
+
+.profileContainer {
+    flex: 1.5; /* Делаем центральный профиль шире */
+    max-width: 400px;
+    min-width: 300px;
 }

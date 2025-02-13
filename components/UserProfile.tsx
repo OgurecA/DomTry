@@ -1,9 +1,9 @@
 import React from "react";
 import styles from '../styles/UserProfile.module.css'; // Подключаем CSS-модуль
 
-const UserProfile = ({ avatar, name, info }) => {
+const UserProfile = ({ avatar, name, info, className }) => {
   return (
-    <div className={styles.profileContainer}>
+    <div className={`${styles.profileContainer} ${className || ""}`} >
       <div className={styles.profile}>
         <img src={avatar} alt="User Avatar" className={styles.avatar} />
         <h2 className={styles.username}>{name}</h2>
