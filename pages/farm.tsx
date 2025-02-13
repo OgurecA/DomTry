@@ -18,9 +18,11 @@ type NftData = {
 
 
 const FarmPage = () => {
+
   const { connection } = useConnection();
   const { publicKey } = useWallet();
-  const [nfts, setNfts] = useState<{ player: any, nft1: any, nft2: any, nft3: any }>({
+
+  const [nfts, setNfts] = useState<{ player: NftData, nft1: NftData, nft2: NftData, nft3: NftData }>({
     player: null,
     nft1: null,
     nft2: null,
@@ -36,8 +38,7 @@ const FarmPage = () => {
   const [animalKey, setAnimalKey] = useState<string | null>(null);
 
   const getStatus = (nft: NftData | null) => {
-    if (!nft) return "SET";
-    return nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
+    return nft && nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
   };
 
 
@@ -72,63 +73,53 @@ const FarmPage = () => {
       ]);
 
       setNfts({
-        player: playerAvatar,
+        player: playerAvatar ?? null,
         nft1: nft1 ? { ...nft1, imageUrl: "/BekPNG.png" } : null,
         nft2: nft2 ? { ...nft2, imageUrl: "/Krisa.png" } : null,
         nft3: nft3 ? { ...nft3, imageUrl: "/BarsukNewPNG.png" } : null,
       });
     };
     fetchNfts();
-  }, [publicKey, connection]);
+  }, [publicKey, connection, playerAvatar]);
 
   
-  // Отдельный `useEffect`, чтобы `selectedNft` обновился после `playerAvatar`
   useEffect(() => {
-    const fetchAndSetNFT = async () => {
-      await fetchAnimalKey(); // Ждём загрузки `animalKey`
-  
-      if (!animalKey) return;
-  
-      // Ищем среди всех NFT
-      const foundNft = [playerAvatar, nfts.nft1, nfts.nft2, nfts.nft3].find(
-        (nft) => nft && nft.nftAddress.toBase58() === animalKey
-      );
-  
-      if (foundNft) {
-        setSelectedNft(foundNft);
-      } else {
-        setSelectedNft(playerAvatar);
+    if (!publicKey) return;
+
+    const fetchAnimalKey = async () => {
+      try {
+        const response = await fetch("/api/getanimal", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ publicKey: publicKey.toBase58() }),
+        });
+
+        const result = await response.json();
+        if (response.ok && result.animalKey) {
+          setAnimalKey(result.animalKey);
+        } else {
+          console.log("⚠ Нет animalKey у пользователя.", publicKey.toBase58());
+        }
+      } catch (error) {
+        console.error("❌ Ошибка при запросе animalKey:", error);
       }
     };
-  
-    fetchAndSetNFT();
-  }, [animalKey, playerAvatar, nfts]); // Добавляем зависимости
-  
-  
-  
-  
-  const fetchAnimalKey = async () => {
-    if (!publicKey) return;
-    try {
-      const response = await fetch("/api/getanimal", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ publicKey: publicKey.toBase58() }),
-      });
 
-      const result = await response.json();
-      if (response.ok && result.animalKey) {
-        setAnimalKey(result.animalKey); // Сохраняем animalKey
-      } else {
-        console.log("⚠ Нет animalKey у пользователя.", publicKey.toBase58());
-        setAnimalKey(playerAvatar.nftAddress.toBase58());
-      }
-    } catch (error) {
-      console.error("❌ Ошибка при запросе animalKey:", error);
-      setAnimalKey(playerAvatar.nftAddress.toBase58());
-    }
-  };
+    fetchAnimalKey();
+  }, [publicKey]);
+  
 
+  useEffect(() => {
+    if (!animalKey) return;
+
+    const foundNft = [nfts.player, nfts.nft1, nfts.nft2, nfts.nft3].find(
+      (nft) => nft && nft.nftAddress.toBase58() === animalKey
+    );
+
+    setSelectedNft(foundNft ?? playerAvatar);
+  }, [animalKey, nfts, playerAvatar]);
+  
+  
 
   const setAnimal = async () => {
       if (!selectedNft) return;
@@ -200,7 +191,7 @@ const FarmPage = () => {
           </h2>
           <p>{selectedNft.attributes.find(attr => attr.trait_type === "Description")?.value || "Нет данных"}</p>
           <button className={styles.selectedNftButton} onClick={() => setAnimal()}>
-            {getStatus(selectedNft) ? "CHOSEN" : "SET"}
+            {getStatus(selectedNft)}
           </button>
         </div>
         )}
