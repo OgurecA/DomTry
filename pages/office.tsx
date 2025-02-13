@@ -20,11 +20,13 @@ type PlayerData = {
 
   
 const OfficePage = () => {
-    const { connection } = useConnection();
     const router = useRouter();
+    const { connection } = useConnection();
+    const { publicKey } = useWallet();
 
     const [isUserInDatabase, setIsUserInDatabase] = useState<boolean | null>(null);
-    const { publicKey } = useWallet();
+    const [check, setCheck] = useState<boolean>(false);
+    
 
     const [userData, setUserData] = useState<PlayerData | null>(null);
    
@@ -71,7 +73,7 @@ const OfficePage = () => {
         };
     
         fetchUserData();
-      }, [publicKey]);
+      }, [publicKey, check]);
       
       
 
@@ -93,7 +95,7 @@ const OfficePage = () => {
                 />}
                 <TeamProfile name={team.name} score={team.score} className={styles.teamContainer}/>
             </div>
-            {isUserInDatabase === false && <ConnectButton />}
+            {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </Back>
     );
 };

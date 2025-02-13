@@ -3,7 +3,11 @@ import styles from "../styles/ConnectButton.module.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { solCommands } from '../utils/solCommands';
 
-export const ConnectButton: FC = () => {
+type ConnectButtonProps = {
+  setCheck: (value: boolean) => void; // ✅ Принимаем setCheck как пропс
+};
+
+export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
 
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
@@ -44,6 +48,8 @@ export const ConnectButton: FC = () => {
       if (response.ok) {
         console.log("✅ Пользователь добавлен в БД:", result);
         setStatus("JOINED")
+        setCheck(true)
+        
       } else {
         console.error("❌ Ошибка при добавлении в БД:", result.message);
         setStatus("JOIN")
