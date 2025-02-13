@@ -63,8 +63,9 @@ const OfficePage = () => {
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
+                <TeamProfile name={team.name} score={team.score} />
                 <UserProfile avatar={user.avatar} name={user.name} info={user.info} />
-                <TeamProfile name={team.name} members={team.members} score={team.score} />
+                <TeamProfile name={team.name} score={team.score} />
             </div>
             {isUserInDatabase === false && <ConnectButton />}
         </Back>
