@@ -30,6 +30,7 @@ const FarmPage = () => {
   });
 
   const [selectedNft, setSelectedNft] = useState<NftData>(null);
+  const [buttonIsLoading, setButtonIsLoading] = useState(false);
 
   const [playerAvatar, setPlayerAvatar] = useState<NftData>(null);
 
@@ -122,7 +123,7 @@ const FarmPage = () => {
   const setAnimal = async () => {
       if (!selectedNft) return;
       try {
-        
+        setButtonIsLoading(true);
         // Отправляем пользователя в БД
         const response = await fetch('/api/setanimal', {
           method: 'POST',
@@ -144,6 +145,8 @@ const FarmPage = () => {
         }
       } catch (error) {
         console.error("❌ Ошибка в setAnimal:", error)
+      } finally {
+        setButtonIsLoading(false); // ✅ Выключаем загрузку после ответа (успех/ошибка)
       }
     };
 
@@ -185,8 +188,8 @@ const FarmPage = () => {
             {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
           </h2>
           <p>{selectedNft.attributes.find(attr => attr.trait_type === "Description")?.value || "Нет данных"}</p>
-          <button className={styles.selectedNftButton} onClick={() => setAnimal()}>
-            {getStatus(selectedNft)}
+          <button className={styles.selectedNftButton} onClick={() => setAnimal()} disabled={buttonIsLoading}>
+            {buttonIsLoading ? <span className={styles.loader}></span> : getStatus(selectedNft)}
           </button>
         </div>
         )}
