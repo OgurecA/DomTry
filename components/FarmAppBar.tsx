@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styles from '../styles/Home.module.css';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
 
 export const FarmAppBar: FC = () => {
@@ -14,9 +13,7 @@ export const FarmAppBar: FC = () => {
     return (
         <div className={styles.AppHeader}>
             <div className={styles.LeftSection}>
-                <button className={styles.BackButton} onClick={() => router.replace("/")}>
-                &#x2B9C;
-                </button>
+                <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton}>NFT</button>
                 <button className={styles.NavButton} onClick={() => router.replace("/office")}>OFFICE</button>
             </div>

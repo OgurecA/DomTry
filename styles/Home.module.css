@@ -66,16 +66,17 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 36px;
-  color: white;
   
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: url("/backArrow.png"); /* Укажи путь к изображению */
+  background-size: cover; /* Заполняет кнопку */
+  background-position: center;
+  background-repeat: no-repeat;
   
-  line-height: 1; /* Убирает смещение стрелки */
-  padding: 0; /* Убирает внутренние отступы, если есть */
-  text-align: center; /* Центрирует символ */
+  transition: 0.3s ease-in-out;
+}
+
+.BackButton:hover {
+  transform: scale(1.05); /* Немного увеличивается при наведении */
 }
 
 .RightSection {
