@@ -15,18 +15,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Запрос к БД
-    const row = await new Promise<{ publickey: string, animalkey: string | null, personal_points: number, team_points: number, input_sol: number } | null>(
-      (resolve, reject) => {
-        db.get(
-          "SELECT publickey, animalkey, personal_points, team_points, input_sol FROM users WHERE publickey = ?",
-          [publicKey],
-          (err, row) => {
-            if (err) reject(err);
-            else resolve(row);
-          }
-        );
-      }
-    );
+    const row = await new Promise<{ 
+      publickey: string; 
+      animalkey: string | null;
+      animal_image: string | null; 
+      personal_points: number; 
+      team_points: number; 
+      input_sol: number;
+    } | null>((resolve, reject) => {
+      db.get(
+        "SELECT publickey, animalkey, animal_image, personal_points, team_points, input_sol FROM users WHERE publickey = ?",
+        [publicKey],
+        (err, row) => {
+          if (err) reject(err);
+          else resolve(row);
+        }
+      );
+    });
 
     if (!row) {
       return res.status(404).json({ message: "Пользователь не найден" });
@@ -35,7 +40,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).json({
       publicKey: row.publickey,
       animalKey: row.animalkey,
+      animalImage: row.animal_image || "/Avatar.png", // Если null, устанавливаем заглушку
       personalPoints: row.personal_points,
+      teamPoints: row.team_points,
       inputSol: row.input_sol,
     });
 
