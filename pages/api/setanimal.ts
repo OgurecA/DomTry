@@ -9,10 +9,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { publicKey, animalKey } = req.body;
+    const { publicKey, animalKey, animalUrl } = req.body;
 
-    if (!publicKey || !animalKey) {
-      return res.status(400).json({ message: "Не переданы `publicKey` или `animalKey`" });
+    if (!publicKey || !animalKey || !animalUrl) {
+      return res.status(400).json({ message: "Не переданы `publicKey`, `animalKey` или `animalUrl`" });
     }
 
     // Проверяем, существует ли пользователь
@@ -27,11 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ message: "Пользователь не найден" });
     }
 
-    // Обновляем `animalkey`
+    // Обновляем `animalkey` и `animal_image`
     await new Promise<void>((resolve, reject) => {
       db.run(
-        `UPDATE users SET animalkey = ? WHERE publickey = ?;`,
-        [animalKey, publicKey],
+        `UPDATE users SET animalkey = ?, animal_image = ? WHERE publickey = ?;`,
+        [animalKey, animalUrl, publicKey],
         (err) => {
           if (err) reject(err);
           else resolve();
@@ -39,8 +39,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       );
     });
 
-    console.log(`✅ Обновлен animalKey: ${animalKey} для ${publicKey}`);
-    res.status(200).json({ message: "animalKey успешно обновлён" });
+    console.log(`✅ Обновлен animalKey: ${animalKey}, animal_image: ${animalUrl} для ${publicKey}`);
+    res.status(200).json({ message: "animalKey и animal_image успешно обновлены" });
 
   } catch (error) {
     console.error("❌ Ошибка API setAnimal:", error);

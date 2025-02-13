@@ -133,6 +133,7 @@ const FarmPage = () => {
           body: JSON.stringify({
             publicKey: publicKey.toBase58(),
             animalKey: selectedNft.nftAddress.toBase58(),
+            animalUrl: selectedNft.imageUrl
           }),
         });
     
