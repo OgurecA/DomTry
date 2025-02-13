@@ -33,8 +33,6 @@ const FarmPage = () => {
 
   const [playerAvatar, setPlayerAvatar] = useState<NftData>(null);
 
-  const [animalStatus, setAnimalStatus] = useState<String>("SET");
-  const [setting, setSetting] = useState<String>("SET");
   const [animalKey, setAnimalKey] = useState<string | null>(null);
 
   const getStatus = (nft: NftData | null) => {
@@ -124,7 +122,6 @@ const FarmPage = () => {
   const setAnimal = async () => {
       if (!selectedNft) return;
       try {
-        setAnimalStatus("CHECKING...")
         
         // Отправляем пользователя в БД
         const response = await fetch('/api/setanimal', {
@@ -141,14 +138,12 @@ const FarmPage = () => {
         const result = await response.json();
         if (response.ok) {
           console.log("✅ Обновлен в БД:", result);
-          setAnimalStatus("CHOSEN")
+          setAnimalKey(selectedNft.nftAddress.toBase58())
         } else {
           console.error("❌ Ошибка при обновлении в БД:", result.message);
-          setAnimalStatus("SET")
         }
       } catch (error) {
         console.error("❌ Ошибка в setAnimal:", error)
-        setAnimalStatus("SET");
       }
     };
 
