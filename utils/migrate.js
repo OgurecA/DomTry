@@ -10,6 +10,7 @@ const tables = [
         animalkey TEXT,
         animal_image TEXT DEFAULT '/Avatar.png',
         personal_points INTEGER DEFAULT 0,
+        team_points INTEGER DEFAULT 0
         team INTEGER DEFAULT 0,
         input_sol REAL DEFAULT 0
     );`,

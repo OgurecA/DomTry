@@ -15,17 +15,17 @@ const OfficePage = () => {
 
     const [isUserInDatabase, setIsUserInDatabase] = useState<boolean | null>(null);
     const { publicKey } = useWallet();
+    const [balance, setBalance] = useState<number | null>(0);
 
     const user = {
         avatar: "/ZirMarket.jpg",
-        name: "John Doe",
+        name: `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`,
         info: [
-          "Возраст: 29 лет",
-          "Город: Нью-Йорк",
-          "Email: john@example.com",
-          "Баланс: 1000 SOL"
+          "Balance: $SOL" + balance,
+          "Input SOL: $SOL" + balance,
         ]
     };
+    
 
     const team = {
         name: "Команда Гром",
