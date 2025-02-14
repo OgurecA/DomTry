@@ -16,9 +16,10 @@ const tables = [
     );`,
     
     `CREATE TABLE IF NOT EXISTS teams (
-        id INTEGER PRIMARY KEY CHECK (id = 1),
-        team_a INTEGER DEFAULT 0,
-        team_b INTEGER DEFAULT 0
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL,
+        score INTEGER DEFAULT 0,
+        players INTEGER DEFAULT 0
     );`
 ];
 
@@ -38,18 +39,20 @@ function migrate() {
 
         // Вставляем единственную строку с очками команд
         db.run(`
-            INSERT INTO teams (id, team_a, team_b) VALUES (1, 0, 0)
-            ON CONFLICT(id) DO NOTHING
+            INSERT INTO teams (name, score, players) VALUES 
+            ('Team A', 0, 0),
+            ('Team B', 0, 0)
+            ON CONFLICT(name) DO NOTHING
         `, err => {
             if (err) {
-                console.error("Ошибка при вставке строки в teams:", err.message);
+                console.error("Ошибка при вставке команд:", err.message);
             } else {
-                console.log("Строка в таблице teams обновлена или уже существует.");
+                console.log("Команды добавлены или уже существуют.");
             }
-
+        
             // Закрываем БД только после выполнения всех операций
             db.close(() => console.log("Миграция завершена."));
-        });
+        });        
     });
 }
 
