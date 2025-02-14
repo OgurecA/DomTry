@@ -20,11 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       animalkey: string | null;
       animal_image: string | null; 
       personal_points: number; 
-      team_points: number; 
+      team_points: number;
+      team: number;
       input_sol: number;
     } | null>((resolve, reject) => {
       db.get(
-        "SELECT publickey, animalkey, animal_image, personal_points, team_points, input_sol FROM users WHERE publickey = ?",
+        "SELECT publickey, animalkey, animal_image, personal_points, team_points, team, input_sol FROM users WHERE publickey = ?",
         [publicKey],
         (err, row) => {
           if (err) reject(err);
@@ -43,6 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       animalImage: row.animal_image || "/Avatar.png", // Если null, устанавливаем заглушку
       personalPoints: row.personal_points,
       teamPoints: row.team_points,
+      team: row.team,
       inputSol: row.input_sol,
     });
 

@@ -16,6 +16,7 @@ type PlayerData = {
     input_sol: number;
     personal_points: number;
     team_points: number;
+    team: number;
   } | null;
 
   
@@ -59,6 +60,7 @@ const OfficePage = () => {
                     balance: convertedBalance,
                     personal_points: result.personalPoints || 0,
                     team_points: result.teamPoints || 0,
+                    team: result.team || 0,
                     input_sol: result.inputSol || 0
                 });
                 setIsUserInDatabase(true);
