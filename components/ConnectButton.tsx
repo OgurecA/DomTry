@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import styles from "../styles/ConnectButton.module.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { solCommands } from '../utils/solCommands';
+import { tools } from "../utils/tools";
 
 type ConnectButtonProps = {
   setCheck: (value: boolean) => void; // ✅ Принимаем setCheck как пропс
@@ -68,7 +69,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       <input
         type="range"
         min="0.01"
-        max="1"
+        max="5"
         step="0.01"
         value={value}
         onChange={(e) => setValue(parseFloat(e.target.value))}
