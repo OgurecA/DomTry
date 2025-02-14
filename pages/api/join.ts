@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { publicKey, amount, transactionId } = req.body;
+    const { publicKey, amount, transactionId, team } = req.body;
 
     if (!publicKey || !amount || !transactionId) {
       return res.status(400).json({ message: 'Недостаточно данных' });
@@ -18,8 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Добавляем пользователя в таблицу `users`
     await new Promise<void>((resolve, reject) => {
       db.run(
-        `INSERT INTO users (publickey, input_sol, animalkey) VALUES (?, ?, ?)`,
-        [publicKey, amount, publicKey],
+        `INSERT INTO users (publickey, input_sol, animalkey, team) VALUES (?, ?, ?, ?)`,
+        [publicKey, amount, publicKey, team],
         function (err) {
           if (err) reject(err);
           else resolve();

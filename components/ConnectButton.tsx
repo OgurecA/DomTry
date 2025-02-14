@@ -4,6 +4,15 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { solCommands } from '../utils/solCommands';
 import { tools } from "../utils/tools";
 
+
+type TeamData = {
+  id: number;
+  name: string;
+  bank: number;
+  players: number;
+} | null;
+
+
 type ConnectButtonProps = {
   setCheck: (value: boolean) => void; // ✅ Принимаем setCheck как пропс
 };
@@ -31,6 +40,38 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       }
   
       console.log("✅ Транзакция успешно подтверждена:", signature);
+
+      const teamResponse = await fetch("/api/teaminfo");
+      
+      if (!teamResponse.ok) {
+        throw new Error("❌ Ошибка при получении данных о командах");
+      }
+    
+      const teamData = await teamResponse.json();
+
+      if (!teamData.teams) {
+        throw new Error("❌ Ошибка: Команды не найдены");
+      }
+
+      const teamA: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 1)|| null;
+      const teamB: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 2) || null;
+
+      if (!teamA || !teamB) {
+        throw new Error("Не удалось найти команды с id 1 и 2");
+      }
+
+      const { team } = await tools.DetermineTeam(teamA.bank, teamB.bank, teamA.players, teamB.players, amount)
+      
+      const teamId: number = (() => {
+        switch (team) {
+          case "Team1":
+            return 1;
+          case "Team2":
+            return 2;
+          default:
+            throw new Error(`❌ Ошибка: '${team}' не является допустимым названием команды`);
+        }
+      })(); 
   
       // Отправляем пользователя в БД
       const response = await fetch('/api/join', {
@@ -41,7 +82,8 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         body: JSON.stringify({
           publicKey: publicKey.toBase58(),
           amount: amount,
-          transactionId: signature
+          transactionId: signature,
+          team: teamId,
         }),
       });
   
@@ -60,6 +102,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       setStatus("JOIN");
     }
   };
+  
   
 
 
