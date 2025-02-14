@@ -24,7 +24,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
   const [ status, setStatus ] = useState<String>("JOIN");
 
   const [value, setValue] = useState(0.01);
-  const gradient = `linear-gradient(90deg, #ff9900 ${value * 100}%, #444 ${value * 100}%)`;
+  const gradient = `linear-gradient(90deg, #ff9900 ${value * 400}%, #444 ${value * 400}%)`;
   
   const joinGame = async () => {
     try {
@@ -61,7 +61,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       }
 
       const { team } = await tools.DetermineTeam(teamA.bank, teamB.bank, teamA.players, teamB.players, amount)
-      
+
       const teamId: number = (() => {
         switch (team) {
           case "Team1":
