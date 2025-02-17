@@ -124,6 +124,10 @@ const OfficePage = () => {
 
                 setBestPlayerTeam1(bestPlayersData.bestPlayerTeam1);
                 setBestPlayerTeam2(bestPlayersData.bestPlayerTeam2); 
+
+                console.log(bestPlayerTeam2)
+                console.log(bestPlayersData.bestPlayerTeam2)
+                console.log(bestPlayersData.bestPlayerTeam2.name)
                 
             } else {
                 console.warn("⚠ Данные о командах не найдены.");
