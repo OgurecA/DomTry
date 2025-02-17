@@ -145,7 +145,9 @@ const OfficePage = () => {
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.personal_points : bestPlayerTeam2.personal_points}
+                        bestPlayer={teamA.name === "Team A" ?
+                            `${bestPlayerTeam1.name.slice(0, 4)}...${bestPlayerTeam1.name.slice(-4)}` :
+                            `${bestPlayerTeam2.name.slice(0, 4)}...${bestPlayerTeam2.name.slice(-4)}`}
                     />
                 )}
                 {userData && <UserProfile
@@ -164,7 +166,9 @@ const OfficePage = () => {
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.personal_points : bestPlayerTeam2.personal_points}
+                        bestPlayer={teamA.name === "Team A" ?
+                            `${bestPlayerTeam1.name.slice(0, 4)}...${bestPlayerTeam1.name.slice(-4)}` :
+                            `${bestPlayerTeam2.name.slice(0, 4)}...${bestPlayerTeam2.name.slice(-4)}`}
                     />
                 )}
             </div>
