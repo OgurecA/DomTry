@@ -118,7 +118,7 @@
 
 @media (max-width: 500px) {
   .AppHeader {
-    height: 80px; /* Новая высота для маленьких экранов */
+    height: 60px; /* Новая высота для маленьких экранов */
     font-size: 35px; /* Можно уменьшить размер текста */
   }
 
@@ -127,7 +127,7 @@
   }
 
   .LeftSection {
-    height: 80px;
+    height: 60px;
     display: flex; /* Размещаем img и span рядом */
     align-items: center; /* Выравниваем по вертикали */
     gap: 5px; /* Расстояние между элементами */
