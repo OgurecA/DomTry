@@ -39,6 +39,16 @@
 @media (max-width: 1500px) {
     .container {
         gap: 50px; /* Расстояние между UserProfile и TeamProfile */
-        padding: 20px;
+        padding: 10px;
+    }
+
+    .teamContainer {
+        padding: 10px;
+        max-width: 300px;
+    }
+
+    .profileContainer {
+        padding: 10px;
+        max-width: 350px;
     }
 }  
