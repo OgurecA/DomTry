@@ -25,10 +25,10 @@ export const AppBar: FC = () => {
             <div className={styles.LeftSection}>
                 <img src="/BarsukNewPNG.png" className={styles.LogoImage}/>
                 <span style={{ fontWeight: 'bold' }}>DOMINATORS</span>
-                <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button>
+                {/* <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button> */}
             </div>
             <div className={styles.RightSection}>
-                <WalletMultiButton/>
+                {/* <WalletMultiButton/> */}
             </div>
         </div>
     );
