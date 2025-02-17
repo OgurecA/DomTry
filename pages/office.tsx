@@ -42,7 +42,8 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
-    const [bestPlayers, setBestPlayers] = useState<any | null>(null);
+    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<PlayerData | null>(null);
+    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<PlayerData | null>(null);
 
 
     useEffect(() => {
@@ -110,7 +111,7 @@ const OfficePage = () => {
             const bestPlayersResponse = await fetch("/api/bestplayers");
             const bestPlayersData = await bestPlayersResponse.json();
 
-            if (teamResponse.ok && teamData.teams) {
+            if (teamResponse.ok && teamData.teams && bestPlayersData && bestPlayersResponse.ok) {
 
                 const userTeamId = userData.team
                 const enemyTeamId = userData.team === 1 ? 2 : 1;
@@ -121,9 +122,8 @@ const OfficePage = () => {
                 setTeamA(teamAData);
                 setTeamB(teamBData);
 
-                setBestPlayers(bestPlayersData);
-
-                console.log(bestPlayersData.bestPlayerTeam2)
+                setBestPlayerTeam1(bestPlayersData.bestPlayerTeam1);
+                setBestPlayerTeam2(bestPlayersData.bestPlayerTeam2); 
                 
             } else {
                 console.warn("⚠ Данные о командах не найдены.");
@@ -140,14 +140,12 @@ const OfficePage = () => {
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                {teamA && bestPlayers && (
+                {teamA && (
                     <TeamProfile
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ?
-                            bestPlayers?.bestPlayerTeam1?.personal_points ?? 0 :
-                            bestPlayers?.bestPlayerTeam2?.personal_points ?? 0}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.name || 0 : bestPlayerTeam2.name || 0}
                     />
                 )}
                 {userData && <UserProfile
@@ -161,14 +159,12 @@ const OfficePage = () => {
                     ]}
                     className={styles.profileContainer}
                 />}
-                {teamB && bestPlayers && (
+                {teamB && (
                     <TeamProfile
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ?
-                            bestPlayers?.bestPlayerTeam1?.personal_points ?? 0 :
-                            bestPlayers?.bestPlayerTeam2?.personal_points ?? 0}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.name || 0 : bestPlayerTeam2.name || 0}
                     />
                 )}
             </div>
