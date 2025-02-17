@@ -2,53 +2,31 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 100px; /* Расстояние между UserProfile и TeamProfile */
+    gap: 100px;
     padding: 40px;
-    flex-wrap: wrap; /* Для адаптивности на мобильных */
+    flex-wrap: wrap;
 }
 
-.teamContainer {
+/* 📌 Добавляем новую обёртку для команд */
+.teamWrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    max-width: 350px;
-    width: 100%;
-    background: #333;
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    gap: 50px;
 }
 
-
-.profileContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    max-width: 400px;
-    width: 100%;
-    background: #333; /* Фон, как у команды */
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 1500px) {
+/* 📱 Если экран < 1150px, команды становятся под UserProfile */
+@media (max-width: 1150px) {
     .container {
-        gap: 50px; /* Расстояние между UserProfile и TeamProfile */
-        padding: 10px;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Уменьшаем отступы */
     }
 
-    .teamContainer {
-        padding: 10px;
-        max-width: 300px;
+    .teamWrapper {
+        flex-direction: row; /* Команды в один ряд */
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
+        justify-content: center;
     }
-
-    .profileContainer {
-        padding: 10px;
-        max-width: 350px;
-    }
-}  
+}

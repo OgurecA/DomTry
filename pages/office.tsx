@@ -144,14 +144,6 @@ const OfficePage = () => {
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
-                    <TeamProfile
-                        name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
-                        score={teamA.score}
-                        className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
-                    />
-                )}
                 {userData && <UserProfile
                     avatar={userData.avatar}
                     name={userData.name}
@@ -163,14 +155,24 @@ const OfficePage = () => {
                     ]}
                     className={styles.profileContainer}
                 />}
-                {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
-                    <TeamProfile
-                        name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
-                        score={teamB.score}
-                        className={styles.teamContainer}
-                        bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
-                    />
-                )}
+                <div className={styles.teamWrapper}>
+        {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
+            <TeamProfile
+                name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
+                score={teamA.score}
+                className={styles.teamContainer}
+                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+            />
+        )}
+        {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
+            <TeamProfile
+                name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
+                score={teamB.score}
+                className={styles.teamContainer}
+                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+            />
+        )}
+    </div>
             </div>
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </Back>
