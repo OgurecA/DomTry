@@ -27,16 +27,16 @@
     .avatar {
         width: 100px;
         height: 100px;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
     .username {
         font-size: 20px;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
     }
     .userInfo {
-        gap: 3px;
+        gap: 2px;
     }
     .infoItem {
-        font-size: 12px;
+        font-size: 16px;
     }
 }  

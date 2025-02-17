@@ -34,7 +34,11 @@
         margin-bottom: 5px;
     }
 
-    .teamScore .teamAlpha {
+    .teamScore {
+        font-size: 12px;
+    }
+
+    .teamAlpha {
         font-size: 12px;
     }
     
