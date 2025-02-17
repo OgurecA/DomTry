@@ -27,7 +27,7 @@ const Home: NextPage = (props) => {
           <h2>
             Work in progress...
           </h2>
-          <p>Email: contact@dominators.website</p>
+          <p>contact@dominators.website</p>
         </div>
       </Back>
     </div>

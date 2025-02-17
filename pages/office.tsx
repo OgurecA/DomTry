@@ -19,6 +19,13 @@ type PlayerData = {
     team: number;
   } | null;
 
+  type TeamData = {
+    id: number;
+    name: string;
+    score: number;
+    players: number;
+    bank: number;
+  };
   
 const OfficePage = () => {
     const router = useRouter();
@@ -32,11 +39,8 @@ const OfficePage = () => {
     const [userData, setUserData] = useState<PlayerData | null>(null);
    
 
-    const team = {
-        name: "Команда Гром",
-        members: ["Игрок 1", "Игрок 2", "Игрок 3"],
-        score: 1500
-    };
+    const [teamA, setTeamA] = useState<TeamData | null>(null);
+    const [teamB, setTeamB] = useState<TeamData | null>(null);
 
 
     useEffect(() => {
@@ -77,13 +81,44 @@ const OfficePage = () => {
         fetchUserData();
       }, [publicKey, check]);
       
-      
+      useEffect(() => {
+        if (!publicKey) return;
+    
+        const fetchUserData = async () => {
+          try {
+            const teamResponse = await fetch("/api/teaminfo");            
+            const teamData = await teamResponse.json();
+
+            if (teamResponse.ok && teamData.teams) {
+
+                const teamAData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 1)|| null;
+                const teamBData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 2) || null;
+
+                setTeamA(teamAData);
+                setTeamB(teamBData);
+                
+            } else {
+                console.warn("⚠ Данные о командах не найдены.");
+            }
+          } catch (error) {
+            console.error("❌ Ошибка при запросе данных о командах:", error);
+          }
+        };
+    
+        fetchUserData();
+      }, [publicKey]);
 
     return (
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                <TeamProfile name={team.name} score={team.score} className={styles.teamContainer}/>
+                {teamA && (
+                    <TeamProfile
+                        name={teamA.name}
+                        score={teamA.score}
+                        className={styles.teamContainer}
+                    />
+                )}
                 {userData && <UserProfile
                     avatar={userData.avatar}
                     name={userData.name}
@@ -95,7 +130,13 @@ const OfficePage = () => {
                     ]}
                     className={styles.profileContainer}
                 />}
-                <TeamProfile name={team.name} score={team.score} className={styles.teamContainer}/>
+                {teamB && (
+                    <TeamProfile
+                        name={teamB.name}
+                        score={teamB.score}
+                        className={styles.teamContainer}
+                    />
+                )}
             </div>
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </Back>
