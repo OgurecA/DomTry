@@ -107,7 +107,7 @@
   overflow-wrap: break-word;
   white-space: normal;
   position: absolute;
-  top: 130px;
+  top: 110px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -145,7 +145,7 @@
   }
 
   .welcomeTextContainer {
-    top: 80px;
+    top: 60px;
     gap: 5px; /* Расстояние между текстом и кнопкой */
   }
 

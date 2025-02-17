@@ -36,3 +36,9 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 1500px) {
+    .container {
+        gap: 50px; /* Расстояние между UserProfile и TeamProfile */
+        padding: 20px;
+    }
+}  
