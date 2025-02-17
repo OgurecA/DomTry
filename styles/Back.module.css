@@ -30,3 +30,13 @@
         top: 60px;
     }
   }
+
+
+@media (max-height: 500px) {
+    .BodyDescription {
+        position: absolute; /* Абсолютное позиционирование */
+        width: 100%;
+        height: calc(100% - 60px); /* Высота с учетом AppBar */
+        top: 60px;
+    }
+  }
