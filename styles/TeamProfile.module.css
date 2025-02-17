@@ -27,3 +27,15 @@
     color: #cda400;
     text-decoration: underline;
 }
+
+@media (max-width: 650px) {
+    .teamName {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .teamScore .teamAlpha {
+        font-size: 14px;
+    }
+    
+}  
