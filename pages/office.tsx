@@ -145,7 +145,7 @@ const OfficePage = () => {
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 : bestPlayerTeam2}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.personal_points : bestPlayerTeam2.personal_points}
                     />
                 )}
                 {userData && <UserProfile
@@ -164,7 +164,7 @@ const OfficePage = () => {
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 : bestPlayerTeam2}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.personal_points : bestPlayerTeam2.personal_points}
                     />
                 )}
             </div>
