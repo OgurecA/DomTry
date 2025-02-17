@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import UserProfile from '../components/UserProfile';
 import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
-import { Back } from '../components/Back';
 import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
 import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { BackOffice } from '../components/BackOffice';
 
 type PlayerData = {
     avatar: string;
@@ -155,7 +155,7 @@ const OfficePage = () => {
       }, [publicKey]);
 
       return (
-        <Back>
+        <BackOffice>
             <OfficeAppBar />
             <div className={styles.container}>
                 {isMobileLayout ? (
@@ -235,7 +235,7 @@ const OfficePage = () => {
     
             {/* Кнопка JOIN, если пользователя нет в БД */}
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
-        </Back>
+        </BackOffice>
     );
     
 };

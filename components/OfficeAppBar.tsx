@@ -9,7 +9,7 @@ export const OfficeAppBar: FC = () => {
     
 
     return (
-        <div className={styles.AppHeader}>
+        <div className={styles.AppHeaderOffice}>
             <div className={styles.LeftSection}>
                 <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton}>NFT</button>

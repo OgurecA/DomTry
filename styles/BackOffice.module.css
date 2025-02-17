@@ -1,0 +1,32 @@
+.BodyDescription {
+    position: absolute; /* Абсолютное позиционирование */
+    width: 100%;
+    height: calc(100% - 90px); /* Высота с учетом AppBar */
+    top: 90px; /* Прикрепляем к нижнему краю */
+    background-image: url('/ForestBack70.png'); /* Путь к картинке */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #181818;
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.Content {
+    position: relative; /* Для контента внутри */
+    width: 100%; /* Контент занимает всю ширину */
+    height: 100%; /* Контент занимает всю высоту */
+    display: flex; /* Flexbox для размещения */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+@media (max-width: 650px) {
+    .BodyDescription {
+        position: absolute; /* Абсолютное позиционирование */
+        width: 100%;
+        height: 100%; /* Высота с учетом AppBar */
+        top: 0;
+    }
+  }
