@@ -108,7 +108,7 @@ const OfficePage = () => {
             const teamResponse = await fetch("/api/teaminfo");            
             const teamData = await teamResponse.json();
 
-            const bestPlayersResponse = await fetch("/api/bestPlayers");
+            const bestPlayersResponse = await fetch("/api/bestplayers");
             const bestPlayersData = await bestPlayersResponse.json();
 
             if (teamResponse.ok && teamData.teams) {
