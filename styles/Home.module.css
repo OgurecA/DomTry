@@ -125,4 +125,11 @@
   .welcomeTextContainer h2 {
     font-size: 25px;
   }
+
+  .LeftSection {
+    height: 80px;
+    display: flex; /* Размещаем img и span рядом */
+    align-items: center; /* Выравниваем по вертикали */
+    gap: 5px; /* Расстояние между элементами */
+  }
 }
