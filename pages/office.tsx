@@ -42,8 +42,8 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
-    const [userTeam, setUserTeam] = useState<number | null>(null);
-    const [enemyTeam, setEnemyTeam] = useState<number | null>(null);
+    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<PlayerData | null>(null);
+    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<PlayerData | null>(null);
 
 
     useEffect(() => {
@@ -108,6 +108,9 @@ const OfficePage = () => {
             const teamResponse = await fetch("/api/teaminfo");            
             const teamData = await teamResponse.json();
 
+            const bestPlayersResponse = await fetch("/api/bestPlayers");
+            const bestPlayersData = await bestPlayersResponse.json();
+
             if (teamResponse.ok && teamData.teams) {
 
                 const userTeamId = userData.team
@@ -118,6 +121,9 @@ const OfficePage = () => {
 
                 setTeamA(teamAData);
                 setTeamB(teamBData);
+
+                setBestPlayerTeam1(bestPlayersData.bestPlayerTeam1);
+                setBestPlayerTeam2(bestPlayersData.bestPlayerTeam2); 
                 
             } else {
                 console.warn("⚠ Данные о командах не найдены.");
@@ -139,6 +145,7 @@ const OfficePage = () => {
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 : bestPlayerTeam2}
                     />
                 )}
                 {userData && <UserProfile
@@ -146,7 +153,7 @@ const OfficePage = () => {
                     name={userData.name}
                     info={[
                         `Balance: ${userData.balance} SOL`,
-                        `Input SOL: ${userData.input_sol} SOL`,
+                        `Input SOL: ${userData.input_sol}`,
                         `Personal Points: ${userData.personal_points}`,
                         `Team Points: ${userData.team_points}`
                     ]}
@@ -157,6 +164,7 @@ const OfficePage = () => {
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 : bestPlayerTeam2}
                     />
                 )}
             </div>
