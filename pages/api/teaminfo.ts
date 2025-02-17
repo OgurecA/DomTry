@@ -15,9 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       name: string;
       bank: number;
       players: number;
+      score: number;
     }[]>((resolve, reject) => {
       db.all(
-        "SELECT id, name, bank, players FROM teams",
+        "SELECT id, name, bank, players, score FROM teams",
         (err, rows) => {
           if (err) reject(err);
           else resolve(rows);
