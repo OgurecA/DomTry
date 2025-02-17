@@ -22,3 +22,21 @@
     font-size: 16px;
     color: #ffcc00;
 }
+
+@media (max-width: 650px) {
+    .avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 8px;
+    }
+    .username {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .userInfo {
+        gap: 3px;
+    }
+    .infoItem {
+        font-size: 12px;
+    }
+}  
