@@ -15,3 +15,10 @@
     font-weight: bold;
     color: #ffcc00;
 }
+
+.teamScore:hover{
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+    color: #cda400;
+    text-decoration: underline;
+}
