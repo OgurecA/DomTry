@@ -146,8 +146,8 @@ const OfficePage = () => {
                         score={teamA.score}
                         className={styles.teamContainer}
                         bestPlayer={teamA.name === "Team A" ?
-                            `${bestPlayerTeam1.name.slice(0, 4) || ""}...${bestPlayerTeam1.name.slice(-4) || ""}` :
-                            `${bestPlayerTeam2.name.slice(0, 4) || ""}...${bestPlayerTeam2.name.slice(-4) || ""}`}
+                            `${bestPlayerTeam1?.name?.slice(0, 4) || ""}...${bestPlayerTeam1?.name?.slice(-4) || ""}` :
+                            `${bestPlayerTeam2?.name?.slice(0, 4) || ""}...${bestPlayerTeam2?.name?.slice(-4) || ""}`}
                     />
                 )}
                 {userData && <UserProfile
@@ -167,8 +167,8 @@ const OfficePage = () => {
                         score={teamB.score}
                         className={styles.teamContainer}
                         bestPlayer={teamA.name === "Team A" ?
-                            `${bestPlayerTeam1.name.slice(0, 4) || ""}...${bestPlayerTeam1.name.slice(-4) || ""}` :
-                            `${bestPlayerTeam2.name.slice(0, 4) || ""}...${bestPlayerTeam2.name.slice(-4) || ""}`}
+                            `${bestPlayerTeam1?.name?.slice(0, 4) || ""}...${bestPlayerTeam1?.name?.slice(-4) || ""}` :
+                            `${bestPlayerTeam2?.name?.slice(0, 4) || ""}...${bestPlayerTeam2?.name?.slice(-4) || ""}`}
                     />
                 )}
             </div>
