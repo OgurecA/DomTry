@@ -45,6 +45,20 @@ const OfficePage = () => {
     const [bestPlayerTeam1, setBestPlayerTeam1] = useState<any | null>(null);
     const [bestPlayerTeam2, setBestPlayerTeam2] = useState<any | null>(null);
 
+    const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileLayout(window.innerWidth < 1150);
+        };
+
+        // Вызываем сразу при загрузке
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
 
     useEffect(() => {
         if (!publicKey) return;
@@ -140,41 +154,89 @@ const OfficePage = () => {
         fetchUserData();
       }, [publicKey]);
 
-    return (
+      return (
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
-                    <TeamProfile
-                        name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
-                        score={teamA.score}
-                        className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
-                    />
-                )}
-                {userData && <UserProfile
-                    avatar={userData.avatar}
-                    name={userData.name}
-                    info={[
-                        `Balance: ${userData.balance} SOL`,
-                        `Input SOL: ${userData.input_sol}`,
-                        `Personal Points: ${userData.personal_points}`,
-                        `Team Points: ${userData.team_points}`
-                    ]}
-                    className={styles.profileContainer}
-                />}
-                {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
-                    <TeamProfile
-                        name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
-                        score={teamB.score}
-                        className={styles.teamContainer}
-                        bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
-                    />
+                {isMobileLayout ? (
+                    <>
+                        {/* UserProfile СНАЧАЛА при ширине < 1150px */}
+                        {userData && (
+                            <UserProfile
+                                avatar={userData.avatar}
+                                name={userData.name}
+                                info={[
+                                    `Balance: ${userData.balance} SOL`,
+                                    `Input SOL: ${userData.input_sol}`,
+                                    `Personal Points: ${userData.personal_points}`,
+                                    `Team Points: ${userData.team_points}`
+                                ]}
+                                className={styles.profileContainer}
+                            />
+                        )}
+    
+                        {/* Команды под UserProfile */}
+                        {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
+                            <TeamProfile
+                                name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
+                                score={teamA.score}
+                                className={styles.teamContainer}
+                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                            />
+                        )}
+    
+                        {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
+                            <TeamProfile
+                                name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
+                                score={teamB.score}
+                                className={styles.teamContainer}
+                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <>
+                        {/* Team - User - Team при ширине > 1150px */}
+                        {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
+                            <TeamProfile
+                                name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
+                                score={teamA.score}
+                                className={styles.teamContainer}
+                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                            />
+                        )}
+    
+                        {userData && (
+                            <UserProfile
+                                avatar={userData.avatar}
+                                name={userData.name}
+                                info={[
+                                    `Balance: ${userData.balance} SOL`,
+                                    `Input SOL: ${userData.input_sol}`,
+                                    `Personal Points: ${userData.personal_points}`,
+                                    `Team Points: ${userData.team_points}`
+                                ]}
+                                className={styles.profileContainer}
+                            />
+                        )}
+    
+                        {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
+                            <TeamProfile
+                                name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
+                                score={teamB.score}
+                                className={styles.teamContainer}
+                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                            />
+                        )}
+                    </>
                 )}
             </div>
+    
+            {/* Кнопка JOIN, если пользователя нет в БД */}
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </Back>
     );
+    
 };
 
 export default OfficePage;
