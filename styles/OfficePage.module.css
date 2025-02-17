@@ -69,11 +69,13 @@
     .teamContainer {
         padding: 10px;
         width: 300px;
+        max-width: 300px;
     }
 
     .profileContainer {
         padding: 10px;
-        width: 350px;
+        width: 600px;
+        max-width: 600px;
     }
 
     .teamsContainer {
