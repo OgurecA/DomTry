@@ -133,3 +133,22 @@
     gap: 5px; /* Расстояние между элементами */
   }
 }
+
+@media (max-height: 500px) {
+  .AppHeader {
+    height: 60px; /* Новая высота для маленьких экранов */
+    font-size: 30px; /* Можно уменьшить размер текста */
+  }
+
+  .welcomeTextContainer h2 {
+    font-size: 25px;
+    top: 80px;
+  }
+
+  .LeftSection {
+    height: 60px;
+    display: flex; /* Размещаем img и span рядом */
+    align-items: center; /* Выравниваем по вертикали */
+    gap: 5px; /* Расстояние между элементами */
+  }
+}
