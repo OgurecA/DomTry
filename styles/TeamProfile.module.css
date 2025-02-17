@@ -16,8 +16,13 @@
     color: #ffcc00;
 }
 
-.teamScore:hover{
-    transition: color 0.3s ease-in-out;
+.teamAlpha {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.teamAlpha:hover{
     cursor: pointer;
     color: #cda400;
     text-decoration: underline;
