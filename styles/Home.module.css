@@ -119,7 +119,7 @@
 @media (max-width: 500px) {
   .AppHeader {
     height: 60px; /* Новая высота для маленьких экранов */
-    font-size: 35px; /* Можно уменьшить размер текста */
+    font-size: 30px; /* Можно уменьшить размер текста */
   }
 
   .welcomeTextContainer h2 {
