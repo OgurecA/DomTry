@@ -42,8 +42,7 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
-    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<PlayerData | null>(null);
-    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<PlayerData | null>(null);
+    const [bestPlayers, setBestPlayers] = useState<any | null>(null);
 
 
     useEffect(() => {
@@ -122,8 +121,7 @@ const OfficePage = () => {
                 setTeamA(teamAData);
                 setTeamB(teamBData);
 
-                setBestPlayerTeam1(bestPlayersData.bestPlayerTeam1);
-                setBestPlayerTeam2(bestPlayersData.bestPlayerTeam2);
+                setBestPlayers(bestPlayersData);
 
                 console.log(bestPlayersData.bestPlayerTeam2)
                 
@@ -142,14 +140,14 @@ const OfficePage = () => {
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                {teamA && (
+                {teamA && bestPlayers && (
                     <TeamProfile
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
                         bestPlayer={teamA.name === "Team A" ?
-                            bestPlayerTeam1.name :
-                            bestPlayerTeam2.name}
+                            bestPlayers.bestPlayerTeam1.name :
+                            bestPlayers.bestPlayerTeam2.name}
                     />
                 )}
                 {userData && <UserProfile
@@ -163,14 +161,14 @@ const OfficePage = () => {
                     ]}
                     className={styles.profileContainer}
                 />}
-                {teamB && (
+                {teamB && bestPlayers && (
                     <TeamProfile
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
                         bestPlayer={teamA.name === "Team A" ?
-                            bestPlayerTeam1.name :
-                            bestPlayerTeam2.name}
+                            bestPlayers.bestPlayerTeam1.name :
+                            bestPlayers.bestPlayerTeam2.name}
                     />
                 )}
             </div>
