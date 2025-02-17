@@ -42,6 +42,9 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
+    const [userTeam, setUserTeam] = useState<number | null>(null);
+    const [enemyTeam, setEnemyTeam] = useState<number | null>(null);
+
 
     useEffect(() => {
         if (!publicKey) return;
@@ -86,13 +89,32 @@ const OfficePage = () => {
     
         const fetchUserData = async () => {
           try {
+
+            const userResponse = await fetch("/api/getuser", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ publicKey: publicKey.toBase58() }),
+              });
+      
+            const userData = await userResponse.json();
+            if (!userResponse.ok || !userData.team) {
+                console.warn("⚠ Пользователь не найден или не состоит в команде.");
+                return;
+            }
+      
+            console.log(`✅ Пользователь ${publicKey.toBase58()} в команде ID: ${userData.team}`);
+            
+
             const teamResponse = await fetch("/api/teaminfo");            
             const teamData = await teamResponse.json();
 
             if (teamResponse.ok && teamData.teams) {
 
-                const teamAData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 1)|| null;
-                const teamBData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === 2) || null;
+                const userTeamId = userData.team
+                const enemyTeamId = userData.team === 1 ? 2 : 1;
+
+                const teamAData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === userTeamId) || null;
+                const teamBData: TeamData | null = teamData.teams.find((team: TeamData) => team.id === enemyTeamId) || null;
 
                 setTeamA(teamAData);
                 setTeamB(teamBData);
@@ -114,7 +136,7 @@ const OfficePage = () => {
             <div className={styles.container}>
                 {teamA && (
                     <TeamProfile
-                        name={teamA.name}
+                        name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
                     />
@@ -132,7 +154,7 @@ const OfficePage = () => {
                 />}
                 {teamB && (
                     <TeamProfile
-                        name={teamB.name}
+                        name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
                     />
