@@ -23,7 +23,12 @@ const Home: NextPage = (props) => {
       </Head>
       <AppBar />
       <Back>
-        <WelcomeText />
+        <div className={styles.welcomeTextContainer}>
+          <h2>
+            Work in progress...
+          </h2>
+          <p>Email: contact@dominators.website</p>
+        </div>
       </Back>
     </div>
   );
