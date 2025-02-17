@@ -93,8 +93,7 @@
     }
 
     .teamContainer {
-        max-height: 300px;
-        height: auto;
+        height: 200px;
     }
 
 }  
