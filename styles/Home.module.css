@@ -142,7 +142,11 @@
 
   .welcomeTextContainer h2 {
     font-size: 25px;
-    top: 40px;
+  }
+
+  .welcomeTextContainer {
+    top: 80px;
+    gap: 5px; /* Расстояние между текстом и кнопкой */
   }
 
   .LeftSection {
