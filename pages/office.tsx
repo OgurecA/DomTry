@@ -146,7 +146,7 @@ const OfficePage = () => {
             <div className={styles.container}>
                 {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
                     <TeamProfile
-                        name={teamA.name === "Team A" ? "Dire Warriors(Your Team)" : "Wild Hearts(Your Team)"}
+                        name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
                         score={teamA.score}
                         className={styles.teamContainer}
                         bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}

@@ -21,3 +21,12 @@
     justify-content: center; /* Центрирование по горизонтали */
     align-items: center; /* Центрирование по вертикали */
 }
+
+@media (max-width: 500px) {
+    .BodyDescription {
+        position: absolute; /* Абсолютное позиционирование */
+        width: 100%;
+        height: calc(100% - 60px); /* Высота с учетом AppBar */
+        top: 60px;
+    }
+  }
