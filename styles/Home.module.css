@@ -89,7 +89,7 @@
 
 .welcomeTextContainer h2 {
   font-size: 40px;
-  color: rgb(148, 148, 148);
+  color: rgb(179, 179, 179);
   margin-bottom: 8px;
 }
 
@@ -100,7 +100,7 @@
   background: transparent;
   padding: 15px;
   border-radius: 12px;
-  color: rgb(148, 148, 148);
+  color: rgb(179, 179, 179);
   text-align: center;
   margin: 0 auto;
   word-wrap: break-word;
