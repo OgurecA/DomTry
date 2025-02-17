@@ -42,8 +42,8 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
-    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<PlayerData | null>(null);
-    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<PlayerData | null>(null);
+    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<any | null>(null);
+    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<any | null>(null);
 
 
     useEffect(() => {
@@ -127,7 +127,7 @@ const OfficePage = () => {
 
                 console.log(bestPlayerTeam2)
                 console.log(bestPlayersData.bestPlayerTeam2)
-                console.log(bestPlayersData.bestPlayerTeam2.name)
+                console.log(bestPlayersData.bestPlayerTeam2.publicKey)
                 
             } else {
                 console.warn("⚠ Данные о командах не найдены.");
@@ -149,7 +149,7 @@ const OfficePage = () => {
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.name || 0 : bestPlayerTeam2.name || 0}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam2.publicKey || 0 : bestPlayerTeam2.publicKey || 0}
                     />
                 )}
                 {userData && <UserProfile
@@ -168,7 +168,7 @@ const OfficePage = () => {
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
                         className={styles.teamContainer}
-                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.name || 0 : bestPlayerTeam2.name || 0}
+                        bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publicKey || 0 : bestPlayerTeam2.publicKey || 0}
                     />
                 )}
             </div>
