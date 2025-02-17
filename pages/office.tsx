@@ -144,7 +144,7 @@ const OfficePage = () => {
         <Back>
             <OfficeAppBar />
             <div className={styles.container}>
-                {teamA && (
+                {teamA && bestPlayerTeam1 && bestPlayerTeam2 && (
                     <TeamProfile
                         name={teamA.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamA.score}
@@ -163,7 +163,7 @@ const OfficePage = () => {
                     ]}
                     className={styles.profileContainer}
                 />}
-                {teamB && (
+                {teamB && bestPlayerTeam1 && bestPlayerTeam2 && (
                     <TeamProfile
                         name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                         score={teamB.score}
