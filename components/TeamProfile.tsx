@@ -10,7 +10,7 @@ const TeamProfile = ({ name, score, className, bestPlayer }) => {
         <p
           className={styles.teamAlpha}
           onClick={() =>
-            window.open(`https://explorer.solana.com/address/${bestPlayer}?cluster=devnet`, "_blank")
+            window.open(`https://solscan.io/account/${bestPlayer}?cluster=devnet`, "_blank")
           }
         >
           Alpha Predator: {bestPlayer?.slice(0, 4)}...{bestPlayer?.slice(-4)}

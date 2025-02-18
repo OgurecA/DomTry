@@ -6,7 +6,9 @@ import WalletContextProvider from '../components/WalletContextProvider';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WalletContextProvider>
-      <Component {...pageProps} />
+      <div className="bg-gray-500">
+        <Component {...pageProps} />
+      </div>
     </WalletContextProvider>
   );
 }

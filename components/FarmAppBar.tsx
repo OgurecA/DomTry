@@ -11,7 +11,7 @@ export const FarmAppBar: FC = () => {
     };
 
     return (
-        <div className={styles.AppHeader}>
+        <div className={styles.AppHeaderFarm}>
             <div className={styles.LeftSection}>
                 <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton}>NFT</button>

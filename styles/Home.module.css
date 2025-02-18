@@ -182,8 +182,30 @@
   z-index: 1000;
 }
 
+.AppHeaderFarm {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 90px;
+  width: calc(100vw - 40px);
+  display: flex;
+  background-color: black;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* Элементы по краям */
+  font-size: 50px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex-wrap: nowrap;
+  z-index: 1000;
+}
+
 @media (max-width: 780px) {
   .AppHeaderOffice {
+    opacity: 0;
+  }
+  .AppHeaderFarm {
     opacity: 0;
   }
 }
