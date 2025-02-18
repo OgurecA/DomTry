@@ -84,6 +84,18 @@
         flex-direction: row;
         align-items: center;
     }
+} 
+
+@media (max-width: 820px) {
+    .container {
+        gap: 10px; /* Расстояние между UserProfile и TeamProfile */
+        padding: 10px;
+    }
+
+    .teamContainer {
+        height: 160px;
+    }
+
 }  
 
 @media (max-width: 650px) {

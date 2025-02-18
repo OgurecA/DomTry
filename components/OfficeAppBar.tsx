@@ -16,7 +16,7 @@ export const OfficeAppBar: FC = () => {
                 <button className={styles.NavButton} onClick={() => router.replace("/farm")}>FARM</button>
             </div>
             <div className={styles.RightSection}>
-                <WalletMultiButton/>
+                <WalletMultiButton className={styles.walletButton}/>
             </div>
         </div>
     );

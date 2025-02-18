@@ -23,6 +23,32 @@
     color: #ffcc00;
 }
 
+@media (max-width: 820px) {
+    .avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 3px;
+    }
+
+    .username {
+        font-size: 20px;
+        margin-bottom: 2px;
+        line-height: 1.1; /* Уменьшаем высоту строки */
+    }
+
+    .userInfo {
+        gap: 1px; /* Минимальное расстояние между строками */
+    }
+
+    .infoItem {
+        font-size: 14px; /* Делаем текст меньше */
+        line-height: 1.1; /* Уменьшаем межстрочное расстояние */
+        margin-bottom: 1px; /* Минимальный отступ между строками */
+    }
+}
+
+
+
 @media (max-width: 650px) {
     .avatar {
         width: 100px;
