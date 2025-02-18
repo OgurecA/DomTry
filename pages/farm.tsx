@@ -181,7 +181,7 @@ const FarmPage = () => {
         <div className={styles.selectedNftInfoContainer}>
             <h2>{selectedNft.nftName}</h2>
             <p>
-            <strong>Адрес:</strong> {isMobileLayout ?
+            <strong>Адрес:</strong> {!isMobileLayout ?
               selectedNft.nftAddress.toBase58() :
               `${selectedNft.nftAddress.toBase58().slice(0, 4)}...${selectedNft.nftAddress.toBase58().slice(-4)}`}
             </p>
