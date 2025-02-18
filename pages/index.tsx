@@ -27,13 +27,13 @@ const Home: NextPage = (props) => {
           <h2>
             Web3 Game
           </h2>
-          <h2>
+          <h2 onClick={() => window.open("https://x.com/dominator24news", "_blank")}>
             Work in progress...
           </h2>
           <h2>
             Coming soon 2025
           </h2>
-          <p>contact@dominators.website</p>
+          <p onClick={() => window.location.href = "mailto:contact@dominators.website"}>contact@dominators.website</p>
         </div>
       </Back>
     </div>
