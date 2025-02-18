@@ -24,14 +24,11 @@ const Home: NextPage = (props) => {
       <AppBar />
       <Back>
         <div className={styles.welcomeTextContainer}>
-          <h2>
+          <h2 className={styles.title}>
             Web3 Game
           </h2>
           <h2 onClick={() => window.open("https://x.com/dominator24news", "_blank")}>
             Work in progress...
-          </h2>
-          <h2>
-            Coming soon 2025
           </h2>
           <p onClick={() => window.location.href = "mailto:contact@dominators.website"}>contact@dominators.website</p>
         </div>
