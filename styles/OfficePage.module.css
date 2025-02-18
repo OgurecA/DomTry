@@ -112,4 +112,9 @@
         height: 160px;
     }
 
+    .teamsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }  
