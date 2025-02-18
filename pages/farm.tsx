@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/FarmPage.module.css";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Back } from "../components/Back";
 import { findNFT } from "../utils/checkForNft";
 import { NftStatus } from "../components/NftStatus"; 
 import { FarmAppBar } from "../components/FarmAppBar";
 import { PublicKey } from "@solana/web3.js";
+import { BackOffice } from "../components/BackOffice";
 
 const allowedAttributes = ["Species", "TeamPoints", "SelfPoints"];
 
@@ -156,7 +156,7 @@ const FarmPage = () => {
   return (
     <>
       <FarmAppBar />
-      <Back>
+      <BackOffice>
         <div className={styles.selectedNftContainer}>
           {selectedNft && (
             <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />
@@ -221,7 +221,7 @@ const FarmPage = () => {
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
           />
         </div>
-      </Back>
+      </BackOffice>
     </>
   );
 };
