@@ -28,7 +28,7 @@ export const AppBar: FC = () => {
                 {/* <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button> */}
             </div>
             <div className={styles.RightSection}>
-                <WalletMultiButton/>
+                <WalletMultiButton className={styles.walletButton}/>
             </div>
         </div>
     );
