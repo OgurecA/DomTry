@@ -67,15 +67,21 @@
 @media (max-width: 650px) {
     .teamName {
         font-size: 16px;
-        margin-bottom: 5px;
+        margin-bottom: 1px;
     }
 
     .teamScore {
         font-size: 14px;
+        margin-bottom: 1px;
     }
 
     .teamAlpha {
         font-size: 14px;
+        margin-bottom: 1px;
+    }
+
+    .teamContent {
+        gap: 1px;
     }
     
 }  

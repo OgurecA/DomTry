@@ -112,10 +112,11 @@
         height: 120px;
         width: 300px;
         max-width: 300px;
+        padding: 5px;
     }
 
     .profileContainer {
-        padding: 10px;
+        padding: 5px;
         width: 300px;
         max-width: 300px;
     }
