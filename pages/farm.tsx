@@ -40,6 +40,20 @@ const FarmPage = () => {
     return nft && nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
   };
 
+  const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+        setIsMobileLayout(window.innerWidth < 1450);
+    };
+
+    // Вызываем сразу при загрузке
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   useEffect(() => {
     if (!publicKey) return;
@@ -166,7 +180,12 @@ const FarmPage = () => {
         {selectedNft && (
         <div className={styles.selectedNftInfoContainer}>
             <h2>{selectedNft.nftName}</h2>
-            <p><strong>Адрес:</strong> {selectedNft.nftAddress.toBase58()}</p>
+            <p>
+            <strong>Адрес:</strong> {isMobileLayout ?
+              selectedNft.nftAddress.toBase58() :
+              `${selectedNft.nftAddress.toBase58().slice(0, 4)}...${selectedNft.nftAddress.toBase58().slice(-4)}`}
+            </p>
+
             <h3>Атрибуты:</h3>
             <ul className={styles.attributeList}>
               {selectedNft.attributes.length > 0 ? (

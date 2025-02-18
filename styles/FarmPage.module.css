@@ -33,7 +33,7 @@
 
 .selectedNftInfoContainer {
   width: auto;
-  max-width: 450px;
+  max-width: 400px;
   min-height: 200px;
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
@@ -72,7 +72,7 @@
 
 .selectedNftDescriptionContainer {
   width: auto;
-  max-width: 450px;
+  max-width: 400px;
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 12px;
@@ -137,3 +137,22 @@
   color: white;
   margin-bottom: 8px;
 }
+
+
+@media (max-width: 1450px) {
+  .avatar {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 3px;
+  }
+  .username {
+      font-size: 20px;
+      margin-bottom: 2px;
+  }
+  .userInfo {
+      gap: 2px;
+  }
+  .infoItem {
+      font-size: 16px;
+  }
+}  
