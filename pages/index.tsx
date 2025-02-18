@@ -25,7 +25,13 @@ const Home: NextPage = (props) => {
       <Back>
         <div className={styles.welcomeTextContainer}>
           <h2>
+            Web3 Game
+          </h2>
+          <h2>
             Work in progress...
+          </h2>
+          <h2>
+            Coming soon 2025
           </h2>
           <p>contact@dominators.website</p>
         </div>
