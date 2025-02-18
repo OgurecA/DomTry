@@ -90,14 +90,12 @@
 .text {
   font-size: 32px;
   color: rgb(179, 179, 179);
-  margin-bottom: 4px;
   font-weight: bold;
 }
 
 .title {
   font-size: 40px;
   color: rgb(179, 179, 179);
-  margin-bottom: 4px;
   font-weight: bold;
 }
 
@@ -120,7 +118,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px; /* Расстояние между текстом и кнопкой */
+  gap: 2px; /* Расстояние между текстом и кнопкой */
 }
 
 @media (max-width: 500px) {
