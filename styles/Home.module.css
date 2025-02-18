@@ -155,7 +155,9 @@
   }
 }
 
-
+.walletButton {
+  opacity: 0;
+}
 
 .AppHeaderOffice {
   position: fixed;
