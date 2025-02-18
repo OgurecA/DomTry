@@ -93,7 +93,11 @@
     }
 
     .teamContainer {
-        height: 200px;
+        height: 300px;
+    }
+
+    .profileContainer {
+        height: 300px;
     }
 
 }  
