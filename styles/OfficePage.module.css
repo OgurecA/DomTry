@@ -111,6 +111,7 @@
     .teamContainer {
         height: 120px;
         width: auto;
+        min-width: 200px;
         max-width: 300px;
         padding: 5px;
     }
@@ -118,6 +119,7 @@
     .profileContainer {
         padding: 5px;
         width: auto;
+        min-width: 200px;
         max-width: 300px;
     }
 
