@@ -49,7 +49,7 @@ const OfficePage = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobileLayout(window.innerWidth < 650);
+            setIsMobileLayout(window.innerWidth < 750);
         };
 
         // Вызываем сразу при загрузке
