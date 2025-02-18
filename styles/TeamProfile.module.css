@@ -59,6 +59,7 @@
     .teamContent {
         min-height: 120px; /* Уменьшаем минимальную высоту */
         gap: 2px; /* Минимальное расстояние между строками */
+        justify-content: flex-start;
     }
 }
 
