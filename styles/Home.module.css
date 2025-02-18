@@ -109,7 +109,7 @@
   overflow-wrap: break-word;
   white-space: normal;
   position: absolute;
-  top: 60px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -122,6 +122,9 @@
 
   .welcomeTextContainer h2 {
     font-size: 25px;
+  }
+  .welcomeTextContainer {
+    top: 10px;
   }
 
   .LeftSection {
@@ -143,8 +146,9 @@
   }
 
   .welcomeTextContainer {
-    top: 60px;
+    top: 10px;
     gap: 5px; /* Расстояние между текстом и кнопкой */
+    max-width: 800px;
   }
 
   .LeftSection {
