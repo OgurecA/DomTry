@@ -102,7 +102,7 @@
 
 }  
 
-@media (max-width: 750px) {
+@media (max-width: 780px) {
     .container {
         gap: 10px; /* Расстояние между UserProfile и TeamProfile */
         padding: 10px;

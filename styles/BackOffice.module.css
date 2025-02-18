@@ -22,7 +22,7 @@
     align-items: center; /* Центрирование по вертикали */
 }
 
-@media (max-width: 750px) {
+@media (max-width: 780px) {
     .BodyDescription {
         position: absolute; /* Абсолютное позиционирование */
         width: 100%;
