@@ -141,10 +141,17 @@
 
 @media (max-width: 1450px) {
   .selectedNftInfoContainer {
-      padding: 15px 25px;
-      max-width: 300px;
+      transform: translateX(-65%);
+      max-width: 400px;
   }
   .selectedNftDescriptionContainer {
-      max-width: 300px;
+      max-width: 400px;
+      transform: translateX(65%);
+  }
+}
+
+@media (max-width: 1150px) {
+  .selectedNftInfoContainer h2 {
+    margin-bottom: -16px;
   }
 }  
