@@ -44,7 +44,7 @@ const FarmPage = () => {
 
   useEffect(() => {
     const handleResize = () => {
-        setIsMobileLayout(window.innerWidth < 150);
+        setIsMobileLayout(window.innerWidth < 1170);
     };
 
     // Вызываем сразу при загрузке

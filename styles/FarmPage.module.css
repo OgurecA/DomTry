@@ -150,8 +150,31 @@
   }
 }
 
-@media (max-width: 1150px) {
-  .selectedNftInfoContainer h2 {
+@media (max-width: 1170px) {
+  .selectedNftDescriptionContainer h2 {
     margin-bottom: -16px;
+  }
+  .selectedNftInfoContainer {
+    transform: translateX(-75%);
+    max-width: 300px;
+    padding: 10px 30px;
+  }
+  .selectedNftDescriptionContainer {
+    max-width: 300px;
+    transform: translateX(75%);
+  }
+}
+
+@media (max-width: 960px) {
+  .selectedNftDescriptionContainer h2 {
+    margin-bottom: -16px;
+  }
+  .selectedNftInfoContainer {
+    transform: translateX(-70%);
+    max-width: 300px;
+  }
+  .selectedNftDescriptionContainer {
+    max-width: 300px;
+    transform: translateX(70%);
   }
 }  
