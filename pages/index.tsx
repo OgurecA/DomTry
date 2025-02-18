@@ -27,9 +27,9 @@ const Home: NextPage = (props) => {
           <p className={styles.title}>
             Web3 Game
           </p>
-          <h2 onClick={() => window.open("https://x.com/dominator24news", "_blank")}>
+          <p className={styles.text} onClick={() => window.open("https://x.com/dominator24news", "_blank")}>
             Work in progress...
-          </h2>
+          </p>
           <p onClick={() => window.location.href = "mailto:contact@dominators.website"}>contact@dominators.website</p>
         </div>
       </Back>
