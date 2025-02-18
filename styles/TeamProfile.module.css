@@ -37,6 +37,31 @@
     min-height: 150px; /* Минимальная высота, чтобы блоки не съезжали */
 }
 
+@media (max-width: 820px) {
+    .teamName {
+        font-size: 18px; /* Делаем текст меньше */
+        margin-bottom: 5px; /* Уменьшаем отступ */
+        line-height: 1.1;
+    }
+
+    .teamScore {
+        font-size: 16px;
+        line-height: 1.1;
+        margin-bottom: 2px; /* Минимальный отступ */
+    }
+
+    .teamAlpha {
+        font-size: 16px;
+        line-height: 1.1;
+        margin-bottom: 2px;
+    }
+
+    .teamContent {
+        min-height: 120px; /* Уменьшаем минимальную высоту */
+        gap: 2px; /* Минимальное расстояние между строками */
+    }
+}
+
 
 @media (max-width: 650px) {
     .teamName {
