@@ -171,10 +171,10 @@
   }
   .selectedNftInfoContainer {
     transform: translateX(-70%);
-    max-width: 300px;
+    max-width: 200px;
   }
   .selectedNftDescriptionContainer {
-    max-width: 300px;
+    max-width: 200px;
     transform: translateX(70%);
   }
 }  
