@@ -21,6 +21,20 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
   const [hover, setHover] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
+  const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileLayout(window.innerWidth < 780);
+        };
+
+        // Вызываем сразу при загрузке
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   useEffect(() => {
     const fetchNft = async () => {
       try {
@@ -64,7 +78,7 @@ export const NftStatus = ({ title, checkNft, imageUrl, onClick }: NftStatusProps
         <img src={imageUrl} alt={title} className={styles.nftImage} />
       )}
 
-      {hover && nftData && (
+      {hover && nftData && !isMobileLayout && (
         <div
           className={styles.tooltip}
           style={{ top: tooltipPosition.y, left: tooltipPosition.x }}
