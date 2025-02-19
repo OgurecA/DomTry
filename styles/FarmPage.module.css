@@ -264,9 +264,9 @@
 @media (max-width: 400px) {
   .selectedNftButton {
     left: 2%;
-    right: auto;
-    width: 47%;
-    top: calc(30px + 47vw);
+    width: 200px; /* Фиксированная ширина */
+    max-width: 200px;
+    top: calc(20px + 47vw);
   }
   .selectedNftInfoContainer {
     right: 2%;
