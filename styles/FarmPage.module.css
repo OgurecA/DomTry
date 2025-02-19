@@ -204,14 +204,19 @@
     max-width: 200px;
     transform: translateX(75%);
   }
-}  
+}
 
 @media (max-width: 780px) {
   .selectedNftInfoContainer {
-    transform: translateX(-75%);
+    right: 10px;
+    left: auto;
+    transform: translateX(0%);
     max-width: 200px;
   }
-  .selectedNftDescriptionContainer {
-    opacity: 0;
+  .selectedNftContainer {
+    left: 10px;
+    transform: translateX(0%);
+    width: 200px;
+    height: 200px;
   }
 }  
