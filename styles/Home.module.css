@@ -203,10 +203,10 @@
 
 @media (max-width: 780px) {
   .AppHeaderOffice {
-    opacity: 0;
+    opacity: 1;
   }
   .AppHeaderFarm {
-    opacity: 0;
+    opacity: 1;
   }
 }
 

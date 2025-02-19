@@ -1,12 +1,25 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
 
 export const OfficeAppBar: FC = () => {
-
     const router = useRouter();
-    
+    const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileLayout(window.innerWidth < 780);
+        };
+
+        // Вызываем сразу при загрузке
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    if (!isMobileLayout) return null; // 📌 Если не мобильная версия, ничего не рендерим
 
     return (
         <div className={styles.AppHeaderOffice}>

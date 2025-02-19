@@ -55,17 +55,17 @@ const FarmPage = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //       setIsMobileLayout2(window.innerWidth < 780);
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+        setIsMobileLayout2(window.innerWidth < 780);
+    };
 
-  //   // Вызываем сразу при загрузке
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
+    // Вызываем сразу при загрузке
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
   useEffect(() => {
@@ -215,7 +215,7 @@ const FarmPage = () => {
             </ul>
           </div>
         )}
-        {selectedNft && (
+        {selectedNft && isMobileLayout2 && (
         <div className={styles.selectedNftDescriptionContainer}>
           <h2>
             {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
