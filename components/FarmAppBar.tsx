@@ -19,7 +19,7 @@ export const FarmAppBar: FC = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    if (!isMobileLayout) return null; // 📌 Если не мобильная версия, ничего не рендерим
+    if (isMobileLayout) return null; // 📌 Если не мобильная версия, ничего не рендерим
 
 
     return (
