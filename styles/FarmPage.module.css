@@ -229,8 +229,7 @@
     gap: 10px;
     flex-wrap: nowrap; /* Разрешаем перенос, если не влезает */
     width: 90%;
+    justify-content: center; /* Центрируем */
   }
-  .nftWrapper > * {
-    width: 100%; /* Элементы заполняют ячейки */
-  }
+  
 }  
