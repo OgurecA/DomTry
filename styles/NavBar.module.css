@@ -9,8 +9,10 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    border-top: 2px solid #ffcc00; /* Обводка сверху */
+    border-radius: 6px 6px 0 0;
+    border: 2px solid #ffcc00; /* Обводка сверху */
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 .NavButton {

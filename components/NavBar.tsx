@@ -18,7 +18,7 @@ export const NavBar: FC = () => {
 
     return (
         <div className={styles.NavBar}>
-            <button className={styles.NavButton} onClick={() => navigateTo('/home')}>Home</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/')}>Home</button>
             <button className={styles.NavButton} onClick={() => navigateTo('/office')}>Office</button>
             <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>Farm</button>
         </div>
