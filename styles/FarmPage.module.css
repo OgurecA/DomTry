@@ -269,9 +269,11 @@
   }
   .selectedNftInfoContainer {
     right: 2%;
+    width: 45%;
   }
   .selectedNftContainer {
     left: 2%;
     width: 47%;
+    box-sizing: border-box;
   }
 }
