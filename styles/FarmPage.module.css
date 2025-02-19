@@ -143,12 +143,12 @@
     font-size: 26px;
   }
   .selectedNftInfoContainer {
-    transform: translateX(-20%);
+    transform: translateX(-50%);
     max-width: 500px;
   }
   .selectedNftDescriptionContainer {
     max-width: 500px;
-    transform: translateX(20%);
+    transform: translateX(50%);
     font-size: 20px;
   }
   .selectedNftInfoContainer h2 {
