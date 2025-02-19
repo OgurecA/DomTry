@@ -213,6 +213,7 @@
     transform: translateX(0%);
     max-width: 300px;
     width: 30%;
+    padding: 0px 15px;
   }
   .selectedNftContainer {
     left: 5%;
@@ -221,7 +222,7 @@
     height: auto;
   }
   .nftWrapper {
-    top: 250px;
+    top: 340px;
     bottom: auto;
     left: 50%;
     transform: translateX(-50%);
@@ -243,3 +244,19 @@
   }
   
 }  
+
+@media (max-width: 540px) {
+  .nftWrapper {
+    top: 270px;
+  }
+}
+
+@media (max-width: 400px) {
+  .selectedNftInfoContainer {
+    right: 2%;
+  }
+  .selectedNftContainer {
+    left: 2%;
+    width: 47%;
+  }
+}
