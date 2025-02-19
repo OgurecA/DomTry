@@ -215,7 +215,7 @@ const FarmPage = () => {
             </ul>
           </div>
         )}
-        {selectedNft && isMobileLayout2 && (
+        {selectedNft && !isMobileLayout2 && (
         <div className={styles.selectedNftDescriptionContainer}>
           <h2>
             {selectedNft.attributes.find(attr => attr.trait_type === "Occupation")?.value || "Нет данных"}
