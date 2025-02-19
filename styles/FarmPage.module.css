@@ -221,12 +221,13 @@
     height: auto;
   }
   .nftWrapper {
-    bottom: 100px;
+    top: 250px;
+    bottom: auto;
     left: 50%;
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Всегда 3 элемента в ряд */
-    gap: 0px;
+    gap: 25px;
     flex-wrap: nowrap; /* Разрешаем перенос, если не влезает */
     width: 60vw;
     justify-content: center; /* Центрируем */
