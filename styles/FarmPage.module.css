@@ -210,7 +210,8 @@
   .selectedNftButton {
     position: absolute;
     width: 100%;
-    max-width: 34%;
+    max-width: 40%;
+    top: 220px;
     right: 5%;
     padding: 12px 15px;
     box-sizing: border-box;
@@ -220,7 +221,7 @@
     left: auto;
     transform: translateX(0%);
     max-width: 300px;
-    width: 34%;
+    width: 40%;
     padding: 0px 15px;
     box-sizing: border-box;
   }
@@ -256,11 +257,14 @@
 
 @media (max-width: 540px) {
   .nftWrapper {
-    top: 270px;
+    top: 280px;
   }
 }
 
 @media (max-width: 400px) {
+  .selectedNftButton {
+    right: 2%;
+  }
   .selectedNftInfoContainer {
     right: 2%;
   }
