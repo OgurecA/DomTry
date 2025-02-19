@@ -232,5 +232,12 @@
     justify-content: center; /* Центрируем */
     place-items: center;
   }
+  .nftWrapper > * {
+    width: 100%; /* Ячейка заполняет свою колонку */
+    aspect-ratio: 1 / 1; /* Делаем ячейки квадратными */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
 }  
