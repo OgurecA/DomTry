@@ -61,8 +61,8 @@
 
 @media (max-width: 780px) {
   .nftContainer {
-    width: 160px;
-    height: 160px;
+    width: 20vw;
+    height: 20vw;
     gap: 0;
   }
 }
