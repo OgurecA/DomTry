@@ -138,6 +138,29 @@
   margin-bottom: 8px;
 }
 
+@media (min-width: 2000px) {
+  .selectedNftDescriptionContainer h2 {
+    font-size: 26px;
+  }
+  .selectedNftInfoContainer {
+    transform: translateX(-20%);
+    max-width: 500px;
+  }
+  .selectedNftDescriptionContainer {
+    max-width: 500px;
+    transform: translateX(20%);
+    font-size: 20px;
+  }
+  .selectedNftInfoContainer h2 {
+    font-size: 26px;
+  }
+  .selectedNftInfoContainer p {
+    font-size: 20px;
+  }
+  .selectedNftInfoContainer h3 {
+    font-size: 22px;
+  }
+}  
 
 @media (max-width: 1450px) {
   .selectedNftInfoContainer {
@@ -170,11 +193,25 @@
     margin-bottom: -16px;
   }
   .selectedNftInfoContainer {
-    transform: translateX(-70%);
+    transform: translateX(-75%);
     max-width: 200px;
   }
   .selectedNftDescriptionContainer {
     max-width: 200px;
-    transform: translateX(70%);
+    transform: translateX(75%);
+  }
+}  
+
+@media (max-width: 780px) {
+  .selectedNftDescriptionContainer h2 {
+    margin-bottom: -16px;
+  }
+  .selectedNftInfoContainer {
+    transform: translateX(-75%);
+    max-width: 200px;
+  }
+  .selectedNftDescriptionContainer {
+    max-width: 200px;
+    transform: translateX(75%);
   }
 }  
