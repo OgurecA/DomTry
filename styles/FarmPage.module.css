@@ -207,15 +207,11 @@
 }  
 
 @media (max-width: 780px) {
-  .selectedNftDescriptionContainer h2 {
-    margin-bottom: -16px;
-  }
   .selectedNftInfoContainer {
     transform: translateX(-75%);
     max-width: 200px;
   }
   .selectedNftDescriptionContainer {
-    max-width: 200px;
-    transform: translateX(75%);
+    opacity: 0;
   }
 }  

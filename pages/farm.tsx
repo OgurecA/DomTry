@@ -41,6 +41,7 @@ const FarmPage = () => {
   };
 
   const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+  const [isMobileLayout2, setIsMobileLayout2] = useState<boolean | null>(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +54,18 @@ const FarmPage = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //       setIsMobileLayout2(window.innerWidth < 780);
+  //   };
+
+  //   // Вызываем сразу при загрузке
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
 
   useEffect(() => {
