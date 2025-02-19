@@ -215,6 +215,11 @@ const FarmPage = () => {
             </ul>
           </div>
         )}
+        {selectedNft && isMobileLayout2 && (
+          <button className={styles.selectedNftButton} onClick={() => setAnimal()} disabled={buttonIsLoading}>
+            {buttonIsLoading ? <span className={styles.loader}></span> : getStatus(selectedNft)}
+          </button>
+        )}
         {selectedNft && !isMobileLayout2 && (
         <div className={styles.selectedNftDescriptionContainer}>
           <h2>
