@@ -263,7 +263,9 @@
 
 @media (max-width: 400px) {
   .selectedNftButton {
-    right: 2%;
+    left: 2%;
+    right: auto;
+    width: 47%;
   }
   .selectedNftInfoContainer {
     right: 2%;
