@@ -57,9 +57,10 @@
     }
 
     .teamContent {
-        min-height: 120px; /* Уменьшаем минимальную высоту */
+        min-height: 10px; /* Уменьшаем минимальную высоту */
         gap: 2px; /* Минимальное расстояние между строками */
         justify-content: flex-start;
+        padding-bottom: 5px;
     }
 }
 

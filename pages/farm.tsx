@@ -185,7 +185,7 @@ const FarmPage = () => {
     <>
       <FarmAppBar />
       <BackOffice>
-      <NavBar />
+      {isMobileLayout2 && (<NavBar />)}
         <div className={styles.selectedNftContainer}>
           {selectedNft && (
             <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />

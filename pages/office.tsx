@@ -158,7 +158,7 @@ const OfficePage = () => {
       return (
         <BackOffice>
             <OfficeAppBar />
-            <NavBar />
+            {isMobileLayout && (<NavBar />)}
             <div className={styles.container}>
                 {isMobileLayout ? (
                     <>

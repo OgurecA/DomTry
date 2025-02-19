@@ -93,7 +93,7 @@
     }
 
     .teamContainer {
-        height: 160px;
+        height: auto;
     }
 
     .profileContainer {
@@ -109,7 +109,7 @@
     }
 
     .teamContainer {
-        height: 120px;
+        height: auto;
         width: auto;
         min-width: 200px;
         max-width: 300px;
