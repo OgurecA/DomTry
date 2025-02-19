@@ -266,6 +266,7 @@
     left: 2%;
     right: auto;
     width: 47%;
+    top: calc(30px + 47vw);
   }
   .selectedNftInfoContainer {
     right: 2%;
