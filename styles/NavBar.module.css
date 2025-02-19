@@ -10,13 +10,15 @@
     align-items: center;
     padding: 10px 0;
     border-radius: 6px 6px 0 0;
-    border: 2px solid #ffcc00; /* Обводка сверху */
+    border-top: 2px solid #ffcc00; /* Обводка сверху */
+    border-left: 2px solid #ffcc00; /* Обводка сверху */
+    border-right: 2px solid #ffcc00; /* Обводка сверху */
     z-index: 1000;
     box-sizing: border-box;
 }
 
 .NavButton {
-    width: 100px;
+    width: 30%;
     height: 40px;
     background: #ffcc00;
     border: none;
