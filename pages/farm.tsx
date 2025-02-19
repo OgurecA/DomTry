@@ -6,6 +6,7 @@ import { NftStatus } from "../components/NftStatus";
 import { FarmAppBar } from "../components/FarmAppBar";
 import { PublicKey } from "@solana/web3.js";
 import { BackOffice } from "../components/BackOffice";
+import { NavBar } from "../components/NavBar";
 
 const allowedAttributes = ["Species", "TeamPoints", "SelfPoints"];
 
@@ -184,6 +185,7 @@ const FarmPage = () => {
     <>
       <FarmAppBar />
       <BackOffice>
+      <NavBar />
         <div className={styles.selectedNftContainer}>
           {selectedNft && (
             <img src={selectedNft.imageUrl} alt={selectedNft.nftName} className={styles.selectedNftImage} />

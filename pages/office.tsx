@@ -8,6 +8,7 @@ import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
 import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { BackOffice } from '../components/BackOffice';
+import { NavBar } from '../components/NavBar';
 
 type PlayerData = {
     avatar: string;
@@ -157,6 +158,7 @@ const OfficePage = () => {
       return (
         <BackOffice>
             <OfficeAppBar />
+            <NavBar />
             <div className={styles.container}>
                 {isMobileLayout ? (
                     <>
