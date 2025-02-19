@@ -208,15 +208,26 @@
 
 @media (max-width: 780px) {
   .selectedNftInfoContainer {
-    right: 10px;
+    right: 5%;
     left: auto;
     transform: translateX(0%);
-    max-width: 200px;
+    max-width: 300px;
+    width: 30%;
   }
   .selectedNftContainer {
-    left: 10px;
+    left: 5%;
     transform: translateX(0%);
-    width: 200px;
-    height: 200px;
+    width: 40%;
+    height: auto;
+  }
+  .nftWrapper { /* Контейнер для всех NFT */
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Разрешаем перенос, если не влезает */
+    width: 80%;
   }
 }  
