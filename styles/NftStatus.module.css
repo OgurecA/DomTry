@@ -51,3 +51,10 @@
   font-size: 12px;
   margin-top: 5px;
 }
+
+@media (min-width: 2000px) {
+  .nftContainer {
+    width: 200px;
+    height: 200px;
+  }
+}  

@@ -160,6 +160,10 @@
   .selectedNftInfoContainer h3 {
     font-size: 22px;
   }
+  .selectedNftContainer {
+    width: 400px;
+    height: 400px;
+  }
 }  
 
 @media (max-width: 1450px) {
