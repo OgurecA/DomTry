@@ -208,6 +208,7 @@
 
 @media (max-width: 780px) {
   .selectedNftButton {
+    position: absolute;
     width: 100%;
     max-width: 34%;
     right: 5%;
