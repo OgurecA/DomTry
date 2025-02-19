@@ -212,6 +212,7 @@
     width: 100%;
     max-width: 34%;
     right: 5%;
+    padding: 12px 15px;
   }
   .selectedNftInfoContainer {
     right: 5%;
