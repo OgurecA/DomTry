@@ -58,3 +58,11 @@
     height: 250px;
   }
 }  
+
+@media (max-width: 780px) {
+  .nftContainer {
+    width: 160px;
+    height: 160px;
+    gap: 0;
+  }
+}

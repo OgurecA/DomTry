@@ -226,10 +226,11 @@
     transform: translateX(-50%);
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Всегда 3 элемента в ряд */
-    gap: 10px;
+    gap: 0px;
     flex-wrap: nowrap; /* Разрешаем перенос, если не влезает */
     width: 90%;
     justify-content: center; /* Центрируем */
+    place-items: center;
   }
   
 }  
