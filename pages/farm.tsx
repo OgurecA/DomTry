@@ -233,8 +233,9 @@ const FarmPage = () => {
           </button>
         </div>
         )}
-        <div className={styles.scrollableContainer}>
-        <div className={styles.nftWrapper}>
+        {isMobileLayout2 ? (
+          <div className={styles.scrollableContainer}>
+          <div className={styles.nftWrapper}>
           <NftStatus
             title="PLAYER"
             imageUrl="/Avatar.png"
@@ -307,8 +308,84 @@ const FarmPage = () => {
             checkNft={() => Promise.resolve(nfts.nft3)}
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
           />
-        </div>
-        </div>
+          </div>
+          </div>
+        ) : (
+          <div className={styles.nftWrapper}>
+            <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="PLAYER"
+            imageUrl="/Avatar.png"
+            checkNft={() => Promise.resolve(playerAvatar)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
+          />
+          <NftStatus
+            title="BERNARD"
+            imageUrl="/BekPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft1)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
+          />
+          <NftStatus
+            title="olev"
+            imageUrl="/Krisa.png"
+            checkNft={() => Promise.resolve(nfts.nft2)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Krisa.png" })}
+          />
+          <NftStatus
+            title="UNICHTOZHITEL"
+            imageUrl="/BarsukNewPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft3)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
+          />
+          </div>
+        )}
       </BackOffice>
     </>
   );
