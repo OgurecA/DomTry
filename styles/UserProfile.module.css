@@ -25,15 +25,16 @@
 
 @media (max-width: 840px) {
     .avatar {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         margin-bottom: 3px;
     }
 
     .username {
         font-size: 20px;
-        margin-bottom: 2px;
+        margin-bottom: 0px;
         line-height: 1.1; /* Уменьшаем высоту строки */
+        margin-top: 0px;
     }
 
     .userInfo {
@@ -43,26 +44,7 @@
     .infoItem {
         font-size: 16px; /* Делаем текст меньше */
         line-height: 1.1; /* Уменьшаем межстрочное расстояние */
-        margin-bottom: 1px; /* Минимальный отступ между строками */
+        margin-top: 8px;
+        margin-bottom: 0px; /* Минимальный отступ между строками */
     }
 }
-
-
-
-@media (max-width: 780px) {
-    .avatar {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 3px;
-    }
-    .username {
-        font-size: 20px;
-        margin-bottom: 2px;
-    }
-    .userInfo {
-        gap: 2px;
-    }
-    .infoItem {
-        font-size: 16px;
-    }
-}  
