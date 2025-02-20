@@ -157,7 +157,15 @@ const OfficePage = () => {
 
       return (
         <BackOffice>
-            <div className={styles.flashEffect}></div>
+            <div className={styles.lightningContainer}>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+</div>
+
             <OfficeAppBar />
             {isMobileLayout && (<NavBarOffice />)}
             <div className={styles.container}>

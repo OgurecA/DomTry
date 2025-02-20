@@ -125,101 +125,50 @@
 
 
 
-@keyframes electricFlash {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) rotate(0deg);
-        filter: brightness(1);
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1.1) rotate(20deg);
-        filter: brightness(3);
-    }
-    20% {
-        opacity: 0.8;
-        transform: scale(0.9) rotate(-10deg);
-        filter: brightness(2);
-    }
-    30% {
-        opacity: 1;
-        transform: scale(1.2) rotate(15deg);
-        filter: brightness(3);
-    }
-    50% {
-        opacity: 0;
-        transform: scale(0.7) rotate(-15deg);
-        filter: brightness(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.5) rotate(0deg);
-        filter: brightness(1);
-    }
-}
-
 @keyframes lightningBurst {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) rotate(0deg);
-        filter: brightness(1);
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1.2) rotate(15deg);
-        filter: brightness(4);
-    }
-    20% {
-        opacity: 0.7;
-        transform: scale(0.8) rotate(-20deg);
-        filter: brightness(3);
-    }
-    30% {
-        opacity: 1;
-        transform: scale(1.5) rotate(10deg);
-        filter: brightness(5);
-    }
-    50% {
-        opacity: 0;
-        transform: scale(0.7) rotate(-10deg);
-        filter: brightness(2);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.5) rotate(0deg);
-        filter: brightness(1);
-    }
+    0% { opacity: 0; transform: scale(0.8); filter: brightness(2); }
+    10% { opacity: 1; transform: scale(1.2); filter: brightness(5); }
+    20% { opacity: 0.7; transform: scale(1); filter: brightness(3); }
+    30% { opacity: 1; transform: scale(1.3); filter: brightness(6); }
+    50% { opacity: 0; transform: scale(0.9); filter: brightness(2); }
+    100% { opacity: 0; transform: scale(0.8); filter: brightness(1); }
 }
 
 @keyframes electricJitter {
-    0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    25% {
-        transform: translate(-48%, -52%) rotate(5deg);
-    }
-    50% {
-        transform: translate(-51%, -49%) rotate(-3deg);
-    }
-    75% {
-        transform: translate(-50%, -51%) rotate(8deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    20% { transform: translate(-49%, -51%) rotate(10deg); }
+    40% { transform: translate(-52%, -48%) rotate(-8deg); }
+    60% { transform: translate(-51%, -52%) rotate(15deg); }
+    80% { transform: translate(-48%, -49%) rotate(-12deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
 }
 
-.flashEffect {
+.lightningContainer {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, white, rgba(255, 255, 255, 0.7), transparent);
-    clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
-    box-shadow: 0 0 25px white, 0 0 50px rgba(255, 255, 255, 0.9);
-    animation: lightningBurst 0.12s infinite steps(1), electricJitter 0.05s infinite steps(2);
-    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.lightningBolt {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: white;
+    box-shadow: 0 0 10px white, 0 0 20px rgba(255, 255, 255, 0.8);
+    transform-origin: center;
+    animation: lightningBurst 0.15s infinite steps(1), electricJitter 0.07s infinite steps(2);
+}
+
+.lightningBolt:nth-child(1) { transform: rotate(10deg) translateY(-5px); }
+.lightningBolt:nth-child(2) { transform: rotate(-10deg) translateY(-5px); }
+.lightningBolt:nth-child(3) { transform: rotate(20deg) translateY(10px); }
+.lightningBolt:nth-child(4) { transform: rotate(-20deg) translateY(10px); }
+.lightningBolt:nth-child(5) { transform: rotate(30deg) translateY(-10px); }
+.lightningBolt:nth-child(6) { transform: rotate(-30deg) translateY(-10px); }
 
