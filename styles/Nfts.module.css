@@ -19,12 +19,11 @@
 
   .nftWrapper { /* Контейнер для всех NFT */
     position: absolute;
-    bottom: 60px;
-    left: 20px;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Разрешаем перенос, если не влезает */
-    max-width: 100%;
+    top: 0px;
+    gap: 20px; /* Отступы внутри */
+    padding: 20px; /* Внешний отступ внутри контейнера */
+    margin: 20px auto; /* Отступы снаружи */
+    width: fit-content;
   }
   
   @media (min-width: 2000px) {
