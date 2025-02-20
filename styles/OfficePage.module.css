@@ -158,16 +158,68 @@
     }
 }
 
+@keyframes lightningBurst {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: brightness(1);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1.2) rotate(15deg);
+        filter: brightness(4);
+    }
+    20% {
+        opacity: 0.7;
+        transform: scale(0.8) rotate(-20deg);
+        filter: brightness(3);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.5) rotate(10deg);
+        filter: brightness(5);
+    }
+    50% {
+        opacity: 0;
+        transform: scale(0.7) rotate(-10deg);
+        filter: brightness(2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: brightness(1);
+    }
+}
+
+@keyframes electricJitter {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    25% {
+        transform: translate(-48%, -52%) rotate(5deg);
+    }
+    50% {
+        transform: translate(-51%, -49%) rotate(-3deg);
+    }
+    75% {
+        transform: translate(-50%, -51%) rotate(8deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
 .flashEffect {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
-    height: 12px;
-    background: white;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, white, rgba(255, 255, 255, 0.7), transparent);
     clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
-    box-shadow: 0 0 20px white, 0 0 40px rgba(255, 255, 255, 0.8);
-    animation: electricFlash 0.15s infinite steps(2);
+    box-shadow: 0 0 25px white, 0 0 50px rgba(255, 255, 255, 0.9);
+    animation: lightningBurst 0.12s infinite steps(1), electricJitter 0.05s infinite steps(2);
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
+
