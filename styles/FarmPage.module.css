@@ -136,7 +136,7 @@
   scrollbar-width: thin; /* Скрываем скроллбар в Firefox */
   scrollbar-color: #ffcc00 transparent; /* Цвет скроллбара */
   position: absolute;
-  top: 300px;
+  bottom: 0;
 }
 
 /* Стилизация скроллбара для Chrome, Edge и Safari */
