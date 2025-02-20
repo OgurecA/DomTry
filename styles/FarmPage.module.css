@@ -127,6 +127,32 @@
   animation: spin 1s linear infinite;
 }
 
+.scrollableContainer {
+  width: 100%;
+  max-width: 600px; /* Ограничиваем ширину */
+  height: 250px; /* Высота контейнера */
+  overflow-y: auto; /* Добавляем вертикальную прокрутку */
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: #ffcc00 transparent; /* Цвет скроллбара */
+}
+
+/* Стилизация скроллбара для Chrome, Edge и Safari */
+.scrollableContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollableContainer::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border-radius: 4px;
+}
+
+.scrollableContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

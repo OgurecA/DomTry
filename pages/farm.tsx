@@ -233,7 +233,7 @@ const FarmPage = () => {
           </button>
         </div>
         )}
-
+        <div className={styles.scrollableContainer}>
         <div className={styles.nftWrapper}>
           <NftStatus
             title="PLAYER"
@@ -307,6 +307,7 @@ const FarmPage = () => {
             checkNft={() => Promise.resolve(nfts.nft3)}
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
           />
+        </div>
         </div>
       </BackOffice>
     </>
