@@ -17,6 +17,15 @@
     border-radius: 10px;
   }
 
+  .nftWrapper { /* Контейнер для всех NFT */
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Разрешаем перенос, если не влезает */
+    max-width: 100%;
+  }
   
   @media (min-width: 2000px) {
     .nftContainer {
