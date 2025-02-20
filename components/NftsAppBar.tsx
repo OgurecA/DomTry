@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
 
-export const FarmAppBar: FC = () => {
-
+export const NftsAppBar: FC = () => {
     const router = useRouter();
     const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
 
@@ -21,15 +21,15 @@ export const FarmAppBar: FC = () => {
 
     if (isMobileLayout) return null; // 📌 Если не мобильная версия, ничего не рендерим
 
-
     return (
-        <div className={styles.AppHeaderFarm}>
+        <div className={styles.AppHeaderOffice}>
             <div className={styles.LeftSection}>
                 <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton} onClick={() => router.replace("/office")}>OFFICE</button>
-                <button className={styles.NavButton} onClick={() => router.replace("/nfts")}>NFT's</button>
+                <button className={styles.NavButton} onClick={() => router.replace("/farm")}>FARM</button>
             </div>
             <div className={styles.RightSection}>
+                <WalletMultiButton className={styles.walletButton}/>
             </div>
         </div>
     );

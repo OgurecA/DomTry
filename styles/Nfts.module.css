@@ -1,0 +1,34 @@
+.nftContainer { /* Контейнер для одной NFT */
+    display: inline-block;
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    gap: 40px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  
+  .nftImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  
+  @media (min-width: 2000px) {
+    .nftContainer {
+      width: 250px;
+      height: 250px;
+    }
+  }  
+  
+  @media (max-width: 780px) {
+    .nftContainer {
+      width: 20vw;
+      height: 20vw;
+      gap: 0;
+    }
+  }

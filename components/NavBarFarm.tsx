@@ -3,7 +3,7 @@ import styles from '../styles/NavBar.module.css';
 import { useRouter } from 'next/router';
 import { useWallet } from '@solana/wallet-adapter-react';
 
-export const NavBar: FC = () => {
+export const NavBarFarm: FC = () => {
     
     const router = useRouter();
     const { publicKey } = useWallet();
@@ -20,7 +20,7 @@ export const NavBar: FC = () => {
         <div className={styles.NavBar}>
             <button className={styles.NavButton} onClick={() => navigateTo('/')}>Home</button>
             <button className={styles.NavButton} onClick={() => navigateTo('/office')}>Office</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>Farm</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/nfts')}>NFT's</button>
         </div>
     );
 };
