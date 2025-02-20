@@ -97,6 +97,9 @@
         width: auto;
         min-width: 200px;
         max-width: 300px;
+        border: 5px solid;
+    border-image: linear-gradient(to right, red, white 50%, blue) 1;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Эффект свечения */
     }
     .profileContainer {
         height: auto;
@@ -121,3 +124,53 @@
     }
 
 }  
+
+
+
+
+@keyframes electricFlash {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: brightness(1);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1.1) rotate(20deg);
+        filter: brightness(3);
+    }
+    20% {
+        opacity: 0.8;
+        transform: scale(0.9) rotate(-10deg);
+        filter: brightness(2);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2) rotate(15deg);
+        filter: brightness(3);
+    }
+    50% {
+        opacity: 0;
+        transform: scale(0.7) rotate(-15deg);
+        filter: brightness(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+        filter: brightness(1);
+    }
+}
+
+.flashEffect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: white;
+    clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+    box-shadow: 0 0 20px white, 0 0 40px rgba(255, 255, 255, 0.8);
+    animation: electricFlash 0.15s infinite steps(2);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
