@@ -125,31 +125,20 @@
 
 
 
-@keyframes lightningBurst {
-    0% { opacity: 0; transform: scale(0.8); filter: brightness(2); }
-    10% { opacity: 1; transform: scale(1.2); filter: brightness(5); }
-    20% { opacity: 0.7; transform: scale(1); filter: brightness(3); }
-    30% { opacity: 1; transform: scale(1.3); filter: brightness(6); }
-    50% { opacity: 0; transform: scale(0.9); filter: brightness(2); }
-    100% { opacity: 0; transform: scale(0.8); filter: brightness(1); }
-}
-
-@keyframes electricJitter {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    20% { transform: translate(-49%, -51%) rotate(10deg); }
-    40% { transform: translate(-52%, -48%) rotate(-8deg); }
-    60% { transform: translate(-51%, -52%) rotate(15deg); }
-    80% { transform: translate(-48%, -49%) rotate(-12deg); }
-    100% { transform: translate(-50%, -50%) rotate(0deg); }
+@keyframes lightningCycle {
+    0%   { opacity: 1;   transform: rotate(0deg) scale(1.2); }
+    33%  { opacity: 0.6; transform: rotate(20deg) scale(1);  }
+    66%  { opacity: 0.2; transform: rotate(-20deg) scale(0.9); }
+    100% { opacity: 1;   transform: rotate(0deg) scale(1.2); }
 }
 
 .lightningContainer {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px;
-    height: 50px;
-    pointer-events: none;
+    width: 150px;
+    height: 150px;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,18 +146,16 @@
 
 .lightningBolt {
     position: absolute;
-    width: 2px;
-    height: 20px;
-    background: white;
-    box-shadow: 0 0 10px white, 0 0 20px rgba(255, 255, 255, 0.8);
-    transform-origin: center;
-    animation: lightningBurst 0.15s infinite steps(1), electricJitter 0.07s infinite steps(2);
+    width: 100px; /* Размер молнии */
+    height: 100px;
+    background: url("/lightning.png") no-repeat center;
+    background-size: contain;
+    opacity: 0.8;
+    animation: lightningCycle 0.15s infinite linear; /* Быстрая анимация */
 }
 
-.lightningBolt:nth-child(1) { transform: rotate(10deg) translateY(-5px); }
-.lightningBolt:nth-child(2) { transform: rotate(-10deg) translateY(-5px); }
-.lightningBolt:nth-child(3) { transform: rotate(20deg) translateY(10px); }
-.lightningBolt:nth-child(4) { transform: rotate(-20deg) translateY(10px); }
-.lightningBolt:nth-child(5) { transform: rotate(30deg) translateY(-10px); }
-.lightningBolt:nth-child(6) { transform: rotate(-30deg) translateY(-10px); }
+/* Разные углы для молний */
+.lightningBolt:nth-child(1) { animation-delay: 0s; transform-origin: center; rotate: 20deg; }
+.lightningBolt:nth-child(2) { animation-delay: 0.05s; transform-origin: center; rotate: -30deg; }
+.lightningBolt:nth-child(3) { animation-delay: 0.1s; transform-origin: center; rotate: 15deg; }
 
