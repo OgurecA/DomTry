@@ -129,14 +129,16 @@
 
 .scrollableContainer {
   width: 100%;
-  max-width: 600px; /* Ограничиваем ширину */
-  height: 250px; /* Высота контейнера */
-  overflow-y: auto; /* Добавляем вертикальную прокрутку */
+  max-width: 600px; /* Максимальная ширина контейнера */
+  height: 250px; /* Фиксированная высота, чтобы работала прокрутка */
+  overflow-y: auto; /* Включаем вертикальную прокрутку */
+  overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.6);
   padding: 10px;
-  scrollbar-width: thin; /* Для Firefox */
+  scrollbar-width: thin; /* Скрываем скроллбар в Firefox */
   scrollbar-color: #ffcc00 transparent; /* Цвет скроллбара */
+  position: relative; /* Делаем позиционирование относительно */
 }
 
 /* Стилизация скроллбара для Chrome, Edge и Safari */
