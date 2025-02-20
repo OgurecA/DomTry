@@ -35,8 +35,3 @@
     transform: scale(1.05);
 }
 
-@media (max-width: 500px) {
-    .NavBar {
-        height: 50px;
-    }
-}
