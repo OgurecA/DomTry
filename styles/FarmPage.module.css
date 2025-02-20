@@ -261,6 +261,7 @@
     box-sizing: border-box;
   }
   .selectedNftInfoContainer {
+    background: transparent;
     right: 5%;
     left: auto;
     transform: translateX(0%);
