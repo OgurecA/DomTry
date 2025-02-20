@@ -17,14 +17,16 @@
     border-radius: 10px;
   }
 
-  .nftWrapper { /* Контейнер для всех NFT */
-    position: absolute;
-    top: 0px;
-    gap: 20px; /* Отступы внутри */
-    padding: 20px; /* Внешний отступ внутри контейнера */
-    margin: 20px auto; /* Отступы снаружи */
-    width: fit-content;
+  .nftWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Гибкая сетка */
+    gap: 20px;
+    justify-content: center; /* Центрируем контент */
+    width: 100%; /* Занимает всю ширину */
+    max-width: 800px; /* Ограничиваем ширину */
+    margin: 0 auto; /* Центрируем контейнер */
   }
+  
   
   @media (min-width: 2000px) {
     .nftContainer {
