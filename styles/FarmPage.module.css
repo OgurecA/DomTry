@@ -6,7 +6,8 @@
   bottom: 60px;
   justify-content: center; /* Центрируем контент */
   width: 90%; /* Занимает всю ширину */
-  margin: 0 auto; /* Центрируем контейнер */
+  left: 50%;
+  transform: translateX(-50%);
   place-items: center;
 }
 
