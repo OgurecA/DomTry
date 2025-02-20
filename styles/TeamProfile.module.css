@@ -40,7 +40,7 @@
 @media (max-width: 840px) {
     .teamName {
         font-size: 18px; /* Делаем текст меньше */
-        margin-bottom: 3px; /* Уменьшаем отступ */
+        margin-bottom: 2px; /* Уменьшаем отступ */
         line-height: 1.1;
         margin-top: 0;
     }
@@ -48,7 +48,7 @@
     .teamScore {
         font-size: 16px;
         line-height: 1.1;
-        margin-bottom: 1px; /* Минимальный отступ */
+        margin-bottom: 0px; /* Минимальный отступ */
         margin-top: 2px;
     }
 
