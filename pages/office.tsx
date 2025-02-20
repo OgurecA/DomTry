@@ -157,7 +157,7 @@ const OfficePage = () => {
 
       return (
         <BackOffice>
-            <div className={styles.flaahEffect}></div>
+            <div className={styles.flashEffect}></div>
             <OfficeAppBar />
             {isMobileLayout && (<NavBarOffice />)}
             <div className={styles.container}>
