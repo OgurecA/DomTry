@@ -235,7 +235,7 @@
 @media (max-width: 780px) {
   .scrollableContainer {
     bottom: 62px;
-    height: 380px;
+    height: 600px;
   }
   .selectedNftButton {
     position: absolute;
@@ -304,9 +304,19 @@
   }
 }
 
+@media (max-height: 950px) {
+  .scrollableContainer {
+    height: 500px;
+  }
+}
+@media (max-height: 830px) {
+  .scrollableContainer {
+    height: 390px;
+  }
+}
 @media (max-height: 715px) {
   .scrollableContainer {
-    height: 320px;
+    height: 280px;
   }
 }
 @media (max-height: 610px) {
