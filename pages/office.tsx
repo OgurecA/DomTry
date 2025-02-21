@@ -165,19 +165,7 @@ const OfficePage = () => {
                 <div className={styles.lightningBolt}></div>
                 <div className={styles.lightningBolt}></div>
             </div>
-            {!isMobileLayout && teamA && teamB && (
-    <div 
-    className={styles.bankContainer}
-    style={{
-        "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
-        "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
-    } as React.CSSProperties}
->
-    BANK:
-</div>
-
-
-)}
+            
 
 
             <OfficeAppBar />
@@ -259,6 +247,17 @@ const OfficePage = () => {
                 )}
             </div>
     
+            {!isMobileLayout && teamA && teamB && (
+    <div 
+    className={styles.bankContainer}
+    style={{
+        "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
+        "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
+    } as React.CSSProperties}
+>
+    BANK:
+</div>
+)}
             {/* Кнопка JOIN, если пользователя нет в БД */}
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </BackOffice>
