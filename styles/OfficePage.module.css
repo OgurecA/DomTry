@@ -253,14 +253,24 @@
 
 .borderMarker {
     position: absolute;
-    top: -5px; /* Чтобы находился ровно на границе */
+    top: -6px; /* Чтобы находился ровно на границе */
     width: 10px;
     height: 10px;
     background: white; /* Цвет маркера */
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
 }
-
+.borderMarker2 {
+    position: absolute;
+    bottom: -6px; /* Чтобы находился ровно на границе */
+    width: 10px;
+    height: 10px;
+    background: white; /* Цвет маркера */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
+}
 
 /* Эффект мигания */
 @keyframes flicker {

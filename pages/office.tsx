@@ -271,6 +271,7 @@ const OfficePage = () => {
 >
     BANK:
     <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+    <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
 </div>
 )}
         </BackOffice>
