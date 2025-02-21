@@ -161,6 +161,9 @@ const OfficePage = () => {
     <div className={styles.lightningBolt}></div>
     <div className={styles.lightningBolt}></div>
     <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
+    <div className={styles.lightningBolt}></div>
 </div>
 
 
