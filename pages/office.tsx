@@ -165,7 +165,7 @@ const OfficePage = () => {
                 <div className={styles.lightningBolt}></div>
                 <div className={styles.lightningBolt}></div>
             </div>
-            {!isMobileLayout && (
+            {!isMobileLayout && teamA && teamB && (
                 <div className={styles.bankContainer}
                     style={{background: `linear-gradient(to right, #ffcc00 ${teamA.score / (teamA.score + teamB.score) * 100}%, #ff3300 0%)`
                 }}>
