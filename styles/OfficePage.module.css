@@ -57,7 +57,7 @@
     text-transform: uppercase;
     padding: 40px 20px;
     position: absolute;
-    top: 590px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
     position: relative;
@@ -104,7 +104,7 @@
     .bankContainer {
         width: 350px;
         padding: 40px 10px;
-        top: 540px;
+        top: 10px;
     }
 }
 
@@ -162,7 +162,7 @@
     .bankContainer {
         width: 200px;
         padding: 40px 20px;
-        top: 250px;
+        top: 0px;
     }
 
 }  
@@ -243,3 +243,28 @@
 .lightningBolt:nth-child(4) { animation-delay: 0.06s; transform-origin: center; rotate: -40deg; }
 .lightningBolt:nth-child(5) { animation-delay: 0.08s; transform-origin: center; rotate: 55deg; }
 .lightningBolt:nth-child(6) { animation-delay: 0.1s; transform-origin: center; rotate: -60deg; }
+
+
+
+
+
+
+
+
+.borderMarker {
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translate(-50%, -50%);
+    animation: flicker 0.3s infinite alternate;
+}
+
+/* Эффект мигания */
+@keyframes flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.5; }
+}

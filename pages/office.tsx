@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
 import UserProfile from '../components/UserProfile';
@@ -59,6 +59,32 @@ const OfficePage = () => {
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    const bankContainerRef = useRef(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+
+    useEffect(() => {
+        // Функция для обновления ширины
+        const updateWidth = () => {
+            if (bankContainerRef.current) {
+                setContainerWidth(bankContainerRef.current.offsetWidth);
+            }
+        };
+
+        // Вызываем при загрузке
+        updateWidth();
+
+        // Следим за изменением размеров экрана
+        window.addEventListener("resize", updateWidth);
+        return () => window.removeEventListener("resize", updateWidth);
+    }, []);
+
+    const teamA_Percentage = (teamA.score / (teamA.score + teamB.score)) * 100;
+    const teamB_Percentage = 100 - teamA_Percentage;
+
+    const teamA_BorderX = (teamA_Percentage / 100) * containerWidth; // Стык цвета #ffcc00 → #ff3300
+    const teamB_BorderX = containerWidth; // Стык цвета #ff3300 → #ffcc00
+
 
 
     useEffect(() => {
@@ -246,7 +272,9 @@ const OfficePage = () => {
                     </>
                 )}
             </div>
-    
+            {/* Кнопка JOIN, если пользователя нет в БД */}
+            {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
+            
             {!isMobileLayout && teamA && teamB && (
     <div 
     className={styles.bankContainer}
@@ -256,10 +284,12 @@ const OfficePage = () => {
     } as React.CSSProperties}
 >
     BANK:
+    <div className={styles.borderMarker} style={{ left: `${teamA_BorderX}px` }}></div>
+
+    {/* Второй маркер (стык границы #ff3300 → #ffcc00) */}
+    <div className={styles.borderMarker} style={{ left: `${teamB_BorderX}px` }}></div>
 </div>
 )}
-            {/* Кнопка JOIN, если пользователя нет в БД */}
-            {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
         </BackOffice>
     );
     
