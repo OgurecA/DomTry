@@ -132,13 +132,29 @@
     100% { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
 }
 
-/* Анимация тряски */
-@keyframes shake {
+/* Анимация тряски для молний (разная для каждой) */
+@keyframes shake1 {
     0%   { transform: translate(0px, 0px); }
     25%  { transform: translate(-1px, 1px); }
     50%  { transform: translate(1px, -1px); }
     75%  { transform: translate(-1px, -1px); }
     100% { transform: translate(0px, 0px); }
+}
+
+@keyframes shake2 {
+    0%   { transform: translate(1px, -1px); }
+    25%  { transform: translate(-1px, -1px); }
+    50%  { transform: translate(1px, 1px); }
+    75%  { transform: translate(-1px, 1px); }
+    100% { transform: translate(1px, -1px); }
+}
+
+@keyframes shake3 {
+    0%   { transform: translate(-1px, 1px); }
+    25%  { transform: translate(1px, 1px); }
+    50%  { transform: translate(-1px, -1px); }
+    75%  { transform: translate(1px, -1px); }
+    100% { transform: translate(-1px, 1px); }
 }
 
 .lightningContainer {
@@ -151,7 +167,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: shake 0.05s infinite linear; /* Тряска контейнера */
 }
 
 .lightningBolt {
@@ -164,6 +179,14 @@
     animation: lightningCycle 0.1s infinite linear;
 }
 
+/* Добавляем тряску индивидуально для каждой молнии */
+.lightningBolt:nth-child(1) { animation: lightningCycle 0.1s infinite linear, shake1 0.05s infinite linear; }
+.lightningBolt:nth-child(2) { animation: lightningCycle 0.1s infinite linear, shake2 0.05s infinite linear; }
+.lightningBolt:nth-child(3) { animation: lightningCycle 0.1s infinite linear, shake3 0.05s infinite linear; }
+.lightningBolt:nth-child(4) { animation: lightningCycle 0.1s infinite linear, shake2 0.05s infinite linear; }
+.lightningBolt:nth-child(5) { animation: lightningCycle 0.1s infinite linear, shake1 0.05s infinite linear; }
+.lightningBolt:nth-child(6) { animation: lightningCycle 0.1s infinite linear, shake3 0.05s infinite linear; }
+
 /* Добавляем свечение */
 .lightningBolt::before {
     content: "";
@@ -174,11 +197,3 @@
     filter: blur(15px);
     z-index: -1;
 }
-
-/* Случайные углы для молний (не крутятся, но двигаются) */
-.lightningBolt:nth-child(1) { animation-delay: 0s; transform-origin: center; rotate: 40deg; }
-.lightningBolt:nth-child(2) { animation-delay: 0.02s; transform-origin: center; rotate: -50deg; }
-.lightningBolt:nth-child(3) { animation-delay: 0.04s; transform-origin: center; rotate: 30deg; }
-.lightningBolt:nth-child(4) { animation-delay: 0.06s; transform-origin: center; rotate: -40deg; }
-.lightningBolt:nth-child(5) { animation-delay: 0.08s; transform-origin: center; rotate: 55deg; }
-.lightningBolt:nth-child(6) { animation-delay: 0.1s; transform-origin: center; rotate: -60deg; }
