@@ -166,7 +166,8 @@ const OfficePage = () => {
                 <div className={styles.lightningBolt}></div>
             </div>
             {!isMobileLayout && teamA && teamB && (
-    <div className={styles.bankContainer}
+    <div 
+    className={styles.bankContainer}
     style={{
         "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
         "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
@@ -174,6 +175,7 @@ const OfficePage = () => {
 >
     BANK:
 </div>
+
 
 )}
 

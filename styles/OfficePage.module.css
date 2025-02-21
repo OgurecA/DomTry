@@ -48,10 +48,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid transparent; /* Цвет рамки */
-    border-radius: 10px; /* Скругленные углы */
-    background: rgba(0, 0, 0, 0.8); /* Фон контейнера */
-    color: white; /* Цвет текста */
+    border: 3px solid transparent; /* Делаем рамку прозрачной */
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
     font-size: 28px;
     font-weight: bold;
     text-transform: uppercase;
@@ -60,18 +60,28 @@
     top: 590px;
     left: 50%;
     transform: translateX(-50%);
+    position: relative;
 }
 
-/* Теперь градиент-рамка обновляется динамически */
+/* Градиентная рамка */
 .bankContainer::before {
     content: "";
     position: absolute;
-    inset: -3px; /* Размещаем поверх границы */
+    inset: -3px; /* Расширяем на 3px за границы */
     border-radius: 10px;
+    padding: 3px; /* Толщина рамки */
     background: linear-gradient(to right, 
         #ffcc00 var(--teamA-score), 
         #ff3300 var(--teamA-score)
     );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
     z-index: -1;
 }
 
