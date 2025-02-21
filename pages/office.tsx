@@ -68,29 +68,6 @@ const OfficePage = () => {
 
 
 
-    const totalScore = (teamA?.score || 0) + (teamB?.score || 0);
-    const teamA_Percentage = totalScore > 0 ? (teamA.score / totalScore) * 100 : 50;
-    const teamB_Percentage = 100 - teamA_Percentage;
-    
-    // Получаем ширину контейнера динамически через ref
-    const [containerWidth, setContainerWidth] = useState(0);
-    const bankContainerRef = useRef(null);
-    
-    useEffect(() => {
-        if (bankContainerRef.current) {
-            setContainerWidth(bankContainerRef.current.offsetWidth);
-        }
-    }, [teamA, teamB]); // Обновляем ширину, когда приходят новые данные
-    
-    const teamA_BorderX = (teamA_Percentage / 100) * containerWidth;
-    const teamB_BorderX = teamA_BorderX; // Так как стык у нас один
-    
-
-
-
-
-
-
 
 
 
@@ -293,7 +270,7 @@ const OfficePage = () => {
     } as React.CSSProperties}
 >
     BANK:
-    <div className={styles.borderMarker} style={{ left: `${teamA_BorderX}px` }}></div>
+    <div className={styles.borderMarker} style={{ left: `${(teamB.score / (teamA.score + teamB.score)) * 100}%` }}></div>
 </div>
 )}
         </BackOffice>
