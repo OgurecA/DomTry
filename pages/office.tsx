@@ -165,9 +165,9 @@ const OfficePage = () => {
                 <div className={styles.lightningBolt}></div>
                 <div className={styles.lightningBolt}></div>
             </div>
-            <div className={styles.bankContainer}>
+            {!isMobileLayout && (<div className={styles.bankContainer}>
                 BANK:
-            </div>
+            </div>)}
 
             <OfficeAppBar />
             {isMobileLayout && (<NavBarOffice />)}
@@ -207,6 +207,9 @@ const OfficePage = () => {
                                 bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
                             />
                         )}
+                        <div className={styles.bankContainer}>
+                            BANK:
+                        </div>
                         </div>
                     </>
                 ) : (
