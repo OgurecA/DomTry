@@ -57,7 +57,7 @@
     text-transform: uppercase;
     padding: 40px 20px;
     position: absolute;
-    top: 0px;
+    top: -30px;
     left: 50%;
     transform: translateX(-50%);
     position: relative;
@@ -253,15 +253,14 @@
 
 .borderMarker {
     position: absolute;
-    top: 50%;
+    top: -5px; /* Чтобы находился ровно на границе */
     width: 10px;
     height: 10px;
-    background-color: white;
+    background: white; /* Цвет маркера */
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    transform: translate(-50%, -50%);
-    animation: flicker 0.3s infinite alternate;
 }
+
 
 /* Эффект мигания */
 @keyframes flicker {
