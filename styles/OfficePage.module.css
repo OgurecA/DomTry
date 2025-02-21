@@ -61,7 +61,14 @@
     left: 50%;
     transform: translateX(-50%);
 }
-
+.bankContainer::before {
+    content: "";
+    position: absolute;
+    inset: -3px; /* Размещаем поверх границы */
+    border-radius: 10px;
+    background: linear-gradient(to right, #ffcc00 50%, #ff3300 50%);
+    z-index: -1;
+}
 
 @media (max-width: 1500px) {
     .container {
