@@ -158,8 +158,8 @@
 .lightningBolt::before {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     background: rgba(255, 255, 255, 0.3);
     filter: blur(15px);
     z-index: -1;
