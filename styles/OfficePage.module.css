@@ -132,29 +132,13 @@
     100% { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
 }
 
-/* Анимация тряски для молний (разная для каждой) */
-@keyframes shake1 {
+/* Анимация тряски */
+@keyframes shake {
     0%   { transform: translate(0px, 0px); }
     25%  { transform: translate(-1px, 1px); }
     50%  { transform: translate(1px, -1px); }
     75%  { transform: translate(-1px, -1px); }
     100% { transform: translate(0px, 0px); }
-}
-
-@keyframes shake2 {
-    0%   { transform: translate(1px, -1px); }
-    25%  { transform: translate(-1px, -1px); }
-    50%  { transform: translate(1px, 1px); }
-    75%  { transform: translate(-1px, 1px); }
-    100% { transform: translate(1px, -1px); }
-}
-
-@keyframes shake3 {
-    0%   { transform: translate(-1px, 1px); }
-    25%  { transform: translate(1px, 1px); }
-    50%  { transform: translate(-1px, -1px); }
-    75%  { transform: translate(1px, -1px); }
-    100% { transform: translate(-1px, 1px); }
 }
 
 .lightningContainer {
@@ -176,16 +160,16 @@
     background: url("/lightning.png") no-repeat center;
     background-size: contain;
     opacity: 0.8;
-    animation: lightningCycle 0.1s infinite linear;
+    animation: lightningCycle 0.1s infinite linear, shake 0.05s infinite linear;
 }
 
-/* Добавляем тряску индивидуально для каждой молнии */
-.lightningBolt:nth-child(1) { animation: lightningCycle 0.1s infinite linear, shake1 0.05s infinite linear; }
-.lightningBolt:nth-child(2) { animation: lightningCycle 0.1s infinite linear, shake2 0.05s infinite linear; }
-.lightningBolt:nth-child(3) { animation: lightningCycle 0.1s infinite linear, shake3 0.05s infinite linear; }
-.lightningBolt:nth-child(4) { animation: lightningCycle 0.1s infinite linear, shake2 0.05s infinite linear; }
-.lightningBolt:nth-child(5) { animation: lightningCycle 0.1s infinite linear, shake1 0.05s infinite linear; }
-.lightningBolt:nth-child(6) { animation: lightningCycle 0.1s infinite linear, shake3 0.05s infinite linear; }
+/* Добавляем задержку анимации, чтобы молнии появлялись вразнобой */
+.lightningBolt:nth-child(1) { animation-delay: 0s, 0s; }
+.lightningBolt:nth-child(2) { animation-delay: 0.03s, 0.02s; }
+.lightningBolt:nth-child(3) { animation-delay: 0.06s, 0.04s; }
+.lightningBolt:nth-child(4) { animation-delay: 0.09s, 0.06s; }
+.lightningBolt:nth-child(5) { animation-delay: 0.12s, 0.08s; }
+.lightningBolt:nth-child(6) { animation-delay: 0.15s, 0.1s; }
 
 /* Добавляем свечение */
 .lightningBolt::before {
