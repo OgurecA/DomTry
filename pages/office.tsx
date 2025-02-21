@@ -158,14 +158,16 @@ const OfficePage = () => {
       return (
         <BackOffice>
             <div className={styles.lightningContainer}>
-    <div className={styles.lightningBolt}></div>
-    <div className={styles.lightningBolt}></div>
-    <div className={styles.lightningBolt}></div>
-    <div className={styles.lightningBolt}></div>
-    <div className={styles.lightningBolt}></div>
-    <div className={styles.lightningBolt}></div>
-</div>
-
+                <div className={styles.lightningBolt}></div>
+                <div className={styles.lightningBolt}></div>
+                <div className={styles.lightningBolt}></div>
+                <div className={styles.lightningBolt}></div>
+                <div className={styles.lightningBolt}></div>
+                <div className={styles.lightningBolt}></div>
+            </div>
+            <div className={styles.bankContainer}>
+                BANK:
+            </div>
 
             <OfficeAppBar />
             {isMobileLayout && (<NavBarOffice />)}
