@@ -79,11 +79,15 @@ const OfficePage = () => {
         return () => window.removeEventListener("resize", updateWidth);
     }, []);
 
-    const teamA_Percentage = (teamA.score / (teamA.score + teamB.score)) * 100;
+    const teamA_Percentage = teamA && teamB && (teamA.score + teamB.score) > 0 
+    ? (teamA.score / (teamA.score + teamB.score)) * 100 
+    : 50; // По умолчанию 50% (если данные еще не загружены)
+
     const teamB_Percentage = 100 - teamA_Percentage;
 
-    const teamA_BorderX = (teamA_Percentage / 100) * containerWidth; // Стык цвета #ffcc00 → #ff3300
-    const teamB_BorderX = containerWidth; // Стык цвета #ff3300 → #ffcc00
+    const teamA_BorderX = (teamA_Percentage / 100) * containerWidth;
+    const teamB_BorderX = containerWidth;
+
 
 
 
