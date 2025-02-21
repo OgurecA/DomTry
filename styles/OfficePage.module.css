@@ -125,21 +125,13 @@
 
 @keyframes lightningCycle {
     0%   { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
-    20%  { opacity: 0.6; transform: rotate(-45deg) scale(1) translate(-1px, 1px); }
-    40%  { opacity: 0.3; transform: rotate(60deg) scale(0.9) translate(1px, -1px); }
-    60%  { opacity: 0.8; transform: rotate(-30deg) scale(1.1) translate(-1px, -1px); }
-    80%  { opacity: 0.5; transform: rotate(50deg) scale(1.05) translate(1px, 1px); }
+    20%  { opacity: 0.6; transform: rotate(-45deg) scale(1) translate(-5px, 5px); }
+    40%  { opacity: 0.3; transform: rotate(60deg) scale(0.9) translate(5px, -5px); }
+    60%  { opacity: 0.8; transform: rotate(-30deg) scale(1.1) translate(-5px, -5px); }
+    80%  { opacity: 0.5; transform: rotate(50deg) scale(1.05) translate(5px, 5px); }
     100% { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
 }
 
-/* Анимация тряски */
-@keyframes shake {
-    0%   { transform: translate(0px, 0px); }
-    25%  { transform: translate(-1px, 1px); }
-    50%  { transform: translate(1px, -1px); }
-    75%  { transform: translate(-1px, -1px); }
-    100% { transform: translate(0px, 0px); }
-}
 
 .lightningContainer {
     position: absolute;
@@ -160,16 +152,8 @@
     background: url("/lightning.png") no-repeat center;
     background-size: contain;
     opacity: 0.8;
-    animation: lightningCycle 0.1s infinite linear, shake 0.05s infinite linear;
+    animation: lightningCycle 0.1s infinite linear;
 }
-
-/* Добавляем задержку анимации, чтобы молнии появлялись вразнобой */
-.lightningBolt:nth-child(1) { animation-delay: 0s, 0s; }
-.lightningBolt:nth-child(2) { animation-delay: 0.03s, 0.02s; }
-.lightningBolt:nth-child(3) { animation-delay: 0.06s, 0.04s; }
-.lightningBolt:nth-child(4) { animation-delay: 0.09s, 0.06s; }
-.lightningBolt:nth-child(5) { animation-delay: 0.12s, 0.08s; }
-.lightningBolt:nth-child(6) { animation-delay: 0.15s, 0.1s; }
 
 /* Добавляем свечение */
 .lightningBolt::before {
@@ -181,3 +165,11 @@
     filter: blur(15px);
     z-index: -1;
 }
+
+/* Случайные углы для молний (не крутятся, но двигаются) */
+.lightningBolt:nth-child(1) { animation-delay: 0s; transform-origin: center; rotate: 40deg; }
+.lightningBolt:nth-child(2) { animation-delay: 0.02s; transform-origin: center; rotate: -50deg; }
+.lightningBolt:nth-child(3) { animation-delay: 0.04s; transform-origin: center; rotate: 30deg; }
+.lightningBolt:nth-child(4) { animation-delay: 0.06s; transform-origin: center; rotate: -40deg; }
+.lightningBolt:nth-child(5) { animation-delay: 0.08s; transform-origin: center; rotate: 55deg; }
+.lightningBolt:nth-child(6) { animation-delay: 0.1s; transform-origin: center; rotate: -60deg; }
