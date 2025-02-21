@@ -48,7 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid #ffcc00; /* Цвет рамки */
+    border: 3px solid transparent; /* Цвет рамки */
     border-radius: 10px; /* Скругленные углы */
     background: rgba(0, 0, 0, 0.8); /* Фон контейнера */
     color: white; /* Цвет текста */
@@ -157,11 +157,14 @@
     }
 
     .bankContainer {
-        padding: 25px 20px;
+        margin-top: 10px;
+        padding: 25px 14px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
+        position: unset;
+        transform: translateX(0px);
     }
 
 }  
