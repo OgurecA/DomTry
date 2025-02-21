@@ -136,8 +136,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -146,8 +146,8 @@
 
 .lightningBolt {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 10px;
+    height: 10px;
     background: url("/lightning.png") no-repeat center;
     background-size: contain;
     opacity: 0.8;
