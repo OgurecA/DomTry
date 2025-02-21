@@ -207,9 +207,7 @@ const OfficePage = () => {
                                 bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
                             />
                         )}
-                        <div className={styles.bankContainer}>
-                            BANK:
-                        </div>
+                        <div className={styles.bankContainer}>BANK:</div>
                         </div>
                     </>
                 ) : (
