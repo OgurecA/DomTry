@@ -61,14 +61,20 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+/* Теперь градиент-рамка обновляется динамически */
 .bankContainer::before {
     content: "";
     position: absolute;
     inset: -3px; /* Размещаем поверх границы */
     border-radius: 10px;
-    background: linear-gradient(to right, #ffcc00 50%, #ff3300 50%);
+    background: linear-gradient(to right, 
+        #ffcc00 var(--teamA-score), 
+        #ff3300 var(--teamA-score)
+    );
     z-index: -1;
 }
+
 
 @media (max-width: 1500px) {
     .container {
