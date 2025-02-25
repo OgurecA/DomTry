@@ -1,15 +1,10 @@
-import { NextPage } from 'next'
 import styles from '../styles/Nfts.module.css'
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { NftsAppBar } from '../components/NftsAppBar'
 import { BackOffice } from '../components/BackOffice'
 import { NavBarNfts } from '../components/NavBarNfts'
 import { useEffect, useState } from 'react'
 
-const NftsPage = (props) => {
-
-  const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+const NftsPage = () => {
 
    const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
 

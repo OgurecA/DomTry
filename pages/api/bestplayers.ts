@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const sqlite3 = require("sqlite3").verbose();
+import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database("game.db");
 
@@ -10,23 +10,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // 1️⃣ Находим лучшего игрока из команды 1
-    const bestPlayerTeam1 = await new Promise<any | null>((resolve, reject) => {
+    const bestPlayerTeam1 = await new Promise<string | null>((resolve, reject) => {
       db.get(
-        "SELECT * FROM users WHERE team = 1 ORDER BY personal_points DESC LIMIT 1",
-        (err, row) => {
+        "SELECT publickey FROM users WHERE team = 1 ORDER BY personal_points DESC LIMIT 1",
+        (err, row: { publickey: string } | null) => {
           if (err) reject(err);
-          else resolve(row || null);
+          else resolve(row ? row.publickey : null);
         }
       );
     });
 
     // 2️⃣ Находим лучшего игрока из команды 2
-    const bestPlayerTeam2 = await new Promise<any | null>((resolve, reject) => {
+    const bestPlayerTeam2 = await new Promise<string | null>((resolve, reject) => {
       db.get(
-        "SELECT * FROM users WHERE team = 2 ORDER BY personal_points DESC LIMIT 1",
-        (err, row) => {
+        "SELECT publickey FROM users WHERE team = 2 ORDER BY personal_points DESC LIMIT 1",
+        (err, row: { publickey: string } | null) => {
           if (err) reject(err);
-          else resolve(row || null);
+          else resolve(row ? row.publickey : null);
         }
       );
     });

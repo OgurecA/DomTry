@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const sqlite3 = require("sqlite3").verbose();
+import sqlite3 from "sqlite3";
 
 const db = new sqlite3.Database("game.db");
 
@@ -15,11 +15,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Запрос к БД
-    const row = await new Promise<{ 
-      publickey: string; 
+    const row = await new Promise<{
+      publickey: string;
       animalkey: string | null;
-      animal_image: string | null; 
-      personal_points: number; 
+      animal_image: string | null;
+      personal_points: number;
       team_points: number;
       team: number;
       input_sol: number;
@@ -27,12 +27,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       db.get(
         "SELECT publickey, animalkey, animal_image, personal_points, team_points, team, input_sol FROM users WHERE publickey = ?",
         [publicKey],
-        (err, row) => {
+        (err, row: { 
+          publickey: string;
+          animalkey: string | null;
+          animal_image: string | null;
+          personal_points: number;
+          team_points: number;
+          team: number;
+          input_sol: number;
+        } | null) => {  // <-- Добавил явное указание типа для row
           if (err) reject(err);
           else resolve(row);
         }
       );
     });
+    
 
     if (!row) {
       return res.status(404).json({ message: "Пользователь не найден" });

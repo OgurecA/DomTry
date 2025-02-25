@@ -27,7 +27,7 @@ export const FarmAppBar: FC = () => {
             <div className={styles.LeftSection}>
                 <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton} onClick={() => router.replace("/office")}>OFFICE</button>
-                <button className={styles.NavButton} onClick={() => router.replace("/nfts")}>NFT's</button>
+                <button className={styles.NavButton} onClick={() => router.replace("/nfts")}>NFT&apos;s</button>
             </div>
             <div className={styles.RightSection}>
             </div>

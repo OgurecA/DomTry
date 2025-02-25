@@ -21,7 +21,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
 
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
-  const [ status, setStatus ] = useState<String>("JOIN");
+  const [ status, setStatus ] = useState<string>("JOIN");
 
   const [value, setValue] = useState(0.01);
   const gradient = `linear-gradient(90deg, #ff9900 ${value * 100}%, #444 ${value * 100}%)`;

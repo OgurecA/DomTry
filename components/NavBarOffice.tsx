@@ -18,9 +18,9 @@ export const NavBarOffice: FC = () => {
 
     return (
         <div className={styles.NavBar}>
-            <button className={styles.NavButton} onClick={() => navigateTo('/')}>Home</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>Farm</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/nfts')}>NFT's</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/')}>HOME</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>FARM</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/nfts')}>NFT&apos;s</button>
         </div>
     );
 };

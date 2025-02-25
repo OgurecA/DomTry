@@ -18,9 +18,9 @@ export const NavBarFarm: FC = () => {
 
     return (
         <div className={styles.NavBar}>
-            <button className={styles.NavButton} onClick={() => navigateTo('/')}>Home</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/office')}>Office</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/nfts')}>NFT's</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/')}>HOME</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/nfts')}>NFT&apos;s</button>
         </div>
     );
 };

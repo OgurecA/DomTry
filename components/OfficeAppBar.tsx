@@ -26,7 +26,7 @@ export const OfficeAppBar: FC = () => {
             <div className={styles.LeftSection}>
                 <button className={styles.BackButton} onClick={() => router.replace("/")}></button>
                 <button className={styles.NavButton} onClick={() => router.replace("/farm")}>FARM</button>
-                <button className={styles.NavButton} onClick={() => router.replace("/nfts")}>NFT's</button>
+                <button className={styles.NavButton} onClick={() => router.replace("/nfts")}>NFT&apos;s</button>
             </div>
             <div className={styles.RightSection}>
                 <WalletMultiButton className={styles.walletButton}/>

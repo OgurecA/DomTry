@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { useRouter } from 'next/router';
 import UserProfile from '../components/UserProfile';
 import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
 import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
-import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { BackOffice } from '../components/BackOffice';
 import { NavBarOffice } from '../components/NavBarOffice';
 
@@ -29,7 +28,6 @@ type PlayerData = {
   };
   
 const OfficePage = () => {
-    const router = useRouter();
     const { connection } = useConnection();
     const { publicKey } = useWallet();
 
@@ -43,8 +41,8 @@ const OfficePage = () => {
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
 
-    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<any | null>(null);
-    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<any | null>(null);
+    const [bestPlayerTeam1, setBestPlayerTeam1] = useState<string | null>(null);
+    const [bestPlayerTeam2, setBestPlayerTeam2] = useState<string | null>(null);
 
     const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
 
@@ -206,7 +204,7 @@ const OfficePage = () => {
                                 name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
                                 score={teamA.score}
                                 className={styles.teamContainer}
-                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
     
@@ -215,7 +213,7 @@ const OfficePage = () => {
                                 name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                                 score={teamB.score}
                                 className={styles.teamContainer}
-                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
                         <div className={styles.bankContainer}>BANK:</div>
@@ -229,7 +227,7 @@ const OfficePage = () => {
                                 name={teamA.name === "Team A" ? "Dire Warriors (Your Team)" : "Wild Hearts (Your Team)"}
                                 score={teamA.score}
                                 className={styles.teamContainer}
-                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                                bestPlayer={teamA.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
     
@@ -252,7 +250,7 @@ const OfficePage = () => {
                                 name={teamB.name === "Team A" ? "Dire Warriors" : "Wild Hearts"}
                                 score={teamB.score}
                                 className={styles.teamContainer}
-                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1.publickey || 0 : bestPlayerTeam2.publickey || 0}
+                                bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
                     </>

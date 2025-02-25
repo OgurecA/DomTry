@@ -18,9 +18,9 @@ export const NavBarNfts: FC = () => {
 
     return (
         <div className={styles.NavBar}>
-            <button className={styles.NavButton} onClick={() => navigateTo('/')}>Home</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/office')}>Office</button>
-            <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>Farm</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/')}>HOME</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button>
+            <button className={styles.NavButton} onClick={() => navigateTo('/farm')}>FARM</button>
         </div>
     );
 };
