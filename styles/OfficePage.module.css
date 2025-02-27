@@ -71,10 +71,10 @@
     border-radius: 10px;
     padding: 3px; /* Толщина рамки */
     background: linear-gradient(to right, 
-        #ffcc00 calc(var(--teamA-score) - 1%), 
-        white calc(var(--teamA-score) - 0.5%),  /* Белый отрывок */
-        white calc(var(--teamA-score) + 0.5%),  /* Белый отрывок */
-        #ff3300 calc(var(--teamA-score) + 1%)
+        #ffcc00 calc(var(--teamA-score) - 10%), 
+        white calc(var(--teamA-score) - 1%),  /* Белый отрывок */
+        white calc(var(--teamA-score) + 1%),  /* Белый отрывок */
+        #ff3300 calc(var(--teamA-score) + 10%)
     );
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
@@ -208,11 +208,9 @@
 
 .lightningContainer {
     position: absolute;
-    top: 50%;
-    left: 50%;
     width: 10px;
     height: 10px;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -256,7 +254,7 @@
 
 .borderMarker {
     position: absolute;
-    top: -6px; /* Чтобы находился ровно на границе */
+    top: -7px; /* Чтобы находился ровно на границе */
     width: 10px;
     height: 10px;
     background: white; /* Цвет маркера */
@@ -266,7 +264,7 @@
 }
 .borderMarker2 {
     position: absolute;
-    bottom: -6px; /* Чтобы находился ровно на границе */
+    bottom: -7px; /* Чтобы находился ровно на границе */
     width: 10px;
     height: 10px;
     background: white; /* Цвет маркера */

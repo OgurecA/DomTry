@@ -167,14 +167,7 @@ const OfficePage = () => {
 
       return (
         <BackOffice>
-            <div className={styles.lightningContainer}>
-                <div className={styles.lightningBolt}></div>
-                <div className={styles.lightningBolt}></div>
-                <div className={styles.lightningBolt}></div>
-                <div className={styles.lightningBolt}></div>
-                <div className={styles.lightningBolt}></div>
-                <div className={styles.lightningBolt}></div>
-            </div>
+            
             
 
 
@@ -268,8 +261,28 @@ const OfficePage = () => {
     } as React.CSSProperties}
 >
     BANK:
-    <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
-    <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+    <div className={styles.lightningContainer1} style={{ 
+         left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+         top: "-7px" 
+     }}>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+    </div>
+    <div className={styles.lightningContainer1} style={{ 
+         left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+         bottom: "-7px" 
+     }}>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+        <div className={styles.lightningBolt}></div>
+    </div>
 </div>
 )}
         </BackOffice>
