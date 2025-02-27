@@ -208,8 +208,8 @@
 
 .lightningContainer {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 10px !important; /* Принудительно задаем */
+    height: 10px !important;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
