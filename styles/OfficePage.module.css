@@ -71,8 +71,10 @@
     border-radius: 10px;
     padding: 3px; /* Толщина рамки */
     background: linear-gradient(to right, 
-        #ffcc00 var(--teamA-score), 
-        #ff3300 var(--teamA-score)
+        #ffcc00 calc(var(--teamA-score) - 1%), 
+        white calc(var(--teamA-score) - 0.5%),  /* Белый отрывок */
+        white calc(var(--teamA-score) + 0.5%),  /* Белый отрывок */
+        #ff3300 calc(var(--teamA-score) + 1%)
     );
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
@@ -84,6 +86,7 @@
     mask-composite: exclude;
     z-index: -1;
 }
+
 
 
 @media (max-width: 1500px) {

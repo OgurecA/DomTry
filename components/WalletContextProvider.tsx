@@ -14,7 +14,7 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     new walletAdapterWallets.SafePalWalletAdapter(),
     new walletAdapterWallets.CloverWalletAdapter(),
     new walletAdapterWallets.BitKeepWalletAdapter(),
-    new walletAdapterWallets.CoinhubWalletAdapter(),
+    new walletAdapterWallets.CoinhubWalletAdapter()
   ], []);
 
   return (
