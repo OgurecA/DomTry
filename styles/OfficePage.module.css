@@ -198,10 +198,10 @@
 
 @keyframes lightningCycle {
     0%   { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
-    20%  { opacity: 0.6; transform: rotate(-45deg) scale(1) translate(-5px, 5px); }
-    40%  { opacity: 0.3; transform: rotate(60deg) scale(0.9) translate(5px, -5px); }
-    60%  { opacity: 0.8; transform: rotate(-30deg) scale(1.1) translate(-5px, -5px); }
-    80%  { opacity: 0.5; transform: rotate(50deg) scale(1.05) translate(5px, 5px); }
+    20%  { opacity: 0.8; transform: rotate(-45deg) scale(1) translate(-5px, 5px); }
+    40%  { opacity: 0.6; transform: rotate(60deg) scale(0.9) translate(5px, -5px); }
+    60%  { opacity: 0.1; transform: rotate(-30deg) scale(1.1) translate(-5px, -5px); }
+    80%  { opacity: 0.6; transform: rotate(50deg) scale(1.05) translate(5px, 5px); }
     100% { opacity: 1;   transform: rotate(0deg) scale(1.2) translate(0px, 0px); }
 }
 
@@ -218,11 +218,11 @@
 
 .lightningBolt {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 7px;
+    height: 7px;
     background: url("/lightning.png") no-repeat center;
     background-size: contain;
-    opacity: 0.8;
+    opacity: 1;
     animation: lightningCycle 0.1s infinite linear;
 }
 
@@ -254,9 +254,9 @@
 
 .borderMarker {
     position: absolute;
-    top: -7px; /* Чтобы находился ровно на границе */
-    width: 10px;
-    height: 10px;
+    top: -4px; /* Чтобы находился ровно на границе */
+    width: 5px;
+    height: 5px;
     background: white; /* Цвет маркера */
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
@@ -264,9 +264,9 @@
 }
 .borderMarker2 {
     position: absolute;
-    bottom: -7px; /* Чтобы находился ровно на границе */
-    width: 10px;
-    height: 10px;
+    bottom: -4px; /* Чтобы находился ровно на границе */
+    width: 5px;
+    height: 5px;
     background: white; /* Цвет маркера */
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);

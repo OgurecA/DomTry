@@ -265,7 +265,7 @@ const OfficePage = () => {
     <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
     <div className={styles.lightningContainer} style={{ 
          left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
-         top: "-7px" 
+         top: "-6px" 
      }}>
         <div className={styles.lightningBolt}></div>
         <div className={styles.lightningBolt}></div>
@@ -276,7 +276,7 @@ const OfficePage = () => {
     </div>
     <div className={styles.lightningContainer} style={{ 
          left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
-         bottom: "-7px" 
+         bottom: "-6px" 
      }}>
         <div className={styles.lightningBolt}></div>
         <div className={styles.lightningBolt}></div>
