@@ -167,11 +167,7 @@ const OfficePage = () => {
 
       return (
         <BackOffice>
-            
-            
-
-
-            <OfficeAppBar />
+        <OfficeAppBar />
             {isMobileLayout && (<NavBarOffice />)}
             <div className={styles.container}>
                 {isMobileLayout ? (
@@ -252,7 +248,7 @@ const OfficePage = () => {
             {/* Кнопка JOIN, если пользователя нет в БД */}
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
             
-            {!isMobileLayout && teamA && teamB && (
+            { teamA && teamB && (
     <div 
     className={styles.bankContainer}
     style={{
