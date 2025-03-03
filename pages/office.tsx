@@ -192,6 +192,7 @@ const OfficePage = () => {
                                 bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
+                        {teamA && teamB && (
                         <div 
                                 className={styles.bankContainer}
                                 style={{
@@ -202,7 +203,7 @@ const OfficePage = () => {
                             BANK:
                             <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                             <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
-                            {/* <div className={styles.lightningContainer} style={{ 
+                            <div className={styles.lightningContainer} style={{ 
                                 left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
                                 top: "-6px" 
                             }}>
@@ -223,8 +224,9 @@ const OfficePage = () => {
                                 <div className={styles.lightningBolt}></div>
                                 <div className={styles.lightningBolt}></div>
                                 <div className={styles.lightningBolt}></div>
-                            </div> */}
+                            </div>
                         </div>
+                        )}
                         </div>
                     </>
                 ) : (
