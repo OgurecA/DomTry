@@ -61,16 +61,6 @@ const OfficePage = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
         if (!publicKey) return;
     
@@ -205,7 +195,39 @@ const OfficePage = () => {
                                 bestPlayer={teamB.name === "Team A" ? bestPlayerTeam1 || 0 : bestPlayerTeam2 || 0}
                             />
                         )}
-                        <div className={styles.bankContainer}>BANK:</div>
+                        <div 
+                                className={styles.bankContainer}
+                                style={{
+                                    "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
+                                    "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
+                                } as React.CSSProperties}
+                            >
+                            BANK:
+                            <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+                            <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+                            <div className={styles.lightningContainer} style={{ 
+                                left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+                                top: "-6px" 
+                            }}>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                            </div>
+                            <div className={styles.lightningContainer} style={{ 
+                                left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+                                bottom: "-6px" 
+                            }}>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                                <div className={styles.lightningBolt}></div>
+                            </div>
+                        </div>
                         </div>
                     </>
                 ) : (
@@ -248,41 +270,41 @@ const OfficePage = () => {
             {/* Кнопка JOIN, если пользователя нет в БД */}
             {isUserInDatabase === false && <ConnectButton setCheck={setCheck} />}
             
-            { teamA && teamB && (
-    <div 
-    className={styles.bankContainer}
-    style={{
-        "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
-        "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
-    } as React.CSSProperties}
->
-    BANK:
-    <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
-    <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
-    <div className={styles.lightningContainer} style={{ 
-         left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
-         top: "-6px" 
-     }}>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-    </div>
-    <div className={styles.lightningContainer} style={{ 
-         left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
-         bottom: "-6px" 
-     }}>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-        <div className={styles.lightningBolt}></div>
-    </div>
-</div>
-)}
+            {!isMobileLayout && teamA && teamB && (
+                <div 
+                    className={styles.bankContainer}
+                    style={{
+                        "--teamA-score": `${(teamA.score / (teamA.score + teamB.score)) * 100}%`,
+                        "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
+                    } as React.CSSProperties}
+                >
+                BANK:
+                <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+                <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
+                <div className={styles.lightningContainer} style={{ 
+                    left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+                    top: "-6px" 
+                }}>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                </div>
+                <div className={styles.lightningContainer} style={{ 
+                    left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%`, 
+                    bottom: "-6px" 
+                }}>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                    <div className={styles.lightningBolt}></div>
+                </div>
+                </div>
+            )}
         </BackOffice>
     );
     
