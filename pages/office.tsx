@@ -150,7 +150,7 @@ const OfficePage = () => {
         };
     
         fetchUserData();
-      }, [publicKey]);
+      }, [publicKey, check]);
 
       return (
         <BackOffice>
@@ -166,7 +166,7 @@ const OfficePage = () => {
                                 name={userData.name}
                                 info={[
                                     `Balance: ${userData.balance} SOL`,
-                                    `Input SOL: ${userData.input_sol}`,
+                                    `Input KST: ${userData.input_sol}`,
                                     `Personal Points: ${userData.personal_points}`,
                                     `Team Points: ${userData.team_points}`
                                 ]}
