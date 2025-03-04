@@ -1,3 +1,4 @@
+import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
     Connection,
     Keypair,
@@ -8,22 +9,6 @@ import {
     Transaction,
     TransactionInstruction,
   } from "@solana/web3.js";
-  import {
-    setAuthority,
-    AuthorityType,
-    createAccount,
-    TOKEN_PROGRAM_ID,
-    mintTo,
-    getOrCreateAssociatedTokenAccount,
-    MULTISIG_SIZE,
-    createInitializeMultisigInstruction,
-    createTransferInstruction,
-    getAssociatedTokenAddress,
-    getAssociatedTokenAddressSync,
-    createAssociatedTokenAccountInstruction,
-    createCloseAccountInstruction,
-  } from "@solana/spl-token";
-  import * as fs from "fs";
 
   // // Playground wallet
   // const secret = JSON.parse(fs.readFileSync("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2.json").toString()) as number[];
@@ -31,6 +16,7 @@ import {
   // const ownerKeypair = Keypair.fromSecretKey(secretKey);
 
   const pot = new PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2");
+  const mint = new PublicKey("7zWihHxBBDuUBfya4b2wWfdhXr5CFsefn1mywodoS3od");
 
 export class solCommands {
 
@@ -41,24 +27,54 @@ export class solCommands {
   ): Promise<{ transaction: Transaction, amount: number }> {
 
 
-    const createAccInstruction = SystemProgram.transfer({
-      fromPubkey: player,
-      toPubkey: pot,
-      lamports: LAMPORTS_PER_SOL * amount,
-    })
+    const potTokenAccount = await getAssociatedTokenAddress(
+      mint, // Адрес токена (mint)
+      pot, // Владелец аккаунта (player)
+      false, // Allow owner off curve (обычно false для стандартных случаев)
+      TOKEN_PROGRAM_ID // Программа токенов Solana
+    );
+
+    const playerTokenAccount = await getAssociatedTokenAddress(
+      mint, // Адрес токена (mint)
+      player, // Владелец аккаунта (player)
+      false, // Allow owner off curve (обычно false для стандартных случаев)
+      TOKEN_PROGRAM_ID // Программа токенов Solana
+    );
+
+    const accountInfo = await connection.getAccountInfo(playerTokenAccount);
 
     
-    const { blockhash } = await connection.getLatestBlockhash('finalized');
-      console.log("Blockhash:", blockhash);
+    const createAccInstruction = SystemProgram.transfer({
+      fromPubkey: playerTokenAccount,
+      toPubkey: potTokenAccount,
+      lamports: 10**3 * amount,
+    })
     
-      const transaction = new Transaction({
-        recentBlockhash: blockhash,
-        feePayer: player,
-      })
-    .add(createAccInstruction)
+    const createAtaInstruction = createAssociatedTokenAccountInstruction(
+      player, // Плательщик (пользователь, который оплачивает создание ATA)
+      playerTokenAccount, // Адрес нового ATA
+      player, // Владелец ATA (тот же пользователь)
+      mint, // Адрес токена
+      TOKEN_PROGRAM_ID // Программа токенов
+    );
+    
+    const { blockhash } = await connection.getLatestBlockhash('finalized');
+    console.log("Blockhash:", blockhash);
+    
+    const transaction = new Transaction({
+      recentBlockhash: blockhash,
+      feePayer: player,
+    })
+
+    if (accountInfo === null) {
+      transaction.add(createAtaInstruction);
+    }
+
+    transaction.add(createAccInstruction)
 
     return { transaction, amount };
 
   }
+
    
 }
