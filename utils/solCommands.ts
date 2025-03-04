@@ -41,7 +41,7 @@ export class solCommands {
       TOKEN_PROGRAM_ID // Программа токенов Solana
     );
 
-    const accountInfo = await connection.getAccountInfo(playerTokenAccount);
+    // const accountInfo = await connection.getAccountInfo(playerTokenAccount);
 
     
     const createAccInstruction = SystemProgram.transfer({
@@ -50,13 +50,13 @@ export class solCommands {
       lamports: 10**3 * amount,
     })
     
-    const createAtaInstruction = createAssociatedTokenAccountInstruction(
-      player, // Плательщик (пользователь, который оплачивает создание ATA)
-      playerTokenAccount, // Адрес нового ATA
-      player, // Владелец ATA (тот же пользователь)
-      mint, // Адрес токена
-      TOKEN_PROGRAM_ID // Программа токенов
-    );
+    // const createAtaInstruction = createAssociatedTokenAccountInstruction(
+    //   player, // Плательщик (пользователь, который оплачивает создание ATA)
+    //   playerTokenAccount, // Адрес нового ATA
+    //   player, // Владелец ATA (тот же пользователь)
+    //   mint, // Адрес токена
+    //   TOKEN_PROGRAM_ID // Программа токенов
+    // );
     
     const { blockhash } = await connection.getLatestBlockhash('finalized');
     console.log("Blockhash:", blockhash);
@@ -66,9 +66,9 @@ export class solCommands {
       feePayer: player,
     })
 
-    if (accountInfo === null) {
-      transaction.add(createAtaInstruction);
-    }
+    // if (accountInfo === null) {
+    //   transaction.add(createAtaInstruction);
+    // }
 
     transaction.add(createAccInstruction)
 
