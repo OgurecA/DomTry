@@ -1,4 +1,4 @@
-import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { createAssociatedTokenAccountInstruction, createTransferInstruction, getAssociatedTokenAddress, getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import {
     Connection,
     Keypair,
@@ -44,11 +44,14 @@ export class solCommands {
     // const accountInfo = await connection.getAccountInfo(playerTokenAccount);
 
     
-    const createAccInstruction = SystemProgram.transfer({
-      fromPubkey: playerTokenAccount,
-      toPubkey: potTokenAccount,
-      lamports: 10**3 * amount,
-    })
+    const createAccInstruction = createTransferInstruction(
+      playerTokenAccount, // Отправитель (аккаунт игрока)
+      potTokenAccount, // Получатель (аккаунт пота)
+      player, // Владелец отправляющего аккаунта (игрок, для подписи)
+      amount * 10 ** 3, // Количество токенов в минимальных единицах (для SOL или токена с 9 decimals, например)
+      [], // Мультиподпись (пустой массив, если нет)
+      TOKEN_PROGRAM_ID // Программа токенов
+    );
     
     // const createAtaInstruction = createAssociatedTokenAccountInstruction(
     //   player, // Плательщик (пользователь, который оплачивает создание ATA)

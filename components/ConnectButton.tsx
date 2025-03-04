@@ -119,7 +119,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         className={styles.slider}
         style={{ background: gradient }}
       />
-      <span className={styles.valueLabel}>{value.toFixed(2)} SOL</span>
+      <span className={styles.valueLabel}>{value.toFixed(2)} KST</span>
 
       {/* Кнопка JOIN */}
       <button
