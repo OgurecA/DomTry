@@ -113,7 +113,7 @@ const OfficePage = () => {
       
             const userData = await userResponse.json();
             if (!userResponse.ok || !userData.team) {
-                console.warn("⚠ Пользователь не найден или не состоит в команде.");
+                console.log("⚠ Пользователь не найден или не состоит в команде.");
                 return;
             }
       

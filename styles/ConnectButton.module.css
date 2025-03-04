@@ -11,6 +11,7 @@
 
 .slider {
   width: 400px;
+  max-width: 90%;
   height: 6px;
   border-radius: 5px;
   background: linear-gradient(90deg, #ff9900, #ff6600);
