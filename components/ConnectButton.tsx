@@ -144,8 +144,13 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         min="0.01"
         max="5"
         step="0.01"
-        value={value}
-        onChange={(e) => setValue(parseFloat(e.target.value))}
+        value={isNaN(value) ? 0.01 : value} // Если value NaN, ставим предыдущее значение
+        onChange={(e) => {
+          const newValue = parseFloat(e.target.value);
+          if (!isNaN(newValue)) {
+            setValue(newValue);
+          }
+          }}
         className={styles.slider}
         style={{ background: gradient }}
       />
