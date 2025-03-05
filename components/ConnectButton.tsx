@@ -122,6 +122,18 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         max="5"
         value={value}
         onChange={(e) => setValue(parseFloat(e.target.value))}
+        onBlur={(e) => {
+          let newValue = parseFloat(e.target.value);
+      
+          // Проверяем, что введено число и ограничиваем до 2 знаков после запятой
+          if (!isNaN(newValue)) {
+            newValue = Math.max(0.01, Math.min(5, newValue)); // Ограничиваем min/max
+            newValue = parseFloat(newValue.toFixed(2)); // Оставляем 2 знака после запятой
+            setValue(newValue);
+          } else {
+            setValue(0.01); // Если поле ввода стало пустым, ставим минимальное значение
+          }
+        }}
         className={styles.inputField}
       />
 
