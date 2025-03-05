@@ -104,11 +104,20 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
   };
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newValue = parseFloat(e.target.value);
-    if (isNaN(newValue) || newValue < 0.01) newValue = 0.01;
-    if (newValue > 5) newValue = 5;
-    setValue(newValue);
-  };
+    let newValue = e.target.value;
+
+    // Разрешаем ввод только цифр, точки и ограничиваем два знака после запятой
+    if (!/^\d*\.?\d{0,2}$/.test(newValue)) return;
+
+    // Преобразуем строку в число и ограничиваем диапазон
+    let numericValue = parseFloat(newValue);
+    if (isNaN(numericValue)) numericValue = 0.01;
+    if (numericValue < 0.01) numericValue = 0.01;
+    if (numericValue > 5) numericValue = 5;
+
+    setValue(parseFloat(numericValue.toFixed(2))); // ✅ Обрезаем до 2 знаков и конвертируем обратно в число
+};
+
 
 
   return (
@@ -117,7 +126,6 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       {/* Поле ввода суммы */}
       <input
         type="number"
-        step="0.01"
         min="0.01"
         max="5"
         value={value}

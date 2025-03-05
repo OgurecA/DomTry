@@ -98,11 +98,19 @@
   color: white;
   border-radius: 5px;
   outline: none;
+  -moz-appearance: textfield; /* Убирает стрелки в Firefox */
+}
+
+.inputField::-webkit-outer-spin-button,
+.inputField::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Убирает стрелки в Chrome, Safari */
+  margin: 0;
 }
 
 .inputField:focus {
   border-color: #ffcc00;
 }
+
 
 
 @media (max-width: 780px) {
