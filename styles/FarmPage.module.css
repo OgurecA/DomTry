@@ -274,7 +274,7 @@
     left: 5%;
     transform: translateX(0%);
     width: 40%;
-    /* height: auto; */
+    height: auto;
     aspect-ratio: 1 / 1;
   }
   .nftWrapper {

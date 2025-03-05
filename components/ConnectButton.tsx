@@ -103,11 +103,29 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
     }
   };
   
-  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = parseFloat(e.target.value);
+    if (isNaN(newValue) || newValue < 0.01) newValue = 0.01;
+    if (newValue > 5) newValue = 5;
+    setValue(newValue);
+  };
 
 
   return (
     <div className={styles.container}>
+
+      {/* Поле ввода суммы */}
+      <input
+        type="number"
+        step="0.01"
+        min="0.01"
+        max="5"
+        value={value}
+        onChange={handleInputChange}
+        className={styles.inputField}
+      />
+
+
       {/* Ползунок (Slider) */}
       <input
         type="range"
@@ -115,11 +133,11 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         max="5"
         step="0.01"
         value={value}
-        onChange={(e) => setValue(parseFloat(e.target.value))}
+        onChange={handleInputChange}
         className={styles.slider}
         style={{ background: gradient }}
       />
-      <span className={styles.valueLabel}>{value.toFixed(2)} KST</span>
+      
 
       {/* Кнопка JOIN */}
       <button
