@@ -152,7 +152,9 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
           }
           }}
         className={styles.slider}
-        style={{ background: gradient }}
+        style={{
+          background: `linear-gradient(90deg, #ff9900 ${(isNaN(value) ? 0.01 : value) / 5 * 100}%, #444 ${(isNaN(value) ? 0.01 : value) / 5 * 100}%)`
+        }}
       />
       
 
