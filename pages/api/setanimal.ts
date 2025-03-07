@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { publicKey, animalKey, animalUrl } = req.body;
+    const { publicKey, animalKey, nftCreator, animalUrl } = req.body;
 
     if (!publicKey || !animalKey || !animalUrl) {
       return res.status(400).json({ message: "Не переданы `publicKey`, `animalKey` или `animalUrl`" });
@@ -35,8 +35,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Обновляем `animalkey` и `animal_image`
     await new Promise<void>((resolve, reject) => {
       db.run(
-        `UPDATE users SET animalkey = ?, animal_image = ? WHERE publickey = ?;`,
-        [animalKey, animalUrl, publicKey],
+        `UPDATE users SET animalkey = ?, animalkeycontrol = ?, animal_image = ? WHERE publickey = ?;`,
+        [animalKey, nftCreator, animalUrl, publicKey],
         (err) => {
           if (err) reject(err);
           else resolve();

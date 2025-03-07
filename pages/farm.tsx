@@ -14,6 +14,7 @@ type NftData = {
   nftAddress: PublicKey;
   nftName: string;
   attributes: { trait_type: string; value: string }[];
+  nftCreator: string;
   imageUrl: string;
 } | null;
 
@@ -82,7 +83,8 @@ const FarmPage = () => {
         { trait_type: "SelfPoints", value: "1" },
         { trait_type: "Description", value: "prosto chelovek" }
       ],
-      imageUrl: "/Avatar.png" // Заглушка для аватара
+      imageUrl: "/Avatar.png", // Заглушка для аватара
+      nftCreator: publicKey.toBase58()
     };
   
     setPlayerAvatar(avatar);
@@ -161,6 +163,7 @@ const FarmPage = () => {
           body: JSON.stringify({
             publicKey: publicKey.toBase58(),
             animalKey: selectedNft.nftAddress.toBase58(),
+            nftCreator: selectedNft.nftCreator,
             animalUrl: selectedNft.imageUrl
           }),
         });

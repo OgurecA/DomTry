@@ -15,7 +15,7 @@ export class findNFT {
     static async Bik(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null; nftCreator: string } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -45,7 +45,8 @@ export class findNFT {
                     return {
                         nftAddress: nft.address,
                         nftName,
-                        attributes
+                        attributes,
+                        nftCreator: BIK_AUTH,
                     };
                 }
             }
@@ -62,7 +63,7 @@ export class findNFT {
       static async Rat(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null; nftCreator: string } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -92,7 +93,8 @@ export class findNFT {
                     return {
                         nftAddress: nft.address,
                         nftName,
-                        attributes
+                        attributes,
+                        nftCreator: KRISA_AUTH,
                     };
                 }
             }
@@ -109,7 +111,7 @@ export class findNFT {
       static async Dragon(
         connection: Connection,
         walletAddress: PublicKey,
-      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null } | null> {
+      ): Promise<{ nftAddress: PublicKey; nftName: string; attributes: any[] | null; nftCreator: string } | null> {
         const metaplex = Metaplex.make(connection);
         try {
             const ownerPubKey = new PublicKey(walletAddress);
@@ -139,7 +141,8 @@ export class findNFT {
                     return {
                         nftAddress: nft.address,
                         nftName,
-                        attributes
+                        attributes,
+                        nftCreator: DRAGON_AUTH,
                     };
                 }
             }

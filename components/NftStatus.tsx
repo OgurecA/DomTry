@@ -6,6 +6,7 @@ type NftData = {
   nftAddress: PublicKey;
   nftName: string;
   attributes: { trait_type: string; value: string }[];
+  nftCreator: string;
 } | null;
 
 type NftStatusProps = {

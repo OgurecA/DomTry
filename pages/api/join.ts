@@ -30,8 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // ✅ Добавляем пользователя в таблицу `users`
         await new Promise<void>((resolve, reject) => {
           db.run(
-            `INSERT INTO users (publickey, input_sol, animalkey, team) VALUES (?, ?, ?, ?)`,
-            [publicKey, amount, publicKey, team], // animalkey теперь null (если не передаётся)
+            `INSERT INTO users (publickey, input_sol, animalkey, animalkeycontrol, team, join_signature) VALUES (?, ?, ?, ?, ?, ?)`,
+            [publicKey, amount, publicKey, publicKey, team, transactionId], // animalkey теперь null (если не передаётся)
             function (err) {
               if (err) {
                 console.error("❌ Ошибка при добавлении пользователя:", err.message);
