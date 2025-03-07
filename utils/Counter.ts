@@ -181,8 +181,8 @@ const updateTeamPoints = async () => {
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
-const EXECUTION_HOUR = 13;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 24; // Минуты (от 0 до 59)
+const EXECUTION_HOUR = 0;  // Часы (от 0 до 23)
+const EXECUTION_MINUTE = 0; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
@@ -228,7 +228,7 @@ const scheduleDailyTask = () => {
     setTimeout(() => {
         dailyFunction();
         // После первого выполнения устанавливаем запуск раз в сутки (24 часа)
-        setInterval(dailyFunction, 2 * 60 * 1000);
+        setInterval(dailyFunction, 24 * 60 * 60 * 1000);
     }, timeUntilExecution);
 };
 
