@@ -174,7 +174,7 @@ const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 13;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 0; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 3; // Минуты (от 0 до 59)
 
 const BIK_AUTH = process.env.BIK_AUTH;
 const KRISA_AUTH = process.env.KRISA_AUTH;
@@ -186,7 +186,7 @@ const dailyFunction = async () => {
 
     // Здесь будет код выполнения задачи (добавим позже)
     
-
+    updateTeamPoints()
 
 
     console.log("✅ Ежедневное задание завершено");
@@ -223,7 +223,7 @@ const scheduleDailyTask = () => {
     setTimeout(() => {
         dailyFunction();
         // После первого выполнения устанавливаем запуск раз в сутки (24 часа)
-        setInterval(dailyFunction, 60 * 1000);
+        setInterval(dailyFunction, 2 * 60 * 1000);
     }, timeUntilExecution);
 };
 
