@@ -173,8 +173,8 @@ const updateTeamPoints = async () => {
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
-const EXECUTION_HOUR = 11;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 21; // Минуты (от 0 до 59)
+const EXECUTION_HOUR = 12;  // Часы (от 0 до 23)
+const EXECUTION_MINUTE = 57; // Минуты (от 0 до 59)
 
 const BIK_AUTH = process.env.BIK_AUTH;
 const KRISA_AUTH = process.env.KRISA_AUTH;
