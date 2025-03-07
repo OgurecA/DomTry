@@ -16,6 +16,11 @@ const NFT_PUBLIC_KEYS = [
     "BpP4tmSJ3XNzpyEEmrbrUjotDx38weao9NMskeFRd9tY"
 ].map(key => new PublicKey(key));
 
+
+const BIK_AUTH = process.env.BIK_AUTH;
+const KRISA_AUTH = process.env.KRISA_AUTH;
+const DRAGON_AUTH = process.env.DRAGON_AUTH;
+
 // Функция для получения метаданных и атрибутов NFT
 const getNftAttributes = async (nftPublicKey: PublicKey) => {
     try {
@@ -174,11 +179,8 @@ const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 13;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 3; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 11; // Минуты (от 0 до 59)
 
-const BIK_AUTH = process.env.BIK_AUTH;
-const KRISA_AUTH = process.env.KRISA_AUTH;
-const DRAGON_AUTH = process.env.DRAGON_AUTH;
 
 // Функция, которая будет выполняться в заданное время
 const dailyFunction = async () => {
