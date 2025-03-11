@@ -198,7 +198,9 @@ const FarmPage = () => {
         {selectedNft && (
         <div className={styles.selectedNftInfoContainer}>
             <h2>{selectedNft.nftName}</h2>
-            <p>
+            <p onClick={() =>
+              window.open(`https://solscan.io/account/${selectedNft.nftAddress.toBase58()}?cluster=devnet`, "_blank", "noopener,noreferrer")
+            }>
             <strong>Адрес:</strong> {!isMobileLayout ?
               selectedNft.nftAddress.toBase58() :
               `${selectedNft.nftAddress.toBase58().slice(0, 4)}...${selectedNft.nftAddress.toBase58().slice(-4)}`}
