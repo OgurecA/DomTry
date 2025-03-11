@@ -167,6 +167,11 @@
   background: transparent;
 }
 
+.addressHover {
+  font-size: 14px;
+  color: #fff;
+}
+
 .addressHover:hover {
   cursor: pointer;
   color: #ffe062;

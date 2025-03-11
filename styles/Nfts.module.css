@@ -30,21 +30,23 @@
   /* Кнопка (верхний слой) */
   .overlayButton {
     position: absolute;
-    top: 50%; /* Центрируем вертикально */
-    left: 50%; /* Центрируем горизонтально */
-    transform: translate(-50%, -50%); /* Смещаем на половину размера кнопки */
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
-    color: white;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 10px;
+    background-color: rgb(253 96 0 / 85%);
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 10; /* Убеждаемся, что кнопка сверху всех слоёв */
+    z-index: 10;
+    width: 90%;
+    font-size: 14px;
   }
   
   /* Опционально: ховер-эффект для кнопки */
   .overlayButton:hover {
-    background-color: rgba(0, 0, 0, 0.9); /* Более тёмный фон при наведении */
+    background-color: rgba(255, 116, 9, 0.9); /* Более тёмный фон при наведении */
   }
 
   .nftWrapper {
@@ -79,5 +81,15 @@
     }
     .nftWrapper {
       grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    }
+    .overlayButton {
+      padding: 5px 10px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .overlayButton {
+      padding: 5px 5px;
+      font-size: 10px;
     }
   }
