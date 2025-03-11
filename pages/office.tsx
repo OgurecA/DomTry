@@ -5,7 +5,7 @@ import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
 import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
-import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { BackOffice } from '../components/BackOffice';
 import { NavBarOffice } from '../components/NavBarOffice';
 
