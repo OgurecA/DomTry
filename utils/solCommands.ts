@@ -16,7 +16,7 @@ import {
   // const ownerKeypair = Keypair.fromSecretKey(secretKey);
 
   const pot = new PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2");
-  const mint = new PublicKey("7zWihHxBBDuUBfya4b2wWfdhXr5CFsefn1mywodoS3od");
+  const mint = new PublicKey("6cAVasi4zhJHbZHzS1UVRAGpXHUoSjLPxtjjYr3RayrS");
 
 export class solCommands {
 
@@ -48,7 +48,7 @@ export class solCommands {
       playerTokenAccount, // Отправитель (аккаунт игрока)
       potTokenAccount, // Получатель (аккаунт пота)
       player, // Владелец отправляющего аккаунта (игрок, для подписи)
-      amount * 10 ** 3, // Количество токенов в минимальных единицах (для SOL или токена с 9 decimals, например)
+      amount * 10 ** 2, // Количество токенов в минимальных единицах (для SOL или токена с 9 decimals, например)
       [], // Мультиподпись (пустой массив, если нет)
       TOKEN_PROGRAM_ID // Программа токенов
     );

@@ -36,8 +36,6 @@ const OfficePage = () => {
     
 
     const [userData, setUserData] = useState<PlayerData | null>(null);
-   
-    const address = new PublicKey("PTaRajqXqHvpLWc5RSvuk3dMihLnwYeXjDVj5KRC8JE");
 
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
@@ -67,7 +65,7 @@ const OfficePage = () => {
     
         const fetchUserData = async () => {
           try {
-            const solBalance = await connection.getBalance(address);
+            const solBalance = await connection.getBalance(publicKey);
             const convertedBalance = solBalance / LAMPORTS_PER_SOL;
             const response = await fetch("/api/getuser", {
                 method: "POST",
@@ -248,7 +246,7 @@ const OfficePage = () => {
                                 name={userData.name}
                                 info={[
                                     `Balance: ${userData.balance} SOL`,
-                                    `Input SOL: ${userData.input_sol}`,
+                                    `Input KST: ${userData.input_sol}`,
                                     `Personal Points: ${userData.personal_points}`,
                                     `Team Points: ${userData.team_points}`
                                 ]}
