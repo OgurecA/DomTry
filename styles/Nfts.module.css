@@ -17,6 +17,36 @@
     border-radius: 10px;
   }
 
+  .overlayImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Или cover, в зависимости от желаемого эффекта */
+    pointer-events: none; /* Чтобы клики проходили через картинку к кнопке */
+  }
+  
+  /* Кнопка (верхний слой) */
+  .overlayButton {
+    position: absolute;
+    top: 50%; /* Центрируем вертикально */
+    left: 50%; /* Центрируем горизонтально */
+    transform: translate(-50%, -50%); /* Смещаем на половину размера кнопки */
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10; /* Убеждаемся, что кнопка сверху всех слоёв */
+  }
+  
+  /* Опционально: ховер-эффект для кнопки */
+  .overlayButton:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Более тёмный фон при наведении */
+  }
+
   .nftWrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Гибкая сетка */

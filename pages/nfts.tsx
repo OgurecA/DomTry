@@ -28,80 +28,58 @@ const NftsPage = () => {
           <div className={styles.scrollableContainer}>
             <div className={styles.nftWrapper}>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                {/* Базовая картинка (нижний слой) */}
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+
+                {/* Дополнительная PNG-картинка (средний слой) */}
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+
+                {/* Кнопка (верхний слой) */}
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
             </div>
           </div>
         ) : (
           <div className={styles.nftWrapper}>
-            <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+              <div className={styles.nftContainer}>
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
               <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
-              </div>
-              <div className={styles.nftContainer}>
-                <img src={"/Avatar.png"} alt={"f"} className={styles.nftImage} />
+                <img src="/Avatar.png" alt="Base Avatar" className={styles.nftImage} />
+                <img src="/Cage.png" alt="Overlay" className={styles.overlayImage} />
+                <button className={styles.overlayButton}>Click Me</button>
               </div>
           </div>
         )}
