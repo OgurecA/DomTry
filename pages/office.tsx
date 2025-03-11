@@ -5,7 +5,7 @@ import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
 import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { BackOffice } from '../components/BackOffice';
 import { NavBarOffice } from '../components/NavBarOffice';
 
@@ -37,6 +37,7 @@ const OfficePage = () => {
 
     const [userData, setUserData] = useState<PlayerData | null>(null);
    
+    const address = new PublicKey("PTaRajqXqHvpLWc5RSvuk3dMihLnwYeXjDVj5KRC8JE");
 
     const [teamA, setTeamA] = useState<TeamData | null>(null);
     const [teamB, setTeamB] = useState<TeamData | null>(null);
@@ -66,7 +67,7 @@ const OfficePage = () => {
     
         const fetchUserData = async () => {
           try {
-            const solBalance = await connection.getBalance(publicKey);
+            const solBalance = await connection.getBalance(address);
             const convertedBalance = solBalance / LAMPORTS_PER_SOL;
             const response = await fetch("/api/getuser", {
                 method: "POST",
