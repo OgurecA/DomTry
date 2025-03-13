@@ -1,4 +1,4 @@
-import { Metaplex, keypairIdentity } from "@metaplex-foundation/js";
+import { Metadata, Metaplex, keypairIdentity } from "@metaplex-foundation/js";
 import { Connection, PublicKey } from "@solana/web3.js";
 import sqlite3 from "sqlite3";
 import dotenv from "dotenv";
@@ -12,17 +12,6 @@ const connection = new Connection(SOLANA_RPC_URL);
 // Подключение Metaplex
 const metaplex = Metaplex.make(connection);
 
-// Список NFT-адресов (публичные ключи)
-const NFT_PUBLIC_KEYS = [
-    "oLEyYPH98oYZQjzXLSXvV9L2Pcr2tPQbPfnYA1EFEF8", 
-    "2c7rWrzkNuFYARxKxYS71SQZZaRsVxxoSVKcp8mdptg5", 
-    "BpP4tmSJ3XNzpyEEmrbrUjotDx38weao9NMskeFRd9tY"
-].map(key => new PublicKey(key));
-
-
-const BIK_AUTH = process.env.BIK_AUTH;
-const KRISA_AUTH = process.env.KRISA_AUTH;
-const DRAGON_AUTH = process.env.DRAGON_AUTH;
 
 // Функция для получения метаданных и атрибутов NFT
 const getNftAttributes = async (nftPublicKey: PublicKey) => {
@@ -45,46 +34,81 @@ const getNftAttributes = async (nftPublicKey: PublicKey) => {
     }
 };
 
-// Основная функция для поиска 3 NFT
-const fetchNftsAttributes = async () => {
-    console.log("🔍 Поиск атрибутов для 3 NFT...");
-    
-    const results = await Promise.all(NFT_PUBLIC_KEYS.map(getNftAttributes));
+type NftOwnershipResult = {
+    owned: boolean;
+    selfPoints: number;
+    teamPoints: number;
+    updateAuthority: string | null;
+  };
 
-    if (!results || results.length !== 3) {
-        console.error("❌ Ошибка: Данные NFT не загружены корректно");
-        return;
+  const checkNftOwnership = async (
+    playerPublicKey: string,
+    nftAnimalKey: string,
+    nftAuthorityCheck: string
+  ): Promise<NftOwnershipResult> => {
+    try {
+      const savedUpdateAuthority = new PublicKey(nftAuthorityCheck);
+      const nftPublicKey = new PublicKey(nftAnimalKey);
+      const publicKey = new PublicKey(playerPublicKey);
+  
+      if (publicKey === nftPublicKey && publicKey === savedUpdateAuthority) {
+        console.log(`⚠ Игрок ${playerPublicKey} не использует NFT`);
+        return { owned: false, selfPoints: 1, teamPoints: 1, updateAuthority: null };
     }
+    
+      // Проверяем, владеет ли игрок NFT
+      const assets = await metaplex.nfts().findAllByOwner({ owner: publicKey });
+      
+      const metadataAssets = assets.filter(asset => asset.model === "metadata") as Metadata[];
+      const nft = metadataAssets.find(asset => asset.mintAddress.equals(nftPublicKey));
+      if (!nft) {
+        console.log(`⚠ Игрок ${playerPublicKey} не владеет NFT ${nftPublicKey.toBase58()}`);
+        return { owned: false, selfPoints: 0, teamPoints: 0, updateAuthority: null };
+      }
+  
+      // Загружаем полные метаданные NFT
+      const nftMetadata = await metaplex.nfts().findByMint({ mintAddress: nftPublicKey });
+      if (!nftMetadata || !nftMetadata.json) {
+        console.log(`⚠ Метаданные для ${nftPublicKey.toBase58()} не найдены`);
+        return { owned: true, selfPoints: 0, teamPoints: 0, updateAuthority: null };
+      }
+  
+      // Проверяем updateAuthority
+      const updateAuthority = nftMetadata.updateAuthorityAddress?.toBase58() || null;
+      if (!updateAuthority || updateAuthority !== savedUpdateAuthority.toBase58()) {
+        console.log(
+          `⚠ updateAuthority для ${nftPublicKey.toBase58()} (${updateAuthority}) не совпадает с ожидаемым (${savedUpdateAuthority.toBase58()})`
+        );
+        return { owned: true, selfPoints: 0, teamPoints: 0, updateAuthority: null };
+      }
+  
+      // Извлекаем атрибуты
+      const attributes = nftMetadata.json.attributes || [];
+      const selfPointsAttr = attributes.find(attr => attr.trait_type === "SelfPoints");
+      const teamPointsAttr = attributes.find(attr => attr.trait_type === "TeamPoints");
+  
+      const selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      const teamPoints = teamPointsAttr?.value ? Number(teamPointsAttr.value) || 0 : 0;
+  
+      // Проверка на допустимые значения
+      if (selfPoints < 0 || selfPoints > 1000 || teamPoints < 0 || teamPoints > 1000) {
+        console.log(
+          `⚠ Недопустимые значения атрибутов для NFT ${nftPublicKey.toBase58()}: SelfPoints=${selfPoints}, TeamPoints=${teamPoints}`
+        );
+        return { owned: true, selfPoints: 0, teamPoints: 0, updateAuthority };
+      }
+  
+      console.log(
+        `✅ Игрок ${playerPublicKey} владеет NFT ${nftPublicKey.toBase58()}. SelfPoints: ${selfPoints}, TeamPoints: ${teamPoints}, UpdateAuthority: ${updateAuthority}`
+      );
+  
+      return { owned: true, selfPoints, teamPoints, updateAuthority };
+    } catch (error) {
+      console.error(`❌ Ошибка при проверке владения NFT для ${playerPublicKey}:`, error);
+      return { owned: false, selfPoints: 0, teamPoints: 0, updateAuthority: null };
+    }
+  };
 
-    // Извлекаем значения TeamPoints и SelfPoints для каждой NFT
-    const [bikAttributes, krisaAttributes, dragonAttributes] = results;
-
-    const getAttributeValue = (attributes: any[], traitType: string): number => {
-        const foundAttribute = attributes.find(attr => attr.trait_type === traitType);
-        return foundAttribute ? Number(foundAttribute.value) || 0 : 0;
-    };
-
-    // Создаем переменные для хранения значений
-    const bikSelfPoints = getAttributeValue(bikAttributes, "SelfPoints");
-    const bikTeamPoints = getAttributeValue(bikAttributes, "TeamPoints");
-
-    const krisaSelfPoints = getAttributeValue(krisaAttributes, "SelfPoints");
-    const krisaTeamPoints = getAttributeValue(krisaAttributes, "TeamPoints");
-
-    const dragonSelfPoints = getAttributeValue(dragonAttributes, "SelfPoints");
-    const dragonTeamPoints = getAttributeValue(dragonAttributes, "TeamPoints");
-
-    console.log("✅ Значения получены:");
-    console.log(`Bik - SelfPoints: ${bikSelfPoints}, TeamPoints: ${bikTeamPoints}`);
-    console.log(`Krisa - SelfPoints: ${krisaSelfPoints}, TeamPoints: ${krisaTeamPoints}`);
-    console.log(`Dragon - SelfPoints: ${dragonSelfPoints}, TeamPoints: ${dragonTeamPoints}`);
-
-    return {
-        bik: { selfPoints: bikSelfPoints, teamPoints: bikTeamPoints },
-        krisa: { selfPoints: krisaSelfPoints, teamPoints: krisaTeamPoints },
-        dragon: { selfPoints: dragonSelfPoints, teamPoints: dragonTeamPoints },
-    };
-};
 
 const updateTeamPoints = async () => {
     console.log("🛠 Обновление командных очков...");
@@ -103,51 +127,30 @@ const updateTeamPoints = async () => {
             return;
         }
 
-        const animalKeyCounts = players.reduce((acc, player) => {
-            acc[player.animalkey] = (acc[player.animalkey] || 0) + 1;
-            return acc;
-        }, {} as Record<string, number>);
-
-        // Оставляем только игроков с **уникальным** `animalkey`
-        const uniquePlayers = players.filter(player => animalKeyCounts[player.animalkey] === 1);
-
-        console.log(`✅ Уникальных игроков после фильтрации: ${uniquePlayers.length}`);
-
-        if (uniquePlayers.length === 0) {
-            console.log("⚠ Нет уникальных игроков после фильтрации дубликатов.");
-            return;
-        }
-
-        // Загружаем атрибуты NFT
-        const { bik, krisa, dragon } = await fetchNftsAttributes();
 
         // Обрабатываем каждого игрока
-        for (const player of uniquePlayers) {
+        for (const player of players) {
             let selfPoints = 0;
             let teamPoints = 0;
 
-            if (player.animalkeycontrol === BIK_AUTH) {
-                selfPoints = bik.selfPoints;
-                teamPoints = bik.teamPoints;
-            } else if (player.animalkeycontrol === KRISA_AUTH) {
-                selfPoints = krisa.selfPoints;
-                teamPoints = krisa.teamPoints;
-            } else if (player.animalkeycontrol === DRAGON_AUTH) {
-                selfPoints = dragon.selfPoints;
-                teamPoints = dragon.teamPoints;
+            const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol);
+
+            if (owned) {
+                selfPoints = nftSelfPoints;
+                teamPoints = nftTeamPoints;
             } else if (player.animalkeycontrol === player.publickey) {
                 selfPoints = 1;
                 teamPoints = 1;
             } else {
-                console.log(`⚠ Игрок ${player.publickey} не связан с известными NFT.${BIK_AUTH} ${KRISA_AUTH} ${DRAGON_AUTH}`);
+                console.log(`⚠ Игрок ${player.publickey} не имеет NFT. Пропускаем.`);
                 continue;
             }
 
             // Обновляем данные игрока
             await new Promise((resolve, reject) => {
                 db.run(
-                    "UPDATE users SET personal_points = personal_points + ?, team_points = team_points + ?, animalkey = ?, animalkeycontrol = ? WHERE publickey = ?",
-                    [selfPoints, teamPoints, player.publickey, player.publickey, player.publickey],
+                    "UPDATE users SET personal_points = personal_points + ?, team_points = team_points + ?, animalkey = ?, animalkeycontrol = ?, animal_image = ? WHERE publickey = ?",
+                    [selfPoints, teamPoints, player.publickey, player.publickey, "/Avatar.png", player.publickey],
                     function (err) {
                         if (err) reject(err);
                         else resolve(null);
@@ -181,8 +184,8 @@ const updateTeamPoints = async () => {
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
-const EXECUTION_HOUR = 0;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 0; // Минуты (от 0 до 59)
+const EXECUTION_HOUR = 13;  // Часы (от 0 до 23)
+const EXECUTION_MINUTE = 45; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
@@ -228,7 +231,7 @@ const scheduleDailyTask = () => {
     setTimeout(() => {
         dailyFunction();
         // После первого выполнения устанавливаем запуск раз в сутки (24 часа)
-        setInterval(dailyFunction, 24 * 60 * 60 * 1000);
+        setInterval(dailyFunction, 1 * 60 * 1000);
     }, timeUntilExecution);
 };
 

@@ -5,7 +5,8 @@ import * as walletAdapterWallets from '@solana/wallet-adapter-wallets';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const endpoint = useMemo(() => 'https://alien-winter-road.solana-mainnet.quiknode.pro/4c7de5bdc89d47c6d70670f9e22e690c08c9f71a/', []);
+  const endpoint = useMemo(() => 'devnet', []);
+  const MainnetEndpoint = useMemo(() => 'https://alien-winter-road.solana-mainnet.quiknode.pro/4c7de5bdc89d47c6d70670f9e22e690c08c9f71a/', []);
   const wallets = useMemo(() => [
     new walletAdapterWallets.PhantomWalletAdapter(),
     new walletAdapterWallets.SafePalWalletAdapter(),
