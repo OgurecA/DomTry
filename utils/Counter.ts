@@ -100,22 +100,26 @@ type NftOwnershipResult = {
       const isTeamPointsText = isTextValue(teamPointsAttr?.value);
 
       
-      let selfPoints = 0;
-      let teamPoints = 0;
+      // let selfPoints = 0;
+      // let teamPoints = 0;
 
-      if (isSelfPointsText) {
-        const selfPointsData = parseTextValue(selfPointsAttr?.value)
-        selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
-      } else {
-        selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      }
+      // if (isSelfPointsText) {
+      //   const selfPointsData = parseTextValue(selfPointsAttr?.value)
+      //   selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
+      // } else {
+      //   selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      // }
 
-      if (isTeamPointsText) {
-        const teamPointsData = parseTextValue(teamPointsAttr?.value)
-        teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
-      } else {
-        teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      }
+      // if (isTeamPointsText) {
+      //   const teamPointsData = parseTextValue(teamPointsAttr?.value)
+      //   teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
+      // } else {
+      //   teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      // }
+
+      
+      const selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      const teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
   
       console.log(
         `✅ Игрок ${playerPublicKey} владеет NFT ${nftPublicKey.toBase58()}. SelfPoints: ${selfPoints}, TeamPoints: ${teamPoints}, UpdateAuthority: ${updateAuthority}`
@@ -248,7 +252,7 @@ const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 25; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 29; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
