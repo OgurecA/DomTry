@@ -218,31 +218,37 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
 
 const getTeamScores = async (): Promise<{ team1Score: number, team2Score: number }> => {
   return new Promise((resolve, reject) => {
-      db.all("SELECT id, score FROM teams", (err, rows: { id: number, score: number }[]) => { // ✅ Добавлен тип
+      db.all("SELECT id, score FROM teams", (err, rows: any[]) => { // ✅ Используем `any[]` вместо строгих типов
           if (err) {
+              console.error("❌ Ошибка при выполнении SELECT запроса:", err);
               reject(err);
               return;
           }
 
-          if (rows.length < 2) {
+          console.log("🔍 Данные из таблицы teams:", rows); // Отладка
+
+          if (!Array.isArray(rows) || rows.length < 2) {
               reject(new Error("❌ В базе данных недостаточно команд для загрузки очков."));
               return;
           }
 
-          const team1Score = rows[0]?.score || 0;
-          const team2Score = rows[1]?.score || 0;
+          const team1Score = Number(rows[0]?.score) || 0;
+          const team2Score = Number(rows[1]?.score) || 0;
+
+          console.log(`✅ Загружены очки команд: Team 1 = ${team1Score}, Team 2 = ${team2Score}`);
 
           resolve({ team1Score, team2Score });
       });
   });
 };
 
+
 // Подключаем базу данных
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 13; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 20; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
@@ -252,8 +258,7 @@ const dailyFunction = async () => {
     // Здесь будет код выполнения задачи (добавим позже)
     const { team1Score, team2Score } = await getTeamScores();
     
-    updateTeamPoints(team1Score, team2Score)
-
+    await updateTeamPoints(team1Score, team2Score)
 
     console.log("✅ Ежедневное задание завершено");
 };
