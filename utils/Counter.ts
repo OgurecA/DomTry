@@ -12,27 +12,9 @@ const connection = new Connection(SOLANA_RPC_URL);
 // Подключение Metaplex
 const metaplex = Metaplex.make(connection);
 
-
-// Функция для получения метаданных и атрибутов NFT
-const getNftAttributes = async (nftPublicKey: PublicKey) => {
-    try {
-        const nftMetadata = await metaplex.nfts().findByMint({ mintAddress: nftPublicKey });
-
-        if (!nftMetadata || !nftMetadata.json) {
-            console.log(`⚠ Метаданные для ${nftPublicKey.toBase58()} не найдены`);
-            return null;
-        }
-
-        // Извлекаем атрибуты
-        const attributes = nftMetadata.json.attributes || [];
-
-        console.log(`✅ NFT ${nftPublicKey.toBase58()} найдено. Атрибуты:`, attributes);
-        return attributes;
-    } catch (error) {
-        console.error(`❌ Ошибка при получении NFT ${nftPublicKey.toBase58()}:`, error);
-        return null;
-    }
-};
+const BIK_AUTH = process.env.BIK_AUTH;
+const KRISA_AUTH = process.env.KRISA_AUTH;
+const DRAGON_AUTH = process.env.DRAGON_AUTH;
 
 type NftOwnershipResult = {
     owned: boolean;
@@ -51,7 +33,7 @@ type NftOwnershipResult = {
       const nftPublicKey = new PublicKey(nftAnimalKey);
       const publicKey = new PublicKey(playerPublicKey);
   
-      if (publicKey === nftPublicKey && publicKey === savedUpdateAuthority) {
+      if (publicKey.toBase58() === nftPublicKey.toBase58() && publicKey.toBase58() === savedUpdateAuthority.toBase58()) {
         console.log(`⚠ Игрок ${playerPublicKey} не использует NFT`);
         return { owned: false, selfPoints: 1, teamPoints: 1, updateAuthority: null };
     }
@@ -127,17 +109,31 @@ const updateTeamPoints = async () => {
             return;
         }
 
+        const usedNfts = new Set<string>();
+
+        const validNftKeys = new Set([BIK_AUTH, KRISA_AUTH, DRAGON_AUTH]);
 
         // Обрабатываем каждого игрока
         for (const player of players) {
             let selfPoints = 0;
             let teamPoints = 0;
 
+            if (!validNftKeys.has(player.animalkeycontrol) && player.animalkeycontrol !== player.publickey) {
+                console.log(`🚫 Игрок ${player.publickey} использует нелегитимный NFT (${player.animalkeycontrol}). Пропускаем.`);
+                continue;
+            }
+
             const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol);
+
+            if (owned && usedNfts.has(player.animalkey)) {
+                console.log(`⚠ NFT ${player.animalkey} уже использовалась в этом запуске. Пропускаем ${player.publickey}.`);
+                continue;
+            }
 
             if (owned) {
                 selfPoints = nftSelfPoints;
                 teamPoints = nftTeamPoints;
+                usedNfts.add(player.animalkey);
             } else if (player.animalkeycontrol === player.publickey) {
                 selfPoints = 1;
                 teamPoints = 1;
