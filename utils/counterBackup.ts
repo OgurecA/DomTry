@@ -140,7 +140,7 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
     try {
         // Получаем игроков с уникальными animalkey (игнорируем дубли)
         const players = await new Promise<any[]>((resolve, reject) => {
-            db.all("SELECT publickey, score, team, animalkey, animalkeycontrol FROM users", (err, rows) => {
+            db.all("SELECT publickey, personal_points, team, animalkey, animalkeycontrol FROM users", (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -167,7 +167,7 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
 
             const playerTeamScore = player.team === 1 ? team1Score : team2Score;
 
-            const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol, player.score, playerTeamScore);
+            const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol, player.personal_points, playerTeamScore);
 
             if (owned && usedNfts.has(player.animalkey)) {
                 console.log(`⚠ NFT ${player.animalkey} уже использовалась в этом запуске. Пропускаем ${player.publickey}.`);
@@ -186,8 +186,6 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
                 continue;
             }
 
-            const columnExists = await checkColumnExists("score", "teams");
-            console.log("columnExists", columnExists)
             // Обновляем данные игрока
             await new Promise((resolve, reject) => {
                 db.run(
@@ -268,7 +266,7 @@ const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 39; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 43; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
