@@ -186,6 +186,8 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
                 continue;
             }
 
+            const columnExists = await checkColumnExists("score", "teams");
+            console.log("columnExists", columnExists)
             // Обновляем данные игрока
             await new Promise((resolve, reject) => {
                 db.run(
@@ -246,13 +248,27 @@ const getTeamScores = async (): Promise<{ team1Score: number, team2Score: number
   });
 };
 
-
+const checkColumnExists = async (columnName: string, tableName: string): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
+      db.all(`PRAGMA table_info(${tableName})`, (err, rows: { name: string }[]) => { // ✅ Указываем тип
+        if (err) {
+          reject(err);
+          return;
+        }
+  
+        const columnExists = rows.some((row) => row.name === columnName);
+        resolve(columnExists);
+      });
+    });
+  };
+  
+  
 // Подключаем базу данных
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 29; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 39; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
