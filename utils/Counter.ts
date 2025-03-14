@@ -16,6 +16,31 @@ const BIK_AUTH = process.env.BIK_AUTH;
 const KRISA_AUTH = process.env.KRISA_AUTH;
 const DRAGON_AUTH = process.env.DRAGON_AUTH;
 
+const isTextValue = (value: any): boolean => typeof value === "string" && isNaN(+value);
+
+const parseTextValue = (value: any): { percentage: number, type: "SelfPoints" | "TeamPoints" | null } => {
+  if (typeof value !== "string") return { percentage: 0, type: null };
+
+  const match = value.match(/^(\d+(\.\d+)?)%\s*of\s*(SelfPoints|TeamPoints)$/i);
+  if (match) {
+      return {
+          percentage: Number(match[1]) / 100, // Преобразуем "10%" → 0.1
+          type: match[3] as "SelfPoints" | "TeamPoints" // Определяем, к чему относится процент
+      };
+  }
+
+  return { percentage: 0, type: null }; // Любой другой текст → 0
+};
+
+const applyPercentage = (data: { percentage: number; type: "SelfPoints" | "TeamPoints" | null }, selfPoints: number, teamPoints: number): number => {
+  if (data.type === "SelfPoints") {
+      return selfPoints * data.percentage; // Если процент от личных очков
+  } else if (data.type === "TeamPoints") {
+      return teamPoints * data.percentage; // Если процент от командных очков
+  }
+  return 0; // Если нет корректного типа, вернуть 0
+};
+
 type NftOwnershipResult = {
     owned: boolean;
     selfPoints: number;
@@ -26,7 +51,9 @@ type NftOwnershipResult = {
   const checkNftOwnership = async (
     playerPublicKey: string,
     nftAnimalKey: string,
-    nftAuthorityCheck: string
+    nftAuthorityCheck: string,
+    playerScore: number,
+    teamScore: number
   ): Promise<NftOwnershipResult> => {
     try {
       const savedUpdateAuthority = new PublicKey(nftAuthorityCheck);
@@ -68,16 +95,26 @@ type NftOwnershipResult = {
       const attributes = nftMetadata.json.attributes || [];
       const selfPointsAttr = attributes.find(attr => attr.trait_type === "SelfPoints");
       const teamPointsAttr = attributes.find(attr => attr.trait_type === "TeamPoints");
-  
-      const selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      const teamPoints = teamPointsAttr?.value ? Number(teamPointsAttr.value) || 0 : 0;
-  
-      // Проверка на допустимые значения
-      if (selfPoints < 0 || selfPoints > 1000 || teamPoints < 0 || teamPoints > 1000) {
-        console.log(
-          `⚠ Недопустимые значения атрибутов для NFT ${nftPublicKey.toBase58()}: SelfPoints=${selfPoints}, TeamPoints=${teamPoints}`
-        );
-        return { owned: true, selfPoints: 0, teamPoints: 0, updateAuthority };
+
+      const isSelfPointsText = isTextValue(selfPointsAttr?.value);
+      const isTeamPointsText = isTextValue(teamPointsAttr?.value);
+
+      
+      let selfPoints = 0;
+      let teamPoints = 0;
+
+      if (isSelfPointsText) {
+        const selfPointsData = parseTextValue(selfPointsAttr?.value)
+        selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
+      } else {
+        selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      }
+
+      if (isTeamPointsText) {
+        const teamPointsData = parseTextValue(teamPointsAttr?.value)
+        teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
+      } else {
+        teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
       }
   
       console.log(
@@ -92,13 +129,14 @@ type NftOwnershipResult = {
   };
 
 
-const updateTeamPoints = async () => {
+const updateTeamPoints = async (team1Score: number, team2Score: number) => {
+
     console.log("🛠 Обновление командных очков...");
 
     try {
         // Получаем игроков с уникальными animalkey (игнорируем дубли)
         const players = await new Promise<any[]>((resolve, reject) => {
-            db.all("SELECT publickey, team, animalkey, animalkeycontrol FROM users", (err, rows) => {
+            db.all("SELECT publickey, score, team, animalkey, animalkeycontrol FROM users", (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -123,7 +161,9 @@ const updateTeamPoints = async () => {
                 continue;
             }
 
-            const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol);
+            const playerTeamScore = player.team === 1 ? team1Score : team2Score;
+
+            const { owned, selfPoints: nftSelfPoints, teamPoints: nftTeamPoints } = await checkNftOwnership(player.publickey, player.animalkey, player.animalkeycontrol, player.score, playerTeamScore);
 
             if (owned && usedNfts.has(player.animalkey)) {
                 console.log(`⚠ NFT ${player.animalkey} уже использовалась в этом запуске. Пропускаем ${player.publickey}.`);
@@ -176,12 +216,33 @@ const updateTeamPoints = async () => {
     }
 };
 
+const getTeamScores = async (): Promise<{ team1Score: number, team2Score: number }> => {
+  return new Promise((resolve, reject) => {
+      db.all("SELECT id, score FROM teams", (err, rows: { id: number, score: number }[]) => { // ✅ Добавлен тип
+          if (err) {
+              reject(err);
+              return;
+          }
+
+          if (rows.length < 2) {
+              reject(new Error("❌ В базе данных недостаточно команд для загрузки очков."));
+              return;
+          }
+
+          const team1Score = rows[0]?.score || 0;
+          const team2Score = rows[1]?.score || 0;
+
+          resolve({ team1Score, team2Score });
+      });
+  });
+};
+
 // Подключаем базу данных
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
-const EXECUTION_HOUR = 12;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 40; // Минуты (от 0 до 59)
+const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
+const EXECUTION_MINUTE = 13; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
@@ -189,8 +250,9 @@ const dailyFunction = async () => {
     console.log(`✅ Запуск ежедневного задания в ${EXECUTION_HOUR}:${EXECUTION_MINUTE} UTC`);
 
     // Здесь будет код выполнения задачи (добавим позже)
+    const { team1Score, team2Score } = await getTeamScores();
     
-    updateTeamPoints()
+    updateTeamPoints(team1Score, team2Score)
 
 
     console.log("✅ Ежедневное задание завершено");
