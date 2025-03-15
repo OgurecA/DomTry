@@ -5,6 +5,7 @@ const nextConfig = {
     BIK_AUTH: process.env.BIK_AUTH,
     KRISA_AUTH: process.env.KRISA_AUTH,
     DRAGON_AUTH: process.env.DRAGON_AUTH,
+    PERCENT_AUTH: process.env.PERCENT_AUTH,
   },
 };
 

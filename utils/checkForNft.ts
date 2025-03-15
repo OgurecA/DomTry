@@ -191,7 +191,7 @@ export class findNFT {
                         nftAddress: nft.address,
                         nftName,
                         attributes,
-                        nftCreator: DRAGON_AUTH,
+                        nftCreator: PERCENT_AUTH,
                     };
                 }
             }
