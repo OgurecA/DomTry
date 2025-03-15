@@ -106,14 +106,14 @@ type NftOwnershipResult = {
 
       if (isSelfPointsText) {
         const selfPointsData = parseTextValue(selfPointsAttr?.value)
-        selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
+        selfPoints = Math.round(applyPercentage(selfPointsData, playerScore, teamScore));
       } else {
         selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
       }
 
       if (isTeamPointsText) {
         const teamPointsData = parseTextValue(teamPointsAttr?.value)
-        teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
+        teamPoints = Math.round(applyPercentage(teamPointsData, playerScore, teamScore));
       } else {
         teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
       }
