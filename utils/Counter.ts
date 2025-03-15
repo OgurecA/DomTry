@@ -266,8 +266,8 @@ const checkColumnExists = async (columnName: string, tableName: string): Promise
 const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
-const EXECUTION_HOUR = 14;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 43; // Минуты (от 0 до 59)
+const EXECUTION_HOUR = 11;  // Часы (от 0 до 23)
+const EXECUTION_MINUTE = 51; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
