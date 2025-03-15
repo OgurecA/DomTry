@@ -24,11 +24,12 @@ const FarmPage = () => {
   const { connection } = useConnection();
   const { publicKey } = useWallet();
 
-  const [nfts, setNfts] = useState<{ player: NftData, nft1: NftData, nft2: NftData, nft3: NftData }>({
+  const [nfts, setNfts] = useState<{ player: NftData, nft1: NftData, nft2: NftData, nft3: NftData, nft4: NftData }>({
     player: null,
     nft1: null,
     nft2: null,
     nft3: null,
+    nft4: null,
   });
 
   const [selectedNft, setSelectedNft] = useState<NftData>(null);
@@ -95,10 +96,11 @@ const FarmPage = () => {
     if (!publicKey) return;
 
     const fetchNfts = async () => {
-      const [nft1, nft2, nft3] = await Promise.all([
+      const [nft1, nft2, nft3, nft4] = await Promise.all([
         findNFT.Bik(connection, publicKey),
         findNFT.Rat(connection, publicKey),
         findNFT.Dragon(connection, publicKey),
+        findNFT.Percent(connection, publicKey),
       ]);
 
       setNfts({
@@ -106,6 +108,7 @@ const FarmPage = () => {
         nft1: nft1 ? { ...nft1, imageUrl: "/BekPNG.png" } : null,
         nft2: nft2 ? { ...nft2, imageUrl: "/Krisa.png" } : null,
         nft3: nft3 ? { ...nft3, imageUrl: "/BarsukNewPNG.png" } : null,
+        nft4: nft4 ? { ...nft4, imageUrl: "/BekPNG.png" } : null,
       });
     };
     fetchNfts();
@@ -141,7 +144,7 @@ const FarmPage = () => {
   useEffect(() => {
     if (!animalKey) return;
 
-    const foundNft = [nfts.player, nfts.nft1, nfts.nft2, nfts.nft3].find(
+    const foundNft = [nfts.player, nfts.nft1, nfts.nft2, nfts.nft3, nfts.nft4].find(
       (nft) => nft && nft.nftAddress.toBase58() === animalKey
     );
 
@@ -248,54 +251,6 @@ const FarmPage = () => {
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
           />
           <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
             title="BERNARD"
             imageUrl="/BekPNG.png"
             checkNft={() => Promise.resolve(nfts.nft1)}
@@ -312,6 +267,12 @@ const FarmPage = () => {
             imageUrl="/BarsukNewPNG.png"
             checkNft={() => Promise.resolve(nfts.nft3)}
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
+          />
+          <NftStatus
+            title="PERCENT"
+            imageUrl="/BekPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft4)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
           />
           </div>
           </div>
@@ -330,48 +291,6 @@ const FarmPage = () => {
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
           />
           <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
-            title="PLAYER"
-            imageUrl="/Avatar.png"
-            checkNft={() => Promise.resolve(playerAvatar)}
-            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/Avatar.png" })}
-          />
-          <NftStatus
             title="BERNARD"
             imageUrl="/BekPNG.png"
             checkNft={() => Promise.resolve(nfts.nft1)}
@@ -388,6 +307,12 @@ const FarmPage = () => {
             imageUrl="/BarsukNewPNG.png"
             checkNft={() => Promise.resolve(nfts.nft3)}
             onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BarsukNewPNG.png" })}
+          />
+          <NftStatus
+            title="PERCENT"
+            imageUrl="/BekPNG.png"
+            checkNft={() => Promise.resolve(nfts.nft4)}
+            onClick={(nft) => setSelectedNft({ ...nft, imageUrl: "/BekPNG.png" })}
           />
           </div>
         )}

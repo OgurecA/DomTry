@@ -15,6 +15,7 @@ const metaplex = Metaplex.make(connection);
 const BIK_AUTH = process.env.BIK_AUTH;
 const KRISA_AUTH = process.env.KRISA_AUTH;
 const DRAGON_AUTH = process.env.DRAGON_AUTH;
+const PERCENT_AUTH = process.env.PERCENT_AUTH;
 
 const isTextValue = (value: any): boolean => typeof value === "string" && isNaN(+value);
 
@@ -100,26 +101,26 @@ type NftOwnershipResult = {
       const isTeamPointsText = isTextValue(teamPointsAttr?.value);
 
       
-      // let selfPoints = 0;
-      // let teamPoints = 0;
+      let selfPoints = 0;
+      let teamPoints = 0;
 
-      // if (isSelfPointsText) {
-      //   const selfPointsData = parseTextValue(selfPointsAttr?.value)
-      //   selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
-      // } else {
-      //   selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      // }
+      if (isSelfPointsText) {
+        const selfPointsData = parseTextValue(selfPointsAttr?.value)
+        selfPoints = applyPercentage(selfPointsData, playerScore, teamScore)
+      } else {
+        selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      }
 
-      // if (isTeamPointsText) {
-      //   const teamPointsData = parseTextValue(teamPointsAttr?.value)
-      //   teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
-      // } else {
-      //   teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      // }
+      if (isTeamPointsText) {
+        const teamPointsData = parseTextValue(teamPointsAttr?.value)
+        teamPoints = applyPercentage(teamPointsData, playerScore, teamScore)
+      } else {
+        teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      }
 
       
-      const selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
-      const teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      // selfPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+      // teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
   
       console.log(
         `✅ Игрок ${playerPublicKey} владеет NFT ${nftPublicKey.toBase58()}. SelfPoints: ${selfPoints}, TeamPoints: ${teamPoints}, UpdateAuthority: ${updateAuthority}`
@@ -153,7 +154,7 @@ const updateTeamPoints = async (team1Score: number, team2Score: number) => {
 
         const usedNfts = new Set<string>();
 
-        const validNftKeys = new Set([BIK_AUTH, KRISA_AUTH, DRAGON_AUTH]);
+        const validNftKeys = new Set([BIK_AUTH, KRISA_AUTH, DRAGON_AUTH, PERCENT_AUTH]);
 
         // Обрабатываем каждого игрока
         for (const player of players) {
