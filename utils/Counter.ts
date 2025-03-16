@@ -22,16 +22,18 @@ const isTextValue = (value: any): boolean => typeof value === "string" && isNaN(
 const parseTextValue = (value: any): { percentage: number, type: "SelfPoints" | "TeamPoints" | null } => {
   if (typeof value !== "string") return { percentage: 0, type: null };
 
-  const match = value.match(/^(\d+(\.\d+)?)%\s*of\s*(SelfPoints|TeamPoints)$/i);
+  // Регулярное выражение теперь поддерживает отрицательные значения
+  const match = value.match(/^(-?\d+(\.\d+)?)%\s*of\s*(SelfPoints|TeamPoints)$/i);
   if (match) {
       return {
-          percentage: Number(match[1]) / 100, // Преобразуем "10%" → 0.1
+          percentage: Number(match[1]) / 100, // Преобразуем "-10%" → -0.1, "10%" → 0.1
           type: match[3] as "SelfPoints" | "TeamPoints" // Определяем, к чему относится процент
       };
   }
 
   return { percentage: 0, type: null }; // Любой другой текст → 0
 };
+
 
 const applyPercentage = (data: { percentage: number; type: "SelfPoints" | "TeamPoints" | null }, selfPoints: number, teamPoints: number): number => {
   if (data.type === "SelfPoints") {

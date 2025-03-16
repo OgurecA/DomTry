@@ -24,6 +24,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
   const [ status, setStatus ] = useState<string>("JOIN");
 
   const [value, setValue] = useState(0.01);
+
   
   const joinGame = async () => {
     try {
@@ -39,6 +40,24 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       }
   
       console.log("✅ Транзакция успешно подтверждена:", signature);
+
+      const verifyResponse = await fetch("/api/verifyTransaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            transactionId: signature,
+            publicKey: publicKey.toBase58(),
+            amount: amount
+        }),
+      });
+
+      const verifyResult = await verifyResponse.json();
+
+      if (!verifyResponse.ok) {
+        throw new Error(`❌ Ошибка: ${verifyResult.message}`);
+      }
+
+      console.log("✅ Транзакция успешно проверена сервером");
 
       const teamResponse = await fetch("/api/teaminfo");
       
@@ -101,6 +120,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
       setStatus("JOIN");
     }
   };
+
   
 
   return (

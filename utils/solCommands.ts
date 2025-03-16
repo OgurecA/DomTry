@@ -16,7 +16,8 @@ import {
   // const ownerKeypair = Keypair.fromSecretKey(secretKey);
 
   const pot = new PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2");
-  const mint = new PublicKey("6cAVasi4zhJHbZHzS1UVRAGpXHUoSjLPxtjjYr3RayrS");
+  const mint = new PublicKey("7zWihHxBBDuUBfya4b2wWfdhXr5CFsefn1mywodoS3od");
+  const mainnetMint = new PublicKey("6cAVasi4zhJHbZHzS1UVRAGpXHUoSjLPxtjjYr3RayrS");
 
 export class solCommands {
 
