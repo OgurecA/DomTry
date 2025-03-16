@@ -29,7 +29,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
   const joinGame = async () => {
     try {
       setStatus("JOINING...")
-      const { transaction, amount } = await solCommands.JoinGame(connection, publicKey, value);
+      const { transaction, amount, playerTokenAccountCheck } = await solCommands.JoinGame(connection, publicKey, value);
   
       const signature = await sendTransaction(transaction, connection);
   
@@ -46,7 +46,7 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             transactionId: signature,
-            publicKey: publicKey.toBase58(),
+            publicKey: playerTokenAccountCheck,
             amount: amount
         }),
       });

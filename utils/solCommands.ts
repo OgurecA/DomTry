@@ -25,7 +25,7 @@ export class solCommands {
     connection: Connection,
     player: PublicKey,
     amount: number
-  ): Promise<{ transaction: Transaction, amount: number }> {
+  ): Promise<{ transaction: Transaction, amount: number, playerTokenAccountCheck: string }> {
 
 
     const potTokenAccount = await getAssociatedTokenAddress(
@@ -41,6 +41,8 @@ export class solCommands {
       false, // Allow owner off curve (обычно false для стандартных случаев)
       TOKEN_PROGRAM_ID // Программа токенов Solana
     );
+
+    const playerTokenAccountCheck = playerTokenAccount.toBase58()
 
     // const accountInfo = await connection.getAccountInfo(playerTokenAccount);
 
@@ -76,7 +78,7 @@ export class solCommands {
 
     transaction.add(createAccInstruction)
 
-    return { transaction, amount };
+    return { transaction, amount, playerTokenAccountCheck };
 
   }
 
