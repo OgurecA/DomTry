@@ -150,20 +150,21 @@
 
     .teamContainer {
         height: auto;
-        width: auto;
+        width: 80%;
         min-width: 200px;
-        max-width: 300px;
+        max-width: 3000px;
     }
     .profileContainer {
         height: auto;
-        width: auto;
-        padding: 5px 20px;
+        width: 80%;
+        padding: 10px 20px;
+        box-sizing: border-box;
         min-width: 200px;
-        max-width: 300px;
+        max-width: 3000px;
     }
 
     .bankContainer {
-        width: 200px;
+        width: 80%;
         padding: 40px 20px;
         top: 0px;
     }
@@ -183,7 +184,7 @@
     }
 
     .bankContainer {
-        margin-top: 10px;
+        margin-top: 0px;
         padding: 25px 14px;
         display: flex;
         flex-direction: column;

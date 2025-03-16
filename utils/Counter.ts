@@ -115,7 +115,7 @@ type NftOwnershipResult = {
         const teamPointsData = parseTextValue(teamPointsAttr?.value)
         teamPoints = Math.round(applyPercentage(teamPointsData, playerScore, teamScore));
       } else {
-        teamPoints = selfPointsAttr?.value ? Number(selfPointsAttr.value) || 0 : 0;
+        teamPoints = teamPointsAttr?.value ? Number(teamPointsAttr.value) || 0 : 0;
       }
 
       
