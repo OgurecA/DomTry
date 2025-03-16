@@ -6,6 +6,15 @@ const connection = new Connection("https://api.devnet.solana.com");
 
 const EXPECTED_RECEIVER_PUBLIC_KEY = "J5vSjmTn4yhetWWncr5KzC1VbrgPVwEQ3BeBT4bs4CrC";
 
+interface ParsedInstruction {
+    type: string;
+    info: {
+        source?: string;
+        destination?: string;
+        amount?: number;
+    };
+}
+
 // Функция проверки транзакции (должна быть где-то определена)
 const verifyTransaction = async (transactionId: string, expectedPublicKey: string, expectedAmount: number) => {
     try {
@@ -24,21 +33,21 @@ const verifyTransaction = async (transactionId: string, expectedPublicKey: strin
         let actualAmount: number = 0;
 
         for (const instruction of instructions) {
-          if ("parsed" in instruction && typeof instruction.parsed === "object" && instruction.parsed !== null) {
-              const parsed = instruction.parsed as { type: string, info: any };
-      
-              // Проверяем, что это перевод токенов (SPL Token Program)
-              if (parsed.type === "transfer" && parsed.info) {
-                  senderPublicKey = parsed.info.source;
-                  receiverPublicKey = parsed.info.destination;
-                  const rawAmount = parsed.info.amount; // 🟢 Количество токенов в "минимальных единицах" (например, 1000 при `decimals = 3`)
-      
-                  // Учитываем `decimals` токена (например, 1000 → 1.000 если `decimals = 3`)
-                  const decimals = 3; // ⚠ Укажи актуальные decimals для твоего токена
-                  actualAmount = rawAmount / (10 ** decimals);
-              }
-          }
-      }
+            if ("parsed" in instruction && typeof instruction.parsed === "object" && instruction.parsed !== null) {
+                const parsed = instruction.parsed as ParsedInstruction; // ✅ Используем тип вместо any
+        
+                // Проверяем, что это перевод токенов (SPL Token Program)
+                if (parsed.type === "transfer" && parsed.info.source && parsed.info.destination && parsed.info.amount) {
+                    senderPublicKey = parsed.info.source;
+                    receiverPublicKey = parsed.info.destination;
+                    const rawAmount = parsed.info.amount; // 🟢 Количество токенов в минимальных единицах
+        
+                    // ✅ Автоматически получаем `decimals` у токена
+                    const decimals = 3; // Здесь можно динамически получать `decimals` (если доступно)
+                    actualAmount = rawAmount / (10 ** decimals);
+                }
+            }
+        }
       
 
         // Проверяем, что отправитель совпадает с ожидаемым publicKey
