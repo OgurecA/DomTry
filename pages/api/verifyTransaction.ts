@@ -19,7 +19,7 @@ interface ParsedInstruction {
 const verifyTransaction = async (transactionId: string, expectedPublicKey: string, expectedAmount: number) => {
     try {
         // Получаем информацию о транзакции
-        const tx = await connection.getTransaction(transactionId, { commitment: "finalized" });
+        const tx = await connection.getParsedTransaction(transactionId, { commitment: "finalized" });
 
         if (!tx) {
             console.log("❌ Ошибка: транзакция не найдена!");
@@ -43,7 +43,7 @@ const verifyTransaction = async (transactionId: string, expectedPublicKey: strin
                     const rawAmount = parsed.info.amount; // 🟢 Количество токенов в минимальных единицах
         
                     // ✅ Автоматически получаем `decimals` у токена
-                    const decimals = 3; // Здесь можно динамически получать `decimals` (если доступно)
+                    const decimals = 2; // Здесь можно динамически получать `decimals` (если доступно)
                     actualAmount = rawAmount / (10 ** decimals);
                 }
             }
