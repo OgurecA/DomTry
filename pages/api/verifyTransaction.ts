@@ -1,9 +1,7 @@
 import { Connection } from '@solana/web3.js';
 import { NextApiRequest, NextApiResponse } from 'next';
-import sqlite3 from "sqlite3";
 
 // Открываем подключение к базе данных
-const db = new sqlite3.Database('game.db');
 const connection = new Connection("https://api.devnet.solana.com");
 
 const EXPECTED_RECEIVER_PUBLIC_KEY = "J5vSjmTn4yhetWWncr5KzC1VbrgPVwEQ3BeBT4bs4CrC";
