@@ -1,10 +1,13 @@
 import { Connection } from '@solana/web3.js';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import sqlite3 from "sqlite3";
+const db = new sqlite3.Database("game.db");
 // Открываем подключение к базе данных
 const connection = new Connection("https://api.devnet.solana.com");
 
 const EXPECTED_RECEIVER_PUBLIC_KEY = "J5vSjmTn4yhetWWncr5KzC1VbrgPVwEQ3BeBT4bs4CrC";
+
+const MAX_TRANSACTION_AGE = 300;
 
 interface ParsedInstruction {
     type: string;
@@ -23,6 +26,18 @@ const verifyTransaction = async (transactionId: string, expectedPublicKey: strin
 
         if (!tx) {
             console.log("❌ Ошибка: транзакция не найдена!");
+            return false;
+        }
+
+        const blockTime = tx.blockTime;
+        if (!blockTime) {
+            console.log("❌ Ошибка: невозможно получить время блока!");
+            return false;
+        }
+
+        const currentTime = Math.floor(Date.now() / 1000); // Текущее время в секундах
+        if (currentTime - blockTime > MAX_TRANSACTION_AGE) {
+            console.log("❌ Ошибка: транзакция слишком старая!");
             return false;
         }
 
@@ -90,6 +105,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
+
+        const existingTransaction = await new Promise((resolve, reject) => {
+            db.get("SELECT join_signature FROM users WHERE join_signature = ?", [transactionId], (err, row) => {
+                if (err) reject(err);
+                else resolve(row);
+            });
+        });
+
+        if (existingTransaction) {
+            console.log(`❌ Ошибка: Транзакция ${transactionId} уже использована!`);
+            return res.status(400).json({ message: "❌ Ошибка: Транзакция уже была использована!" });
+        }
         // Проверяем транзакцию
         const isTransactionValid = await verifyTransaction(transactionId, publicKey, amount);
 

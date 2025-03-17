@@ -21,7 +21,7 @@ export const AppBar: FC = () => {
     return (
         <div className={styles.AppHeader}>
             <div className={styles.LeftSection}>
-                <img src="/BarsukNewPNG.png" className={styles.LogoImage}/>
+                <img src="/BarsukNewPNG.png" alt="" className={styles.LogoImage}/>
                 <span style={{ fontWeight: 'bold' }}>DOMINATORS</span>
                 {/* <button className={styles.NavButton} onClick={() => navigateTo('/office')}>OFFICE</button> */}
             </div>

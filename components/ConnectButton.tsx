@@ -28,7 +28,14 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
   
   const joinGame = async () => {
     try {
+
+      if (!Number.isFinite(value) || value < 0.01 || value > 5) {
+        console.error("❌ Ошибка: Некорректная сумма!");
+        return;
+      }
+      
       setStatus("JOINING...")
+      
       const { transaction, amount, playerTokenAccountCheck } = await solCommands.JoinGame(connection, publicKey, value);
   
       const signature = await sendTransaction(transaction, connection);
@@ -46,7 +53,8 @@ export const ConnectButton: FC<ConnectButtonProps> = ({ setCheck }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             transactionId: signature,
-            publicKey: playerTokenAccountCheck,
+            publicKey: publicKey.toBase58(),
+            playerTokenAccount: playerTokenAccountCheck,
             amount: amount
         }),
       });
