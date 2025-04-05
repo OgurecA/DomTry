@@ -199,7 +199,7 @@ const OfficePage = () => {
                                     "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
                                 } as React.CSSProperties}
                             >
-                            BANK:
+                            BANK: 0.17
                             <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                             <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                             <div className={styles.lightningContainer} style={{ 
