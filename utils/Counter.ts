@@ -269,7 +269,7 @@ const db = new sqlite3.Database("game.db");
 
 // ⚡ Задаем время выполнения (в UTC)
 const EXECUTION_HOUR = 9;  // Часы (от 0 до 23)
-const EXECUTION_MINUTE = 15; // Минуты (от 0 до 59)
+const EXECUTION_MINUTE = 17; // Минуты (от 0 до 59)
 
 
 // Функция, которая будет выполняться в заданное время
