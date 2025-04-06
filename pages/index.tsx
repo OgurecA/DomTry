@@ -3,9 +3,24 @@ import styles from '../styles/Home.module.css'
 import { AppBar } from '../components/AppBar'
 import Head from 'next/head'
 import { Back } from '../components/Back'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
+import { useEffect, useState } from 'react'
 
 const Home: NextPage = () => {
 
+  const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
+      
+          useEffect(() => {
+              const handleResize = () => {
+                  setIsMobileLayout(window.innerWidth < 780);
+              };
+      
+              // Вызываем сразу при загрузке
+              handleResize();
+              window.addEventListener("resize", handleResize);
+      
+              return () => window.removeEventListener("resize", handleResize);
+          }, []);
 
   return (
     <div className={styles.App}>
@@ -20,6 +35,9 @@ const Home: NextPage = () => {
       <AppBar />
       <Back>
         <div className={styles.welcomeTextContainer}>
+          {isMobileLayout && (
+                <WalletMultiButton className={styles.walletButton}/>
+            )} {/* НЕ РАБОТАЕТ ИЗ-ЗА СТИЛЕЙ */}
           <p className={styles.title}>
             Web3 Game
           </p>
