@@ -75,7 +75,7 @@ const OfficePage = () => {
             try {
                 const accountInfo = await getAccount(connection, bankAddress);
                 const tokenBalance = Number(accountInfo.amount);
-                const decimals = 2; // или подставь нужное значение, если у токена есть десятичные
+                const decimals = 3; // или подставь нужное значение, если у токена есть десятичные
                 setBankBalance(tokenBalance / 10 ** decimals);
             } catch (err) {
                 console.error("Ошибка при получении баланса:", err);
