@@ -40,7 +40,7 @@ const FarmPage = () => {
   const [animalKey, setAnimalKey] = useState<string | null>(null);
 
   const getStatus = (nft: NftData | null) => {
-    return nft && nft.nftAddress.toBase58() === animalKey ? "FARMING" : "SET";
+    return nft && nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "FARMING";
   };
 
   const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
