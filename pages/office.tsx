@@ -5,9 +5,10 @@ import TeamProfile from '../components/TeamProfile';
 import { OfficeAppBar } from '../components/OfficeAppBar';
 import styles from '../styles/OfficePage.module.css';
 import { ConnectButton } from '../components/ConnectButton';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { BackOffice } from '../components/BackOffice';
 import { NavBarOffice } from '../components/NavBarOffice';
+import { getAccount, getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 type PlayerData = {
     avatar: string;
@@ -34,6 +35,7 @@ const OfficePage = () => {
     const [isUserInDatabase, setIsUserInDatabase] = useState<boolean | null>(null);
     const [check, setCheck] = useState<boolean>(false);
     
+    const [bankBalance, setBankBalance] = useState<number | null>(null);
 
     const [userData, setUserData] = useState<PlayerData | null>(null);
 
@@ -58,6 +60,31 @@ const OfficePage = () => {
     }, []);
 
 
+    useEffect(() => {
+        const getBank = async () => {
+            const pot = new PublicKey("ArttwtHob1nbRSKmNDwAjXopxHt3sJJQnyG9VwwTe1V2");
+            const mint = new PublicKey("7zWihHxBBDuUBfya4b2wWfdhXr5CFsefn1mywodoS3od");
+
+            const bankAddress = getAssociatedTokenAddressSync(
+                mint,
+                pot,
+                false,
+                TOKEN_PROGRAM_ID
+            );
+
+            try {
+                const accountInfo = await getAccount(connection, bankAddress);
+                const tokenBalance = Number(accountInfo.amount);
+                const decimals = 2; // или подставь нужное значение, если у токена есть десятичные
+                setBankBalance(tokenBalance / 10 ** decimals);
+            } catch (err) {
+                console.error("Ошибка при получении баланса:", err);
+                setBankBalance(0);
+            }
+        };
+
+        getBank();
+    }, []);
 
 
     useEffect(() => {
@@ -199,7 +226,7 @@ const OfficePage = () => {
                                     "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
                                 } as React.CSSProperties}
                             >
-                            {`BANK: ${teamA.bank + teamB.bank}`}
+                            BANK: {bankBalance !== null ? bankBalance : "Loading..."} {/* BANK!!!!!!!! */}
                             <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                             <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                             <div className={styles.lightningContainer} style={{ 
@@ -276,7 +303,7 @@ const OfficePage = () => {
                         "--teamB-score": `${(teamB.score / (teamA.score + teamB.score)) * 100}%`
                     } as React.CSSProperties}
                 >
-                {`BANK: ${teamA.bank + teamB.bank}`}
+                BANK: {bankBalance !== null ? bankBalance : "Loading..."} {/* BANK!!!!!!!! */}
                 <div className={styles.borderMarker} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                 <div className={styles.borderMarker2} style={{ left: `${(teamA.score / (teamA.score + teamB.score)) * 100}%` }}></div>
                 <div className={styles.lightningContainer} style={{ 

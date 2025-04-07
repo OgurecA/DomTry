@@ -40,7 +40,7 @@ const FarmPage = () => {
   const [animalKey, setAnimalKey] = useState<string | null>(null);
 
   const getStatus = (nft: NftData | null) => {
-    return nft && nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "SET";
+    return nft && nft.nftAddress.toBase58() === animalKey ? "CHOSEN" : "FARMING";
   };
 
   const [isMobileLayout, setIsMobileLayout] = useState<boolean | null>(false);
@@ -226,7 +226,9 @@ const FarmPage = () => {
           </div>
         )}
         {selectedNft && isMobileLayout2 && (
-          <button className={styles.selectedNftButton} onClick={() => setAnimal()} disabled={buttonIsLoading}>
+          <button className={`${styles.selectedNftButton} ${getStatus(selectedNft) === "FARMING" ? styles.farming : ""}`}
+                  onClick={() => setAnimal()}
+                  disabled={buttonIsLoading}>
             {buttonIsLoading ? <span className={styles.loader}></span> : getStatus(selectedNft)}
           </button>
         )}
