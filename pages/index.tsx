@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { Back } from '../components/Back'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useEffect, useState } from 'react'
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 const Home: NextPage = () => {
 
@@ -21,6 +22,20 @@ const Home: NextPage = () => {
       
               return () => window.removeEventListener("resize", handleResize);
           }, []);
+
+
+          useEffect(() => {
+            async function fetchFingerprint() {
+              // Initialize FingerprintJS and get the visitor identifier.
+              const fpPromise = FingerprintJS.load();
+              const fp = await fpPromise;
+              const result = await fp.get();
+    
+              console.log(result)
+            }
+        
+            fetchFingerprint();
+          })
 
   return (
     <div className={styles.App}>

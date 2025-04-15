@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.6.2",
     "@metaplex-foundation/js": "^0.20.1",
     "@project-serum/borsh": "^0.2.5",
     "@solana/spl-token": "^0.4.12",

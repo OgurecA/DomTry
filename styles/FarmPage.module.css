@@ -120,7 +120,7 @@
   transition: 0.3s ease-in-out;
 }
 
-.farming {
+.selectedNftButton.farming {
   background: linear-gradient(90deg, #97e02a, #6aaf03);
 }
 
