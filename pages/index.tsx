@@ -35,7 +35,7 @@ const Home: NextPage = () => {
             }
         
             fetchFingerprint();
-          })
+          }, []);
 
   return (
     <div className={styles.App}>
